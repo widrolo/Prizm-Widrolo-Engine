@@ -2,36 +2,28 @@
 #include <fxcg/display.h>
 #include <stdlib.h>
 
-void Player::Start()
+void Player::Reset()
 {
-    position.x = 100;
-    position.y = 70;
+    Vector2 pos;
+    Vector2 scl;
 
-    scale.x = 20;
-    scale.y = 20;
+    pos.x = 100;
+    pos.y = 70;
+    SetPosition(pos);
+
+    scl.x = 20;
+    scl.y = 20;
+    SetScale(scl);
 
     color = COLOR_BLUE;
+    CoreReset();
 }
 void Player::Tick()
 {
-    ActorTick();
-    
-    int key;
-    GetKey(&key);
-
-    if (key == KEY_CTRL_LEFT)
-        position.x -= 3;
-    else if (key == KEY_CTRL_RIGHT)
-        position.x += 3;
-    else if (key == KEY_CTRL_UP)
-        position.y -= 3;
-    else if (key == KEY_CTRL_DOWN)
-        position.y += 3;
-    Bdisp_AllClr_VRAM();
+    CharacterTick();
 }
 void Player::Draw()
 {
-    ActorDraw();
-    //renderer.RenderSprite8x8(position, sprite2);
-    VRAM_CopySprite(sprite2, position.x, position.y, 8, 8);
+    CharacterDraw();
+    
 }

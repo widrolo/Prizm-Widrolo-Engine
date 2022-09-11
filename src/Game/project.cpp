@@ -9,7 +9,7 @@ void Game::Awake()
 }
 void Game::Start()
 {
-    player.Start();
+    player.Reset();
 }
 void Game::Tick()
 {
@@ -17,6 +17,7 @@ void Game::Tick()
 }
 void Game::Draw()
 {
+    Bdisp_AllClr_VRAM();
     player.Draw();
 }
 void Game::End()
