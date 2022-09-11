@@ -7,6 +7,9 @@ void Player::Reset()
     Vector2 pos;
     Vector2 scl;
 
+    enableStdMove = true;
+    speed = 3;
+
     pos.x = 100;
     pos.y = 70;
     SetPosition(pos);
@@ -25,5 +28,4 @@ void Player::Tick()
 void Player::Draw()
 {
     CharacterDraw();
-    
 }
