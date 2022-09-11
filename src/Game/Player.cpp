@@ -32,5 +32,6 @@ void Player::Tick()
 void Player::Draw()
 {
     ActorDraw();
-    renderer.RenderSquare(position, scale, color);
+    //renderer.RenderSprite8x8(position, sprite2);
+    VRAM_CopySprite(sprite2, position.x, position.y, 8, 8);
 }
