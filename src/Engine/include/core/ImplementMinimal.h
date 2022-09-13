@@ -28,7 +28,7 @@ class Character : Actor
 {
 public:
 
-private:
+public:
     SpriteRenderer renderer = SpriteRenderer();
 
 protected:
@@ -71,11 +71,35 @@ protected:
                 position.y += 1 * speed;
         }
     }
-    void CharacterDraw()
+    /*
+    * Render modes:
+    * 0 - renders a cube based off the scale and the color
+    * 1 - renders a 8x8 sprite
+    * 2 - renders a 16x16 sprite
+    * 3 - renders a 32x32 sprite
+    */
+    void CharacterDraw(int renderMode)
     {
         ActorDraw();
         
-        renderer.RenderSquare(position, scale, color);
+        switch (renderMode)
+        {
+        case 0:
+            renderer.RenderSquare(position, scale, color);
+            break;
+        case 1:
+            renderer.RenderSprite8x8(position);
+            break;
+        case 2:
+            //renderer.RenderSquare(position, scale, color);
+            break;
+        case 3:
+            //renderer.RenderSquare(position, scale, color);
+            break;
+        
+        default:
+            break;
+        }
     }
     void CoreReset()
     {

@@ -7,6 +7,17 @@
 class SpriteRenderer
 {
 public:
+    color_t sprite8x8[8][8] = {
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0}
+    };
+public:
     void RenderSquare(Vector2 position, Vector2 scale, int color)
     {
         for (int x = 0; x < scale.x; x++)
@@ -17,15 +28,14 @@ public:
             }
         }
     }
-    void RenderSprite8x8(Vector2 position, color_t data[64])
+    void RenderSprite8x8(Vector2 position)
     {
-        VRAM_CopySprite(data, position.x, position.y, 8, 8);
-        //for (int x = 0; x < 8; x++)
-        //{
-        //    for (int y = 0; y < 8; y++)
-        //    {
-        //        Bdisp_SetPoint_VRAM(x + position.x, y + position.y, sprite8x8[y][x]);
-        //    }
-        //}
+        for (int x = 0; x < 8; x++)
+        {
+            for (int y = 0; y < 8; y++)
+            {
+                Bdisp_SetPoint_VRAM(x + position.x, y + position.y, sprite8x8[y][x]);
+            }
+        }
     }
 };
