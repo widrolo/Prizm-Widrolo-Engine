@@ -28,8 +28,8 @@ INCLUDES	:=  "C:\Users\Filip\Desktop\PrizmSDK-win-0.5.2\projects\Widrolo-Engine\
 #---------------------------------------------------------------------------------
 # options for code and add-in generation
 #---------------------------------------------------------------------------------
-
-MKG3AFLAGS := -n basic:Engine -i uns:../unselected.bmp -i sel:../selected.bmp
+APPNAME	   := "!DBG! Demo"
+MKG3AFLAGS := -n basic:$(APPNAME) -i uns:../unselected.bmp -i sel:../selected.bmp
 
 # Optional: add -flto to CFLAGS and LDFLAGS to enable link-time optimization
 # (LTO). Doing so will usually allow the compiler to generate much better code

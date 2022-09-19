@@ -15,6 +15,16 @@ private:
         {COLOR_BLUE, 0, 0, 0, 0, 0, 0, COLOR_BLUE},
         {COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE},
     };
+    color_t playerSprite64[64] = {
+        COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE,
+        COLOR_BLUE, 0, 0, 0, 0, 0, 0, COLOR_BLUE,
+        COLOR_BLUE, 0, 0, 0, 0, 0, 0, COLOR_BLUE,
+        COLOR_BLUE, 0, 0, 0, 0, 0, 0, COLOR_BLUE,
+        COLOR_BLUE, 0, 0, 0, 0, 0, 0, COLOR_BLUE,
+        COLOR_BLUE, 0, 0, 0, 0, 0, 0, COLOR_BLUE,
+        COLOR_BLUE, 0, 0, 0, 0, 0, 0, COLOR_BLUE,
+        COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE, COLOR_BLUE
+    };
     void Assign();
 public:
     void Reset();

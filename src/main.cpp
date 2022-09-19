@@ -4,6 +4,9 @@
 int main() {
     Game game;
     game.Awake();
+#if __FINAL || __EMULATE_FINAL
+    PrintXY(2, 2, "Press any key to start", TEXT_MODE_TRANSPARENT_BACKGROUND, COLOR_BLACK);
+#endif 
     bool isRunning = true;
     Bdisp_AllClr_VRAM();
 

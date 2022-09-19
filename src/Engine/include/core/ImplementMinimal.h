@@ -1,7 +1,9 @@
 
 #include <fxcg/keyboard.h>
-#include "C:\Users\Filip\Desktop\PrizmSDK-win-0.5.2\projects\Widrolo-Engine\src\Engine\include\math\vector.h"
+#include <fxcg/heap.h>
+#include "C:\Users\Filip\Desktop\stuff\PrizmSDK-win-0.5.2\projects\Widrolo-Engine\src\Engine\include\math\vector.h"
 #include "./SpriteRenderer.h"
+
 
 class Actor
 {
@@ -29,12 +31,17 @@ class Character : Actor
 public:
 
 public:
-    SpriteRenderer renderer = SpriteRenderer();
+    // DO-NOT-USE SpriteRenderer renderer = SpriteRenderer();
+
+    // malloc cause the "new" operator doesnt work lol
+
+    SpriteRenderer *renderer = static_cast<SpriteRenderer*>(sys_malloc(sizeof(SpriteRenderer)));
 
 protected:
     int speed;
     int color;
     bool enableStdMove;
+    int key;
 
     void SetPosition(Vector2 pos)
     {
@@ -58,7 +65,7 @@ protected:
         ActorTick();
         if (enableStdMove)
         {
-            int key;
+            
             GetKey(&key);
 
             if (key == KEY_CTRL_LEFT)
@@ -85,10 +92,11 @@ protected:
         switch (renderMode)
         {
         case 0:
-            renderer.RenderSquare(position, scale, color);
+            renderer->RenderSquare(position, scale, color);
             break;
+#if __DEV
         case 1:
-            renderer.RenderSprite8x8(position);
+            //renderer->RenderSprite8x8(position, );
             break;
         case 2:
             //renderer.RenderSquare(position, scale, color);
@@ -99,11 +107,13 @@ protected:
         
         default:
             break;
+#endif
         }
     }
     void CoreReset()
     {
         ticks = 0;
+        renderer->Init();
     }
 };
 

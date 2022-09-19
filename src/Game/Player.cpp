@@ -24,19 +24,23 @@ void Player::Reset()
 }
 void Player::Assign()
 {
-    for (int x = 0; x < 8; x++)
-        {
-            for (int y = 0; y < 8; y++)
-            {
-                renderer.sprite8x8[x][y] = playerSprite[x][y];
-            }
-        }
+    //for (int x = 0; x < 8; x++)
+    //{
+    //    for (int y = 0; y < 8; y++)
+    //    {
+    //        renderer.sprite8x8[x][y] = playerSprite[x][y];
+    //    }
+    //}
 }
 void Player::Tick()
 {
     CharacterTick();
+
+    if (key == KEY_CTRL_EXE)
+        renderer->Init();
 }
 void Player::Draw()
 {
     CharacterDraw(1);
+    renderer->RenderSprite8x8(GetPosition(), playerSprite64);
 }
