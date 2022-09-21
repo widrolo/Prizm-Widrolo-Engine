@@ -20,27 +20,39 @@ void Player::Reset()
     SetScale(scl);
 
     color = COLOR_BLUE;
+    Assign();
     CoreReset();
 }
 void Player::Assign()
 {
-    //for (int x = 0; x < 8; x++)
-    //{
-    //    for (int y = 0; y < 8; y++)
-    //    {
-    //        renderer.sprite8x8[x][y] = playerSprite[x][y];
-    //    }
-    //}
+    //attempt to change color
+    for (int i = 0; i < 63; i++)
+    {
+        malloc_sprite_test[i] = COLOR_BLUE;
+    }
+    
 }
 void Player::Tick()
 {
     CharacterTick();
-
-    if (key == KEY_CTRL_EXE)
-        renderer->Init();
 }
+
 void Player::Draw()
 {
-    CharacterDraw(1);
-    renderer->RenderSprite8x8(GetPosition(), playerSprite64);
+    Assign();
+    int y = 0;
+    int x = 0;
+    for (int i = 0; i < 63; i++)
+    {      
+        Bdisp_SetPoint_VRAM(x + GetPosition().x, y + GetPosition().y, malloc_sprite_test[i]);
+        if (i % 8 == 0)
+        {
+            y++;
+        }
+        x++;
+        if (x > 8)
+        {
+            x = 0;
+        }
+    }
 }
