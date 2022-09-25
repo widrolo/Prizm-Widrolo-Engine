@@ -4,6 +4,7 @@
 #include "C:\Users\Filip\Desktop\stuff\PrizmSDK-win-0.5.2\projects\Widrolo-Engine\src\Engine\include\math\vector.h"
 #include "./SpriteRenderer.h"
 
+#pragma once
 
 class Actor
 {
@@ -28,20 +29,13 @@ public:
 
 class Character : Actor
 {
-public:
-
-public:
-    // DO-NOT-USE SpriteRenderer renderer = SpriteRenderer();
-
-    // malloc cause the "new" operator doesnt work lol
-
-    SpriteRenderer *renderer = static_cast<SpriteRenderer*>(sys_malloc(sizeof(SpriteRenderer)));
-
 protected:
     int speed;
     int color;
     bool enableStdMove;
     int key;
+    color_t *pPlayerSprite = static_cast<color_t*>(sys_malloc(sizeof(color_t) * 64));
+    SpriteRenderer *renderer = static_cast<SpriteRenderer*>(sys_malloc(sizeof(SpriteRenderer)));
 
     void SetPosition(Vector2 pos)
     {
@@ -94,9 +88,8 @@ protected:
         case 0:
             renderer->RenderSquare(position, scale, color);
             break;
-#if __DEV
         case 1:
-            //renderer->RenderSprite8x8(position, );
+            renderer->RenderSprite8x8(position, pPlayerSprite);
             break;
         case 2:
             //renderer.RenderSquare(position, scale, color);
@@ -107,9 +100,68 @@ protected:
         
         default:
             break;
-#endif
         }
     }
+    void CoreReset()
+    {
+        ticks = 0;
+        renderer->Init();
+    }
+};
+
+class NPC : Actor
+{
+protected:
+    int color;
+    color_t *pNPCSprite = static_cast<color_t*>(sys_malloc(sizeof(color_t) * 64));
+    SpriteRenderer *renderer = static_cast<SpriteRenderer*>(sys_malloc(sizeof(SpriteRenderer)));
+
+    void SetPosition(Vector2 pos)
+    {
+        position = pos;
+    }
+    void SetScale(Vector2 scl)
+    {
+        scale = scl;
+    }
+    Vector2 GetPosition()
+    {
+        return position;
+    }
+    Vector2 GetScale()
+    {
+        return scale;
+    }
+
+    void NPCTick()
+    {
+        ActorTick();
+    }
+
+    void NPCDraw(int renderMode)
+    {
+        ActorDraw();
+        
+        switch (renderMode)
+        {
+        case 0:
+            renderer->RenderSquare(position, scale, color);
+            break;
+        case 1:
+            renderer->RenderSprite8x8(position, pNPCSprite);
+            break;
+        case 2:
+            //renderer.RenderSquare(position, scale, color);
+            break;
+        case 3:
+            //renderer.RenderSquare(position, scale, color);
+            break;
+        
+        default:
+            break;
+        }
+    }
+
     void CoreReset()
     {
         ticks = 0;

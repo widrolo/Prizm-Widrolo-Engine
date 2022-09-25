@@ -9,34 +9,14 @@
 class SpriteRenderer
 {
 public:
-#if __BLEEDING_EDGE
-    color_t sprite8x8[8][8] = {
-        { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
-        { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
-        { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
-        { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
-        { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
-        { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
-        { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
-        { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }
-    };
-#endif
 
     void Init()
     {
-#if __BLEEDING_EDGE
-        for (int x = 0; x < 8; x++)
-        {
-            for (int y = 0; y < 8; y++)
-            {
-                sprite8x8[y][x] = 0x00;
-            }
-        }
-#endif
+
     }
     void Destruct()
     {
-        //sys_free(sprite8x8v2);
+        
     }
 public:
     void RenderSquare(Vector2 position, Vector2 scale, int color)
@@ -50,19 +30,9 @@ public:
         }
     }
 #if __DEV
-    void RenderSprite8x8(Vector2 position, color_t sprite[64])
+    void RenderSprite8x8(Vector2 position, color_t *sprite)
     {
         VRAM_CopySprite(sprite, position.x, position.y, 8, 8);
-//        for (int x = 0; x < 8; x++)
-//        {
-//            for (int y = 0; y < 8; y++)
-//            {
-//#if __BLEEDING_EDGE
-//                Bdisp_SetPoint_VRAM(x + position.x, y + position.y, sprite8x8[y][x]);
-//#endif          
-//                Bdisp_SetPoint_VRAM(x + position.x, y + position.y, sprite[y][x]);
-//            }
-//        }
     }
 #endif
 };

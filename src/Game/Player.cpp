@@ -19,7 +19,7 @@ void Player::Reset()
     scl.y = 20;
     SetScale(scl);
 
-    color = COLOR_BLUE;
+    color = COLOR_RED;
     Assign();
     CoreReset();
 }
@@ -28,7 +28,7 @@ void Player::Assign()
     //attempt to change color
     for (int i = 0; i < 63; i++)
     {
-        malloc_sprite_test[i] = COLOR_BLUE;
+        pPlayerSprite[i] = COLOR_BLUE;
     }
     
 }
@@ -39,20 +39,5 @@ void Player::Tick()
 
 void Player::Draw()
 {
-    Assign();
-    int y = 0;
-    int x = 0;
-    for (int i = 0; i < 63; i++)
-    {      
-        Bdisp_SetPoint_VRAM(x + GetPosition().x, y + GetPosition().y, malloc_sprite_test[i]);
-        if (i % 8 == 0)
-        {
-            y++;
-        }
-        x++;
-        if (x > 8)
-        {
-            x = 0;
-        }
-    }
+    CharacterDraw(0);
 }
