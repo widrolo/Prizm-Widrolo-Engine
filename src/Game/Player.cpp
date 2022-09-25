@@ -2,8 +2,9 @@
 #include <fxcg/display.h>
 #include <stdlib.h>
 
-void Player::Reset()
+void Player::Reset(GameModeManager *pGMM)
 {
+    pGameModeManger = pGMM;
     Vector2 pos;
     Vector2 scl;
     
@@ -20,21 +21,17 @@ void Player::Reset()
     SetScale(scl);
 
     color = COLOR_RED;
-    Assign();
     CoreReset();
-}
-void Player::Assign()
-{
-    //attempt to change color
-    for (int i = 0; i < 63; i++)
-    {
-        pPlayerSprite[i] = COLOR_BLUE;
-    }
-    
 }
 void Player::Tick()
 {
     CharacterTick();
+
+    if (key == KEY_CTRL_EXE)
+        pGameModeManger->GetPlayer()->Reset(pGameModeManger);
+    if (key == KEY_CHAR_0)
+        pGameModeManger->GetGameMode()->ChangeSkyboxColor(COLOR_DARKGREEN);
+
 }
 
 void Player::Draw()

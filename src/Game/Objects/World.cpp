@@ -1,9 +1,5 @@
 #include "./World.h"
 
-void World::Assign()
-{
-
-}
 void World::Reset()
 {
     Vector2 pos;
@@ -18,14 +14,13 @@ void World::Reset()
     SetScale(scl);
 
     color = COLOR_GREEN;
-    Assign();
     CoreReset();
 }
 void World::Tick()
 {
-
+    PawnTick();
 }
 void World::Draw()
 {
-    NPCDraw(0);
+    PawnDraw(0);
 }

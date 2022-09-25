@@ -2,10 +2,8 @@
 #include "../../Engine/include/core/SpriteRenderer.h"
 #pragma once
 
-class World : NPC
+class World : Pawn
 {
-private:
-    void Assign();
 public:
     void Reset();
     void Tick();

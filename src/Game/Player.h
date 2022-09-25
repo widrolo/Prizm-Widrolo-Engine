@@ -5,9 +5,9 @@
 class Player : Character
 {
 private:
-    void Assign();
+    GameModeManager *pGameModeManger;
 public:
-    void Reset();
+    void Reset(GameModeManager *pGMM);
     void Tick();
     void Draw();
 };
