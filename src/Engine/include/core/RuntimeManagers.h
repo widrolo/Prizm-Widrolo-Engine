@@ -1,3 +1,4 @@
+#include "./Collision.h"
 #include "./GameModeBase.h"
 #include "./game.h"
 
@@ -9,6 +10,7 @@ class GameModeManager
 {
 private:
     GameModeBase *pCurrentGameMode;
+    CollisionManger *pCurrentCollsionManager;
     Player *pCurrentPlayer;
     Game *pGameInstance;
 public:
@@ -21,6 +23,10 @@ public:
     {
         pCurrentPlayer = pNewPlayer;
     }
+    void SetCollisionManager(CollisionManger *pNewCollisionManger)
+    {
+        pCurrentCollsionManager = pNewCollisionManger;
+    }
 
     Player* GetPlayer()
     {
@@ -30,5 +36,10 @@ public:
     GameModeBase* GetGameMode()
     {
         return pCurrentGameMode;
+    }
+
+    CollisionManger* GetCollisionManager()
+    {
+        return pCurrentCollsionManager;
     }
 };

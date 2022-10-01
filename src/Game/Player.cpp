@@ -5,11 +5,10 @@
 void Player::Reset(GameModeManager *pGMM)
 {
     pGameModeManger = pGMM;
-    Vector2 pos;
-    Vector2 scl;
     
+    pCM = pGameModeManger->GetCollisionManager();
 
-    enableStdMove = true;
+    enableStdMove = false;
     speed = 3;
 
     pos.x = 100;
@@ -20,12 +19,43 @@ void Player::Reset(GameModeManager *pGMM)
     scl.y = 20;
     SetScale(scl);
 
+    pCollisionBox.position = pos;
+    pCollisionBox.size = scl;
+    pCollisionBox.layer = 1;
+    pCollisionBox.ID = 100;
+    pGameModeManger->GetCollisionManager()->AddBox(&pCollisionBox);
+
     color = COLOR_RED;
     CoreReset();
 }
 void Player::Tick()
 {
     CharacterTick();
+
+    // TODO Make the collison work
+
+    if (key == KEY_CTRL_LEFT)
+    {
+        //if (pGameModeManger->GetCollisionManager()->CheckForCollision(pCollisionBox.ID))
+            pos.x -= 1 * speed;
+    }
+    else if (key == KEY_CTRL_RIGHT)
+    {
+        //if (pGameModeManger->GetCollisionManager()->CheckForCollision(pCollisionBox.ID))
+            pos.x += 1 * speed;
+    }
+    else if (key == KEY_CTRL_UP)
+    {
+        //if (pGameModeManger->GetCollisionManager()->CheckForCollision(pCollisionBox.ID))
+            pos.y -= 1 * speed;
+    }
+    else if (key == KEY_CTRL_DOWN)
+    {
+        //if (pGameModeManger->GetCollisionManager()->CheckForCollision(pCollisionBox.ID))
+            pos.y += 1 * speed;
+    }
+    
+    SetPosition(pos);
 
     if (key == KEY_CTRL_EXE)
         pGameModeManger->GetPlayer()->Reset(pGameModeManger);
@@ -37,4 +67,5 @@ void Player::Tick()
 void Player::Draw()
 {
     CharacterDraw(0);
+    PrintXY(1, 1, (char*)pCollisionBox.ID, TEXT_MODE_TRANSPARENT_BACKGROUND, COLOR_BLACK);
 }

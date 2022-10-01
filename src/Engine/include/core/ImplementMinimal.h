@@ -61,9 +61,9 @@ protected:
     void CharacterTick()
     {
         ActorTick();
+        GetKey(&key);
         if (enableStdMove)
         {
-            GetKey(&key);
             if (key == KEY_CTRL_LEFT)
                 position.x -= 1 * speed;
             else if (key == KEY_CTRL_RIGHT)
