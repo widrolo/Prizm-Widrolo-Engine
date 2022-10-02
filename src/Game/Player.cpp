@@ -1,6 +1,5 @@
 #include "./Player.h"
 #include <fxcg/display.h>
-#include <stdlib.h>
 
 void Player::Reset(GameModeManager *pGMM)
 {
@@ -33,6 +32,8 @@ void Player::Tick()
     CharacterTick();
 
     // TODO Make the collison work
+
+    //pGameModeManger->GetCollisionManager()->CheckForCollision(pCollisionBox.ID, collided);
 
     if (key == KEY_CTRL_LEFT)
     {
@@ -67,5 +68,4 @@ void Player::Tick()
 void Player::Draw()
 {
     CharacterDraw(0);
-    PrintXY(1, 1, (char*)pCollisionBox.ID, TEXT_MODE_TRANSPARENT_BACKGROUND, COLOR_BLACK);
 }

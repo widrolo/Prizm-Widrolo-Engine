@@ -3,7 +3,7 @@
 
 #include <fxcg/keyboard.h>
 #include <fxcg/heap.h>
-#include "C:\Users\Filip\Desktop\stuff\PrizmSDK-win-0.5.2\projects\Widrolo-Engine\src\Engine\include\math\vector.h"
+#include "./../math/vector.h"
 #include "./SpriteRenderer.h"
 #include "./RuntimeManagers.h"
 
@@ -12,17 +12,12 @@
 
 class Actor
 {
-public:
-    // Position in Pixels
+public: // Actor Variables
     Vector2 position;
-public:
-    // Scale in Pixels
     Vector2 scale;
-
-    // runtime stuff
     unsigned int ticks = 0;
 
-public:
+public: // Actor Functions
     void ActorTick(){
         ticks++;
     }
@@ -33,7 +28,7 @@ public:
 
 class Character : Actor
 {
-protected:
+protected: // Character Specific Variables
     int speed;
     int color;
     bool enableStdMove;
@@ -41,23 +36,13 @@ protected:
     color_t *pPlayerSprite = static_cast<color_t*>(sys_malloc(sizeof(color_t) * 64));
     SpriteRenderer *renderer = static_cast<SpriteRenderer*>(sys_malloc(sizeof(SpriteRenderer)));
 
-    void SetPosition(Vector2 pos)
-    {
-        position = pos;
-    }
-    void SetScale(Vector2 scl)
-    {
-        scale = scl;
-    }
-    Vector2 GetPosition()
-    {
-        return position;
-    }
-    Vector2 GetScale()
-    {
-        return scale;
-    }
+protected: // Acceessing Actor Variables Using Functions
+    void SetPosition(Vector2 pos) { position = pos; }
+    void SetScale(Vector2 scl) { scale = scl; }
+    Vector2 GetPosition() { return position; }
+    Vector2 GetScale() { return scale; }
 
+protected: // Character Specific Functions
     void CharacterTick()
     {
         ActorTick();
@@ -74,13 +59,7 @@ protected:
                 position.y += 1 * speed;
         }
     }
-    /*
-    * Render modes:
-    * 0 - renders a cube based off the scale and the color
-    * 1 - renders a 8x8 sprite
-    * TODO: 2 - renders a 16x16 sprite
-    * TODO: 3 - renders a 32x32 sprite
-    */
+
     void CharacterDraw(int renderMode)
     {
         ActorDraw();
@@ -107,34 +86,23 @@ protected:
     void CoreReset()
     {
         ticks = 0;
-        renderer->Init();
     }
 };
 
 class Pawn : Actor
 {
-protected:
+protected: // Pawn Specific Variables
     int color;
     color_t *pPawnSprite = static_cast<color_t*>(sys_malloc(sizeof(color_t) * 64));
     SpriteRenderer *renderer = static_cast<SpriteRenderer*>(sys_malloc(sizeof(SpriteRenderer)));
 
-    void SetPosition(Vector2 pos)
-    {
-        position = pos;
-    }
-    void SetScale(Vector2 scl)
-    {
-        scale = scl;
-    }
-    Vector2 GetPosition()
-    {
-        return position;
-    }
-    Vector2 GetScale()
-    {
-        return scale;
-    }
+protected: // Acceessing Actor Variables Using Functions
+    void SetPosition(Vector2 pos) { position = pos; }
+    void SetScale(Vector2 scl) { scale = scl; }
+    Vector2 GetPosition() { return position; }
+    Vector2 GetScale() { return scale; }
 
+protected: // Pawn Behavior
     void PawnTick()
     {
         ActorTick();
@@ -167,7 +135,6 @@ protected:
     void CoreReset()
     {
         ticks = 0;
-        renderer->Init();
     }
 };
 

@@ -1,4 +1,4 @@
-#include "C:\Users\Filip\Desktop\stuff\PrizmSDK-win-0.5.2\projects\Widrolo-Engine\src\Engine\include\math\vector.h"
+#include "./../math/vector.h"
 
 #pragma once
 
@@ -61,15 +61,13 @@ public: // Public Box Array Control Functions
 
 public: //Public Collision Check Functions
 
-int CheckForCollision(unsigned int ID)
+    void CheckForCollision(unsigned int ID, int *result)
     {
         int index = FindBoxID(ID);
-        if (index == -1) { return 0; }
+        if (index == -1) { *result = 0; return; }
 
         int findIndex = FindNextBox(0, ID);
-        if (findIndex == -1) { return 0; }
-
-        int result = 0;
+        if (findIndex == -1) { *result = 0; return; }
 
         do
         {
@@ -83,11 +81,10 @@ int CheckForCollision(unsigned int ID)
                 boxes[findIndex]->position.x + boxes[findIndex]->position.x > boxes[index]->position.x && 
                 boxes[index]->position.y + boxes[index]->size.y > boxes[findIndex]->position.y && 
                 boxes[findIndex]->position.y + boxes[findIndex]->position.y > boxes[index]->position.y)
-            { result = 1; break; }
+            { *result = 1; return; }
 
             findIndex = FindNextBox(findIndex + 1, ID);
         } while (findIndex != -1);
-        return result;
     }
 
 private: // Private Searching Functions

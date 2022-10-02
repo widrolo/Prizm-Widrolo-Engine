@@ -1,24 +1,14 @@
 #include "./EngineDefines.h"
 #include <fxcg/display.h>
 #include <fxcg/heap.h>
-#include "C:\Users\Filip\Desktop\stuff\PrizmSDK-win-0.5.2\projects\Widrolo-Engine\src\Engine\include\math\vector.h"
+#include "./../math/vector.h"
 #pragma once
 
 #define COLOR_CLEAR (color_t)0xF345
 
 class SpriteRenderer
 {
-public:
-
-    void Init()
-    {
-
-    }
-    void Destruct()
-    {
-        
-    }
-public:
+public: // Rendering Functions
     void RenderSquare(Vector2 position, Vector2 scale, int color)
     {
         for (int x = 0; x < scale.x; x++)
