@@ -25,18 +25,14 @@ public: // Public Box Array Control Functions
     CollisionManger()
     {
         for (int i = 0; i < MAX_BOXES; i++)
-        {
             boxes[i] = nullptr;
-        }
     }
 
     void AddBox(CollisionBox *pBox)
     {
         int index = CheckForAvail();
         if (index == -1)
-        {
             return;
-        }
         
         boxes[index] = pBox;
     }
@@ -61,13 +57,13 @@ public: // Public Box Array Control Functions
 
 public: //Public Collision Check Functions
 
-    void CheckForCollision(unsigned int ID, int *result)
+    bool CheckForCollision(unsigned int ID)
     {
         int index = FindBoxID(ID);
-        if (index == -1) { *result = 0; return; }
+        if (index == -1) { return false; }
 
         int findIndex = FindNextBox(0, ID);
-        if (findIndex == -1) { *result = 0; return; }
+        if (findIndex == -1) { return false; }
 
         do
         {
@@ -81,10 +77,12 @@ public: //Public Collision Check Functions
                 boxes[findIndex]->position.x + boxes[findIndex]->position.x > boxes[index]->position.x && 
                 boxes[index]->position.y + boxes[index]->size.y > boxes[findIndex]->position.y && 
                 boxes[findIndex]->position.y + boxes[findIndex]->position.y > boxes[index]->position.y)
-            { *result = 1; return; }
+            { return true; }
 
             findIndex = FindNextBox(findIndex + 1, ID);
         } while (findIndex != -1);
+
+        return false;
     }
 
 private: // Private Searching Functions
@@ -92,22 +90,16 @@ private: // Private Searching Functions
     int CheckForAvail()
     {
         for (int i = 0; i < MAX_BOXES; i++)
-        {
             if (boxes[i] == nullptr)
                 return i;
-        }
         return -1;
     }
 
     int FindBoxID(unsigned int ID)
     {
         for (int i = 0; i < MAX_BOXES; i++)
-        {
             if (boxes[i]->ID == ID)
-            {
                 return i;
-            }
-        }
 
         return -1;
     }
@@ -115,24 +107,16 @@ private: // Private Searching Functions
     int FindBoxLayer(unsigned char layer, int start)
     {
         for (int i = start; i < MAX_BOXES; i++)
-        {
             if (boxes[i]->layer == layer)
-            {
                 return i;
-            }
-        }
     }
 
     int FindNextBox(int start, unsigned int searchAgainst)
     {
         for (int i = start; i < MAX_BOXES; i++)
-        {
             if (boxes[i] != nullptr)
-            {
                 if (boxes[i]->ID != searchAgainst)
                     return i;
-            }
-        }
 
         return -1;
     }

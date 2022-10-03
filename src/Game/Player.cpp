@@ -1,11 +1,11 @@
 #include "./Player.h"
 #include <fxcg/display.h>
 
-void Player::Reset(GameModeManager *pGMM)
+void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM)
 {
     pGameModeManger = pGMM;
     
-    pCM = pGameModeManger->GetCollisionManager();
+    pCollisionManger = pCM;
 
     enableStdMove = false;
     speed = 3;
@@ -24,6 +24,8 @@ void Player::Reset(GameModeManager *pGMM)
     pCollisionBox.ID = 100;
     pGameModeManger->GetCollisionManager()->AddBox(&pCollisionBox);
 
+
+
     color = COLOR_RED;
     CoreReset();
 }
@@ -33,33 +35,32 @@ void Player::Tick()
 
     // TODO Make the collison work
 
-    //pGameModeManger->GetCollisionManager()->CheckForCollision(pCollisionBox.ID, collided);
-
     if (key == KEY_CTRL_LEFT)
     {
-        //if (pGameModeManger->GetCollisionManager()->CheckForCollision(pCollisionBox.ID))
+        if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
             pos.x -= 1 * speed;
     }
     else if (key == KEY_CTRL_RIGHT)
     {
-        //if (pGameModeManger->GetCollisionManager()->CheckForCollision(pCollisionBox.ID))
+        if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
             pos.x += 1 * speed;
     }
     else if (key == KEY_CTRL_UP)
     {
-        //if (pGameModeManger->GetCollisionManager()->CheckForCollision(pCollisionBox.ID))
+        if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
             pos.y -= 1 * speed;
     }
     else if (key == KEY_CTRL_DOWN)
     {
-        //if (pGameModeManger->GetCollisionManager()->CheckForCollision(pCollisionBox.ID))
+        if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
             pos.y += 1 * speed;
     }
     
     SetPosition(pos);
+    pCollisionBox.position = GetPosition();
 
     if (key == KEY_CTRL_EXE)
-        pGameModeManger->GetPlayer()->Reset(pGameModeManger);
+        pGameModeManger->GetPlayer()->Reset(pGameModeManger, pCollisionManger);
     if (key == KEY_CHAR_0)
         pGameModeManger->GetGameMode()->ChangeSkyboxColor(COLOR_DARKGREEN);
 
