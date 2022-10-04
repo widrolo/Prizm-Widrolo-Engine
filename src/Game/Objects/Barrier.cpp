@@ -19,11 +19,11 @@ void Barrier::Reset(GameModeManager *pGMM, CollisionManger *pCM)
     collisionBox.position = pos;
     collisionBox.size = scl;
     collisionBox.layer = 1;
-    collisionBox.ID = 200;
+    collisionBox.ID = 1;
 
     // TODO: GET THIS BS TO WORK!!!
-    
-    //pCollisionManger->AddBox(&collisionBox);
+
+    pCollisionManger->AddBox(&collisionBox);
 
     color = COLOR_BLUE;
     CoreReset();

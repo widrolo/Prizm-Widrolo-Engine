@@ -12,7 +12,7 @@ private:
     //CollisionBox *pCollisionBox = static_cast<CollisionBox*>(sys_malloc(sizeof(CollisionBox)));
     Vector2 pos;
     Vector2 scl;
-    int collided = 0;
+    bool collided = false;
 public:
     void Reset(GameModeManager *pGMM, CollisionManger *pCM);
     void Tick();

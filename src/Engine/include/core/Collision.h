@@ -19,6 +19,7 @@ private: // Private Vars
 
     unsigned int avalibleID = 1;
     CollisionBox *boxes[MAX_BOXES];
+    bool collided;
 
 public: // Public Box Array Control Functions
 
@@ -57,32 +58,61 @@ public: // Public Box Array Control Functions
 
 public: //Public Collision Check Functions
 
-    bool CheckForCollision(unsigned int ID)
+    bool GetCollision()
     {
+        return collided;
+    }
+
+    void CheckForCollision(unsigned int ID)
+    {
+
         int index = FindBoxID(ID);
-        if (index == -1) { return false; }
+        if (index == -1) { collided = false; return; }
+
+        CollisionBox box1 = *boxes[index];
 
         int findIndex = FindNextBox(0, ID);
-        if (findIndex == -1) { return false; }
+        if (findIndex == -1) { collided = false; return; }
+        
+        bool check1, check2, check3, check4, collision; 
+
+        collision = false;
 
         do
         {
+            check1 = false;
+            check2 = false;
+            check3 = false;
+            check4 = false;
+            CollisionBox box2 = *boxes[findIndex];
+            
+            if (box1.position.x + box1.size.x > box2.position.x)
+                check1 = true;
+            if (box1.position.x + box1.size.x > box2.position.x)
+                check2 = true;
+            if (box1.position.y + box1.size.y > box2.position.y)
+                check3 = true;
+            if (box2.position.y + box2.position.y > box1.position.y)
+                check4 = true;
+
+
+            if (check1)
+            {
+                collided = true;
+                return;
+            }
             // One Big Reliable Boy For Checking Collision
-            /*
-            Fun Fact:
-            This large if statement is the second try at implementing this check!
-            But I hope that its also the last time i have to do this!
-            */
-            if (boxes[index]->position.x + boxes[index]->size.x > boxes[findIndex]->position.x && 
-                boxes[findIndex]->position.x + boxes[findIndex]->position.x > boxes[index]->position.x && 
-                boxes[index]->position.y + boxes[index]->size.y > boxes[findIndex]->position.y && 
-                boxes[findIndex]->position.y + boxes[findIndex]->position.y > boxes[index]->position.y)
-            { return true; }
+
+            //if (box1.position.x + box1.size.x > box2.position.x && 
+            //    box2.position.x + box2.position.x > box1.position.x && 
+            //    box1.position.y + box1.size.y > box2.position.y && 
+            //    box2.position.y + box2.position.y > box1.position.y)
+            //{ return true; }
 
             findIndex = FindNextBox(findIndex + 1, ID);
         } while (findIndex != -1);
 
-        return false;
+        collided = false;
     }
 
 private: // Private Searching Functions

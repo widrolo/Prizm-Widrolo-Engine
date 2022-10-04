@@ -35,24 +35,26 @@ void Player::Tick()
 
     // TODO Make the collison work
 
+    pCollisionManger->CheckForCollision(pCollisionBox.ID);
+
     if (key == KEY_CTRL_LEFT)
     {
-        if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
+        if (!collided)
             pos.x -= 1 * speed;
     }
     else if (key == KEY_CTRL_RIGHT)
     {
-        if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
+        //if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
             pos.x += 1 * speed;
     }
     else if (key == KEY_CTRL_UP)
     {
-        if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
+        //if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
             pos.y -= 1 * speed;
     }
     else if (key == KEY_CTRL_DOWN)
     {
-        if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
+        //if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
             pos.y += 1 * speed;
     }
     
