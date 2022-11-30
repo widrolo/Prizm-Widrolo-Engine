@@ -6,7 +6,7 @@ void Barrier::Reset(GameModeManager *pGMM, CollisionManger *pCM)
     Vector2 scl;
 
     pGameModeManger = pGMM;
-    pCollisionManger = pCM;
+    pCollisionManager = pCM;
 
     pos.x = 100;
     pos.y = 100;
@@ -19,11 +19,9 @@ void Barrier::Reset(GameModeManager *pGMM, CollisionManger *pCM)
     collisionBox.position = pos;
     collisionBox.size = scl;
     collisionBox.layer = 1;
-    collisionBox.ID = 1;
+    collisionBox.ID = pCollisionManager->GenerateNewID();
 
-    // TODO: GET THIS BS TO WORK!!!
-
-    pCollisionManger->AddBox(&collisionBox);
+    pCollisionManager->AddBox(&collisionBox);
 
     color = COLOR_BLUE;
     CoreReset();

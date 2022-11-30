@@ -5,7 +5,7 @@ void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM)
 {
     pGameModeManger = pGMM;
     
-    pCollisionManger = pCM;
+    pCollisionManager = pCM;
 
     enableStdMove = false;
     speed = 3;
@@ -21,8 +21,8 @@ void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM)
     pCollisionBox.position = pos;
     pCollisionBox.size = scl;
     pCollisionBox.layer = 1;
-    pCollisionBox.ID = 100;
-    pGameModeManger->GetCollisionManager()->AddBox(&pCollisionBox);
+    pCollisionBox.ID = pCollisionManager->GenerateNewID();
+    pCollisionManager->AddBox(&pCollisionBox);
 
 
 
@@ -35,26 +35,26 @@ void Player::Tick()
 
     // TODO Make the collison work
 
-    pCollisionManger->CheckForCollision(pCollisionBox.ID);
+    pCollisionManager->CheckForCollision(pCollisionBox.ID, &collisionResult);
 
     if (key == KEY_CTRL_LEFT)
     {
-        if (!collided)
+        if (collisionResult.collided)
             pos.x -= 1 * speed;
     }
     else if (key == KEY_CTRL_RIGHT)
     {
-        //if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
+        if (collisionResult.collided)
             pos.x += 1 * speed;
     }
     else if (key == KEY_CTRL_UP)
     {
-        //if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
+        if (collisionResult.collided)
             pos.y -= 1 * speed;
     }
     else if (key == KEY_CTRL_DOWN)
     {
-        //if (pCollisionManger->CheckForCollision(pCollisionBox.ID))
+        if (collisionResult.collided)
             pos.y += 1 * speed;
     }
     
@@ -62,7 +62,7 @@ void Player::Tick()
     pCollisionBox.position = GetPosition();
 
     if (key == KEY_CTRL_EXE)
-        pGameModeManger->GetPlayer()->Reset(pGameModeManger, pCollisionManger);
+        pGameModeManger->GetPlayer()->Reset(pGameModeManger, pCollisionManager);
     if (key == KEY_CHAR_0)
         pGameModeManger->GetGameMode()->ChangeSkyboxColor(COLOR_DARKGREEN);
 

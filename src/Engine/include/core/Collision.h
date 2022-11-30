@@ -2,7 +2,7 @@
 
 #pragma once
 
-#define MAX_BOXES 200
+#define MAX_BOXES 100
 
 class CollisionBox
 {
@@ -13,13 +13,19 @@ public:
     unsigned int ID;
 };
 
+class CollisionResult
+{
+public:
+    bool collided;
+    unsigned int otherID;
+};
+
 class CollisionManger
 {
 private: // Private Vars
 
     unsigned int avalibleID = 1;
     CollisionBox *boxes[MAX_BOXES];
-    bool collided;
 
 public: // Public Box Array Control Functions
 
@@ -58,61 +64,41 @@ public: // Public Box Array Control Functions
 
 public: //Public Collision Check Functions
 
-    bool GetCollision()
-    {
-        return collided;
-    }
-
-    void CheckForCollision(unsigned int ID)
-    {
-
+    // TO HELL WITH THIS FUNCTION!!!
+    void CheckForCollision(unsigned int ID, CollisionResult* result) 
+    {                                                                
+        // Find the box that is checking collision
         int index = FindBoxID(ID);
-        if (index == -1) { collided = false; return; }
+        if (index == -1) { result->collided = false; return; }
 
         CollisionBox box1 = *boxes[index];
 
+        // locate other boxes
         int findIndex = FindNextBox(0, ID);
-        if (findIndex == -1) { collided = false; return; }
-        
-        bool check1, check2, check3, check4, collision; 
+        if (findIndex == -1) { result->collided = false; return; }
 
-        collision = false;
-
-        do
+        CollisionBox box2;
+        while (findIndex != -1)
         {
-            check1 = false;
-            check2 = false;
-            check3 = false;
-            check4 = false;
-            CollisionBox box2 = *boxes[findIndex];
-            
-            if (box1.position.x + box1.size.x > box2.position.x)
-                check1 = true;
-            if (box1.position.x + box1.size.x > box2.position.x)
-                check2 = true;
-            if (box1.position.y + box1.size.y > box2.position.y)
-                check3 = true;
-            if (box2.position.y + box2.position.y > box1.position.y)
-                check4 = true;
+            box2 = *boxes[findIndex];
 
-
-            if (check1)
-            {
-                collided = true;
-                return;
-            }
             // One Big Reliable Boy For Checking Collision
 
-            //if (box1.position.x + box1.size.x > box2.position.x && 
-            //    box2.position.x + box2.position.x > box1.position.x && 
-            //    box1.position.y + box1.size.y > box2.position.y && 
-            //    box2.position.y + box2.position.y > box1.position.y)
-            //{ return true; }
+            if (box1.position.x + box1.size.x > box2.position.x && 
+                box2.position.x + box2.position.x > box1.position.x && 
+                box1.position.y + box1.size.y > box2.position.y && 
+                box2.position.y + box2.position.y > box1.position.y)
+            { 
+                result->collided = true;
+                result->otherID = findIndex;
+                return;
+            }
 
             findIndex = FindNextBox(findIndex + 1, ID);
-        } while (findIndex != -1);
+        }
 
-        collided = false;
+        result->collided = false;
+        return;
     }
 
 private: // Private Searching Functions
@@ -145,7 +131,7 @@ private: // Private Searching Functions
     {
         for (int i = start; i < MAX_BOXES; i++)
             if (boxes[i] != nullptr)
-                if (boxes[i]->ID != searchAgainst)
+                if (boxes[i]->ID == searchAgainst) //possible bug!
                     return i;
 
         return -1;

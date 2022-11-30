@@ -8,7 +8,7 @@ class Barrier : Pawn
 private:
     GameModeManager *pGameModeManger;
     CollisionBox collisionBox;
-    CollisionManger *pCollisionManger;
+    CollisionManger *pCollisionManager;
 public:
     void Reset(GameModeManager *pGMM, CollisionManger *pCM);
     void Tick();
