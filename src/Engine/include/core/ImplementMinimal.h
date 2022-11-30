@@ -70,7 +70,9 @@ protected: // Character Specific Functions
             renderer->RenderSquare(position, scale, color);
             break;
         case 1:
+#if __BLEEDING_EDGE == 1
             renderer->RenderSprite8x8(position, pPlayerSprite);
+#endif
             break;
         case 2:
             //renderer.RenderSquare(position, scale, color);
@@ -118,7 +120,9 @@ protected: // Pawn Behavior
             renderer->RenderSquare(position, scale, color);
             break;
         case 1:
+#if __BLEEDING_EDGE == 1
             renderer->RenderSprite8x8(position, pPawnSprite);
+#endif
             break;
         case 2:
             //renderer.RenderSquare(position, scale, color);

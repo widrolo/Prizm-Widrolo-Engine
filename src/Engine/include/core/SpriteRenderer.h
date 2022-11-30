@@ -11,6 +11,9 @@ class SpriteRenderer
 public: // Rendering Functions
     void RenderSquare(Vector2 position, Vector2 scale, int color)
     {
+#if __RENDERING == 0
+        return;
+#endif
         for (int x = 0; x < scale.x; x++)
         {
             for (int y = 0; y < scale.y; y++)
@@ -19,7 +22,7 @@ public: // Rendering Functions
             }
         }
     }
-#if __DEV
+#if __BLEEDING_EDGE == 1
     void RenderSprite8x8(Vector2 position, color_t *sprite)
     {
         VRAM_CopySprite(sprite, position.x, position.y, 8, 8);

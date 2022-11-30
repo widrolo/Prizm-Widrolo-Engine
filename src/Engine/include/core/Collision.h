@@ -1,3 +1,4 @@
+#include "./EngineDefines.h"
 #include "./../math/vector.h"
 
 #pragma once
@@ -64,9 +65,14 @@ public: // Public Box Array Control Functions
 
 public: //Public Collision Check Functions
 
-    // TO HELL WITH THIS FUNCTION!!!
     void CheckForCollision(unsigned int ID, CollisionResult* result) 
-    {                                                                
+    {
+#if __COLLISION == 0
+        return;
+#endif
+        // Setup
+        result->collided = false;
+
         // Find the box that is checking collision
         int index = FindBoxID(ID);
         if (index == -1) { result->collided = false; return; }
@@ -82,12 +88,12 @@ public: //Public Collision Check Functions
         {
             box2 = *boxes[findIndex];
 
-            // One Big Reliable Boy For Checking Collision
+            // Fast pixel perfect collision checking 
 
-            if (box1.position.x + box1.size.x > box2.position.x && 
-                box2.position.x + box2.position.x > box1.position.x && 
-                box1.position.y + box1.size.y > box2.position.y && 
-                box2.position.y + box2.position.y > box1.position.y)
+            if (box1.position.x + box1.size.x > box2.position.x &&
+                box2.position.x + box2.size.x > box1.position.x &&
+                box1.position.y + box1.size.y > box2.position.y &&
+                box2.position.y + box2.size.y > box1.position.y)
             { 
                 result->collided = true;
                 result->otherID = findIndex;
@@ -131,7 +137,7 @@ private: // Private Searching Functions
     {
         for (int i = start; i < MAX_BOXES; i++)
             if (boxes[i] != nullptr)
-                if (boxes[i]->ID == searchAgainst) //possible bug!
+                if (boxes[i]->ID != searchAgainst) //possible bug!
                     return i;
 
         return -1;

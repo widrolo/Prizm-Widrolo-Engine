@@ -3,6 +3,7 @@
 
 void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM)
 {
+    // Setup object
     pGameModeManger = pGMM;
     
     pCollisionManager = pCM;
@@ -10,6 +11,7 @@ void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM)
     enableStdMove = false;
     speed = 3;
 
+    // Setup player
     pos.x = 100;
     pos.y = 70;
     SetPosition(pos);
@@ -18,48 +20,57 @@ void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM)
     scl.y = 20;
     SetScale(scl);
 
+    color = COLOR_RED;
+
+    // Setup collision
     pCollisionBox.position = pos;
     pCollisionBox.size = scl;
     pCollisionBox.layer = 1;
     pCollisionBox.ID = pCollisionManager->GenerateNewID();
     pCollisionManager->AddBox(&pCollisionBox);
 
-
-
-    color = COLOR_RED;
+    // Complete setup
     CoreReset();
 }
 void Player::Tick()
 {
     CharacterTick();
 
-    // TODO Make the collison work
-
-    pCollisionManager->CheckForCollision(pCollisionBox.ID, &collisionResult);
+    // Advanced movement
 
     if (key == KEY_CTRL_LEFT)
-    {
-        if (collisionResult.collided)
-            pos.x -= 1 * speed;
-    }
-    else if (key == KEY_CTRL_RIGHT)
-    {
+    {   
+        pos.x -= 1 * speed;
+        pCollisionManager->CheckForCollision(pCollisionBox.ID, &collisionResult);
         if (collisionResult.collided)
             pos.x += 1 * speed;
     }
+    else if (key == KEY_CTRL_RIGHT)
+    {
+        pos.x += 1 * speed;
+        pCollisionManager->CheckForCollision(pCollisionBox.ID, &collisionResult);
+        if (collisionResult.collided)
+            pos.x -= 1 * speed;
+    }
     else if (key == KEY_CTRL_UP)
     {
+        pos.y -= 1 * speed;
+        pCollisionManager->CheckForCollision(pCollisionBox.ID, &collisionResult);
         if (collisionResult.collided)
-            pos.y -= 1 * speed;
+            pos.y += 1 * speed;
     }
     else if (key == KEY_CTRL_DOWN)
     {
+        pos.y += 1 * speed;
+        pCollisionManager->CheckForCollision(pCollisionBox.ID, &collisionResult);
         if (collisionResult.collided)
-            pos.y += 1 * speed;
+            pos.y -= 1 * speed;
     }
     
     SetPosition(pos);
     pCollisionBox.position = GetPosition();
+
+    // Debugging 
 
     if (key == KEY_CTRL_EXE)
         pGameModeManger->GetPlayer()->Reset(pGameModeManger, pCollisionManager);

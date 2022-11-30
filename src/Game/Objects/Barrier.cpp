@@ -12,8 +12,8 @@ void Barrier::Reset(GameModeManager *pGMM, CollisionManger *pCM)
     pos.y = 100;
     SetPosition(pos);
 
-    scl.x = 50;
-    scl.y = 100;
+    scl.x = 100;
+    scl.y = 50;
     SetScale(scl);
 
     collisionBox.position = pos;

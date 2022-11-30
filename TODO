@@ -1,8 +1,13 @@
-Sprint 1 (27. Sep 2022) [MISSED]
-[ ] - Collision
+Goals: 2022
+Primary:
+[O] - Collision
 [O] - Sprites
-[ ] - Trigger zones (requires Collision)
+[O] - Trigger zones (requires Collision)
 [O] - Game Mode base
 [O] - Pawn Class
 [ ] - UI (requires Sprites for smaller font)
 [ ] - Game Reset (requires Game Mode base)
+
+Secondary:
+[O] - Anti Piracy
+[ ] - Tool for converting bmp to color arrays

@@ -9,9 +9,9 @@ int main() {
     // Clear the screen in preperation of game start
     Bdisp_AllClr_VRAM();
 
-    // Start Notification
+    // Start Notification (basic anti piracy)
 #if __FINAL || __EMULATE_FINAL
-    PrintXY(5, 2, "   Press Any Key", TEXT_MODE_TRANSPARENT_BACKGROUND, COLOR_BLACK);
+    PrintXY(5, 6, "   An Filip", TEXT_MODE_TRANSPARENT_BACKGROUND, COLOR_BLACK);
 #endif 
 
     // Game start and Game loop begin

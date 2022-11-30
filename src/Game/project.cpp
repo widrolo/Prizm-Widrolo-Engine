@@ -6,34 +6,37 @@
 #include "./Objects/Barrier.cpp"
 #include "./Player.cpp"
 
-// Allocate managers
+// Create managers
 GameModeManager *pGameModeManger = static_cast<GameModeManager*>(sys_malloc(sizeof(GameModeManager)));
 GameModeBase gameMode;
-//CollisionManger *pCollisionManager = static_cast<CollisionManger*>(sys_malloc(sizeof(CollisionManger)));
-CollisionManger pCollisionManager;
+CollisionManger collisionManager;
 
-// Create players
+// Create objects for gameplay
 Player player;
 World world;
 Barrier barrier;
+// Initialize engine components
 void Game::Awake()
 {
     pGameModeManger->SetGameMode(&gameMode);
     pGameModeManger->SetCurrentPlayer(&player);
-    pGameModeManger->SetCollisionManager(&pCollisionManager);
+    pGameModeManger->SetCollisionManager(&collisionManager);
 }
+// Initialize gameplay objects
 void Game::Start()
 {  
     world.Reset();
-    barrier.Reset(pGameModeManger, &pCollisionManager);
-    player.Reset(pGameModeManger, &pCollisionManager);
+    barrier.Reset(pGameModeManger, &collisionManager);
+    player.Reset(pGameModeManger, &collisionManager);
 }
+// Tick gameplay objects
 void Game::Tick()
 {
     world.Tick();
     barrier.Tick();
     player.Tick();
 }
+// Draw gameplay
 void Game::Draw()
 {
     Bdisp_AllClr_VRAM();
@@ -41,6 +44,7 @@ void Game::Draw()
     barrier.Draw();
     player.Draw();
 }
+// End gameplay (if this gets called, then the game crashed)
 void Game::End()
 {
 

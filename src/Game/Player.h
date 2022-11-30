@@ -10,10 +10,9 @@ private:
     CollisionBox pCollisionBox;
     CollisionManger *pCollisionManager;
     CollisionResult collisionResult;
-    //CollisionBox *pCollisionBox = static_cast<CollisionBox*>(sys_malloc(sizeof(CollisionBox)));
+
     Vector2 pos;
     Vector2 scl;
-    bool collided = false;
 public:
     void Reset(GameModeManager *pGMM, CollisionManger *pCM);
     void Tick();
