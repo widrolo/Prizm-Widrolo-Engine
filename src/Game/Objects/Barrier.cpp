@@ -16,10 +16,7 @@ void Barrier::Reset(GameModeManager *pGMM, CollisionManger *pCM)
     scl.y = 50;
     SetScale(scl);
 
-    collisionBox.position = pos;
-    collisionBox.size = scl;
-    collisionBox.layer = 1;
-    collisionBox.ID = pCollisionManager->GenerateNewID();
+    collisionBox.MakeBox(pos, scl, 1, pCollisionManager->GenerateNewID());
 
     pCollisionManager->AddBox(&collisionBox);
 

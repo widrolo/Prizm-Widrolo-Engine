@@ -1,11 +1,11 @@
 #include "./Player.h"
 #include <fxcg/display.h>
 
-void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM)
+void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pCH)
 {
     // Setup object
     pGameModeManger = pGMM;
-    
+    pCrashHandler = pCH;
     pCollisionManager = pCM;
 
     enableStdMove = false;
@@ -23,10 +23,7 @@ void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM)
     color = COLOR_RED;
 
     // Setup collision
-    pCollisionBox.position = pos;
-    pCollisionBox.size = scl;
-    pCollisionBox.layer = 1;
-    pCollisionBox.ID = pCollisionManager->GenerateNewID();
+    pCollisionBox.MakeBox(pos, scl, 1, pCollisionManager->GenerateNewID());
     pCollisionManager->AddBox(&pCollisionBox);
 
     // Complete setup
@@ -41,41 +38,43 @@ void Player::Tick()
     if (key == KEY_CTRL_LEFT)
     {   
         pos.x -= 1 * speed;
-        pCollisionManager->CheckForCollision(pCollisionBox.ID, &collisionResult);
+        pCollisionManager->CheckForCollision(pCollisionBox.GetID(), &collisionResult);
         if (collisionResult.collided)
             pos.x += 1 * speed;
     }
     else if (key == KEY_CTRL_RIGHT)
     {
         pos.x += 1 * speed;
-        pCollisionManager->CheckForCollision(pCollisionBox.ID, &collisionResult);
+        pCollisionManager->CheckForCollision(pCollisionBox.GetID(), &collisionResult);
         if (collisionResult.collided)
             pos.x -= 1 * speed;
     }
     else if (key == KEY_CTRL_UP)
     {
         pos.y -= 1 * speed;
-        pCollisionManager->CheckForCollision(pCollisionBox.ID, &collisionResult);
+        pCollisionManager->CheckForCollision(pCollisionBox.GetID(), &collisionResult);
         if (collisionResult.collided)
             pos.y += 1 * speed;
     }
     else if (key == KEY_CTRL_DOWN)
     {
         pos.y += 1 * speed;
-        pCollisionManager->CheckForCollision(pCollisionBox.ID, &collisionResult);
+        pCollisionManager->CheckForCollision(pCollisionBox.GetID(), &collisionResult);
         if (collisionResult.collided)
             pos.y -= 1 * speed;
     }
     
     SetPosition(pos);
-    pCollisionBox.position = GetPosition();
+    pCollisionBox.SetBoxInfo(pos, scl);
 
     // Debugging 
 
     if (key == KEY_CTRL_EXE)
-        pGameModeManger->GetPlayer()->Reset(pGameModeManger, pCollisionManager);
+        pGameModeManger->GetPlayer()->Reset(pGameModeManger, pCollisionManager, pCrashHandler);
     if (key == KEY_CHAR_0)
         pGameModeManger->GetGameMode()->ChangeSkyboxColor(COLOR_DARKGREEN);
+    if (key == KEY_CHAR_1)
+        pCrashHandler->Crash();
 
 }
 

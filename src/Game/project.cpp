@@ -1,6 +1,7 @@
 #include "../Engine/include/core/RuntimeManagers.h"
 #include "../Engine/include/core/Collision.h"
 #include "../Engine/include/core/game.h"
+#include "../Engine/include/core/CrashHandler.h"
 // Game objects
 #include "./Objects/World.cpp"
 #include "./Objects/Barrier.cpp"
@@ -8,6 +9,7 @@
 
 // Create managers
 GameModeManager *pGameModeManger = static_cast<GameModeManager*>(sys_malloc(sizeof(GameModeManager)));
+CrashHandler crashHandler;
 GameModeBase gameMode;
 CollisionManger collisionManager;
 
@@ -27,7 +29,7 @@ void Game::Start()
 {  
     world.Reset();
     barrier.Reset(pGameModeManger, &collisionManager);
-    player.Reset(pGameModeManger, &collisionManager);
+    player.Reset(pGameModeManger, &collisionManager, &crashHandler);
 }
 // Tick gameplay objects
 void Game::Tick()

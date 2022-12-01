@@ -13,7 +13,7 @@ int main() {
 #if __FINAL || __EMULATE_FINAL
     PrintXY(5, 6, "   An Filip", TEXT_MODE_TRANSPARENT_BACKGROUND, COLOR_BLACK);
 #endif 
-
+    int dummy;
     // Game start and Game loop begin
     game.Start();
     bool isRunning = true;
@@ -21,6 +21,7 @@ int main() {
     {
         game.Tick();
         game.Draw();
+        GetKey(&dummy);
     }
     // Game end (use for soft crashes only)
     game.End();

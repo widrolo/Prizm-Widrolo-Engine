@@ -32,7 +32,7 @@ protected: // Character Specific Variables
     int speed;
     int color;
     bool enableStdMove;
-    int key;
+    unsigned char key;
     color_t *pPlayerSprite = static_cast<color_t*>(sys_malloc(sizeof(color_t) * 64));
     SpriteRenderer *renderer = static_cast<SpriteRenderer*>(sys_malloc(sizeof(SpriteRenderer)));
 
@@ -46,16 +46,16 @@ protected: // Character Specific Functions
     void CharacterTick()
     {
         ActorTick();
-        GetKey(&key);
+        PRGM_GetKey_OS(&key);
         if (enableStdMove)
         {
-            if (key == KEY_CTRL_LEFT)
+            if (key == KEY_PRGM_LEFT)
                 position.x -= 1 * speed;
-            else if (key == KEY_CTRL_RIGHT)
+            else if (key == KEY_PRGM_RIGHT)
                 position.x += 1 * speed;
-            else if (key == KEY_CTRL_UP)
+            else if (key == KEY_PRGM_UP)
                 position.y -= 1 * speed;
-            else if (key == KEY_CTRL_DOWN)
+            else if (key == KEY_PRGM_DOWN)
                 position.y += 1 * speed;
         }
     }

@@ -14,7 +14,7 @@
 #define __BLEEDING_EDGE 0		// This enables features (not engine features) that are incomplete, untested or unstable
 
 // turn stuff on or off
-#define __COLLISION 0			// This disables all collision and trigger zones
+#define __COLLISION 1			// This disables all collision and trigger zones
 #define __RENDERING 1			// This disables all rendering
 
 // Anti Piracy

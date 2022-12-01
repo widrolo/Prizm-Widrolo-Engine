@@ -7,11 +7,38 @@
 
 class CollisionBox
 {
-public:
+private:
     Vector2 position;
     Vector2 size;
     unsigned char layer;
     unsigned int ID;
+public: 
+    void MakeBox(Vector2 position, Vector2 size, unsigned char layer, unsigned int ID)
+    {
+        this->position = position;
+        this->size = size;
+        this->layer = layer;
+        this->ID = ID;
+    }
+
+    void SetBoxInfo(Vector2 position, Vector2 size)
+    {
+        this->position = position;
+        this->size = size;
+    }
+
+    unsigned int GetID()
+    {
+        return ID;
+    }
+    Vector2 GetPosition()
+    {
+        return position;
+    }
+    Vector2 GetSize()
+    {
+        return size;
+    }
 };
 
 class CollisionResult
@@ -49,7 +76,7 @@ public: // Public Box Array Control Functions
     {
         for (int i = 0; i < MAX_BOXES; i++)
         {
-            if (boxes[i]->ID == ID)
+            if (boxes[i]->GetID() == ID)
             {
                 boxes[i] = nullptr;
                 return;
@@ -90,10 +117,10 @@ public: //Public Collision Check Functions
 
             // Fast pixel perfect collision checking 
 
-            if (box1.position.x + box1.size.x > box2.position.x &&
-                box2.position.x + box2.size.x > box1.position.x &&
-                box1.position.y + box1.size.y > box2.position.y &&
-                box2.position.y + box2.size.y > box1.position.y)
+            if (box1.GetPosition().x + box1.GetSize().x > box2.GetPosition().x &&
+                box2.GetPosition().x + box2.GetSize().x > box1.GetPosition().x &&
+                box1.GetPosition().y + box1.GetSize().y > box2.GetPosition().y &&
+                box2.GetPosition().y + box2.GetSize().y > box1.GetPosition().y)
             { 
                 result->collided = true;
                 result->otherID = findIndex;
@@ -120,24 +147,25 @@ private: // Private Searching Functions
     int FindBoxID(unsigned int ID)
     {
         for (int i = 0; i < MAX_BOXES; i++)
-            if (boxes[i]->ID == ID)
+            if (boxes[i]->GetID() == ID)
                 return i;
 
         return -1;
     }
 
+#if __BLEEDING_EDGE == 1
     int FindBoxLayer(unsigned char layer, int start)
     {
         for (int i = start; i < MAX_BOXES; i++)
             if (boxes[i]->layer == layer)
                 return i;
     }
-
+#endif
     int FindNextBox(int start, unsigned int searchAgainst)
     {
         for (int i = start; i < MAX_BOXES; i++)
             if (boxes[i] != nullptr)
-                if (boxes[i]->ID != searchAgainst) //possible bug!
+                if (boxes[i]->GetID() != searchAgainst) //possible bug!
                     return i;
 
         return -1;

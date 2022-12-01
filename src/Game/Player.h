@@ -10,11 +10,12 @@ private:
     CollisionBox pCollisionBox;
     CollisionManger *pCollisionManager;
     CollisionResult collisionResult;
+    CrashHandler *pCrashHandler;
 
     Vector2 pos;
     Vector2 scl;
 public:
-    void Reset(GameModeManager *pGMM, CollisionManger *pCM);
+    void Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pCH);
     void Tick();
     void Draw();
 };
