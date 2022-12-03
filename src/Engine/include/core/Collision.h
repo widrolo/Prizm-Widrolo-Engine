@@ -46,6 +46,12 @@ class CollisionResult
 public:
     bool collided;
     unsigned int otherID;
+
+    void Reset()
+    {
+        collided = false;
+        otherID = 0;
+    }
 };
 
 class CollisionManger

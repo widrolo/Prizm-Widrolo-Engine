@@ -37,4 +37,6 @@
 #endif
 
 // Who is getting this copy
+#if __FINAL == 1
 _Pragma ("message(__FOR_WHO)")
+#endif

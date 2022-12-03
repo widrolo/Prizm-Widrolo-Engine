@@ -7,7 +7,7 @@ class Player : Character
 {
 private:
     GameModeManager *pGameModeManger;
-    CollisionBox pCollisionBox;
+    CollisionBox collisionBox;
     CollisionManger *pCollisionManager;
     CollisionResult collisionResult;
     CrashHandler *pCrashHandler;

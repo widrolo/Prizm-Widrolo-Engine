@@ -14,7 +14,7 @@ class Actor
 {
 public: // Actor Variables
     Vector2 position;
-    Vector2 scale;
+    Vector2 size;
     unsigned int ticks = 0;
 
 public: // Actor Functions
@@ -32,31 +32,101 @@ protected: // Character Specific Variables
     int speed;
     int color;
     bool enableStdMove;
-    unsigned char key;
+    int key;
     color_t *pPlayerSprite = static_cast<color_t*>(sys_malloc(sizeof(color_t) * 64));
     SpriteRenderer *renderer = static_cast<SpriteRenderer*>(sys_malloc(sizeof(SpriteRenderer)));
 
+private: // Collision Components
+    bool enableStdCollisionMove;
+    CollisionManger *pCollisionManager;
+    CollisionBox *pCollisionBox;
+    CollisionResult *pCollisionResult;
+
+protected: // Collision functions
+    void SetCollisionInfo(CollisionManger *pCollisionManager, CollisionBox *pCollisionBox, CollisionResult *pCollisionResult)
+    {
+        this->pCollisionManager = pCollisionManager;
+        this->pCollisionBox = pCollisionBox;
+        this->pCollisionResult = pCollisionResult;
+    }
+
+    void EnableCollisionMove()
+    {
+        if (enableStdMove)
+            return;
+        
+        if (pCollisionManager == nullptr || pCollisionBox == nullptr || pCollisionResult == nullptr)
+            return;
+
+        enableStdCollisionMove = true;
+    }
+
 protected: // Acceessing Actor Variables Using Functions
-    void SetPosition(Vector2 pos) { position = pos; }
-    void SetScale(Vector2 scl) { scale = scl; }
+    void SetPosition(Vector2 position) { this->position = position; }
+    void SetScale(Vector2 size) { this->size = size; }
     Vector2 GetPosition() { return position; }
-    Vector2 GetScale() { return scale; }
+    Vector2 GetScale() { return size; }
 
 protected: // Character Specific Functions
     void CharacterTick()
     {
         ActorTick();
-        PRGM_GetKey_OS(&key);
+        GetKey(&key);
         if (enableStdMove)
         {
-            if (key == KEY_PRGM_LEFT)
+            if (key == KEY_CTRL_LEFT)
                 position.x -= 1 * speed;
-            else if (key == KEY_PRGM_RIGHT)
+            else if (key == KEY_CTRL_RIGHT)
                 position.x += 1 * speed;
-            else if (key == KEY_PRGM_UP)
+            else if (key == KEY_CTRL_UP)
                 position.y -= 1 * speed;
-            else if (key == KEY_PRGM_DOWN)
+            else if (key == KEY_CTRL_DOWN)
                 position.y += 1 * speed;
+        }
+
+        if (enableStdCollisionMove)
+        {
+            if (key == KEY_CTRL_LEFT)
+            {   
+                position.x -= 1 * speed;
+                pCollisionBox->SetBoxInfo(position, size);
+                pCollisionManager->CheckForCollision(pCollisionBox->GetID(), pCollisionResult);
+                if (pCollisionResult->collided)
+                {
+                    position.x += 1 * speed;
+                }
+            }
+            else if (key == KEY_CTRL_RIGHT)
+            {
+                position.x += 1 * speed;
+                pCollisionBox->SetBoxInfo(position, size);
+                pCollisionManager->CheckForCollision(pCollisionBox->GetID(), pCollisionResult);
+                if (pCollisionResult->collided)
+                {
+                    position.x -= 1 * speed;
+                }
+            }
+            else if (key == KEY_CTRL_UP)
+            {
+                position.y -= 1 * speed;
+                pCollisionBox->SetBoxInfo(position, size);
+                pCollisionManager->CheckForCollision(pCollisionBox->GetID(), pCollisionResult);
+                if (pCollisionResult->collided)
+                {
+                    position.y += 1 * speed;
+                }
+            }
+            else if (key == KEY_CTRL_DOWN)
+            {
+                position.y += 1 * speed;
+                pCollisionBox->SetBoxInfo(position, size);
+                pCollisionManager->CheckForCollision(pCollisionBox->GetID(), pCollisionResult);
+                if (pCollisionResult->collided)
+                {
+                    position.y -= 1 * speed;
+                }
+            }
+            pCollisionBox->SetBoxInfo(position, size);
         }
     }
 
@@ -67,7 +137,7 @@ protected: // Character Specific Functions
         switch (renderMode)
         {
         case 0:
-            renderer->RenderSquare(position, scale, color);
+            renderer->RenderSquare(position, size, color);
             break;
         case 1:
 #if __BLEEDING_EDGE == 1
@@ -75,10 +145,10 @@ protected: // Character Specific Functions
 #endif
             break;
         case 2:
-            //renderer.RenderSquare(position, scale, color);
+            //renderer.RenderSquare(position, size, color);
             break;
         case 3:
-            //renderer.RenderSquare(position, scale, color);
+            //renderer.RenderSquare(position, size, color);
             break;
         
         default:
@@ -87,6 +157,12 @@ protected: // Character Specific Functions
     }
     void CoreReset()
     {
+        pCollisionBox = nullptr;
+        pCollisionManager = nullptr;
+        pCollisionResult = nullptr;
+
+        enableStdCollisionMove = false;
+
         ticks = 0;
     }
 };
@@ -100,9 +176,9 @@ protected: // Pawn Specific Variables
 
 protected: // Acceessing Actor Variables Using Functions
     void SetPosition(Vector2 pos) { position = pos; }
-    void SetScale(Vector2 scl) { scale = scl; }
+    void SetScale(Vector2 scl) { size = scl; }
     Vector2 GetPosition() { return position; }
-    Vector2 GetScale() { return scale; }
+    Vector2 GetScale() { return size; }
 
 protected: // Pawn Behavior
     void PawnTick()
@@ -117,7 +193,7 @@ protected: // Pawn Behavior
         switch (renderMode)
         {
         case 0:
-            renderer->RenderSquare(position, scale, color);
+            renderer->RenderSquare(position, size, color);
             break;
         case 1:
 #if __BLEEDING_EDGE == 1
@@ -125,10 +201,10 @@ protected: // Pawn Behavior
 #endif
             break;
         case 2:
-            //renderer.RenderSquare(position, scale, color);
+            //renderer.RenderSquare(position, size, color);
             break;
         case 3:
-            //renderer.RenderSquare(position, scale, color);
+            //renderer.RenderSquare(position, size, color);
             break;
         
         default:

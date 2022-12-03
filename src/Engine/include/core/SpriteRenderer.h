@@ -9,14 +9,14 @@
 class SpriteRenderer
 {
 public: // Rendering Functions
-    void RenderSquare(Vector2 position, Vector2 scale, int color)
+    void RenderSquare(Vector2 position, Vector2 size, int color)
     {
 #if __RENDERING == 0
         return;
 #endif
-        for (int x = 0; x < scale.x; x++)
+        for (int x = 0; x < size.x; x++)
         {
-            for (int y = 0; y < scale.y; y++)
+            for (int y = 0; y < size.y; y++)
             {
                 Bdisp_SetPoint_VRAM(x + position.x, y + position.y, color);
             }

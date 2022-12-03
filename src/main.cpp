@@ -4,7 +4,7 @@
 int main() {
     // Load game
     Game game;
-    game.Awake();
+    game.Awake(&game);
 
     // Clear the screen in preperation of game start
     Bdisp_AllClr_VRAM();
@@ -13,15 +13,13 @@ int main() {
 #if __FINAL || __EMULATE_FINAL
     PrintXY(5, 6, "   An Filip", TEXT_MODE_TRANSPARENT_BACKGROUND, COLOR_BLACK);
 #endif 
-    int dummy;
     // Game start and Game loop begin
     game.Start();
-    bool isRunning = true;
-    while (isRunning) 
+    game.isRunning = true;
+    while (game.isRunning) 
     {
         game.Tick();
         game.Draw();
-        GetKey(&dummy);
     }
     // Game end (use for soft crashes only)
     game.End();

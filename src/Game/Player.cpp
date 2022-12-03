@@ -23,8 +23,10 @@ void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pC
     color = COLOR_RED;
 
     // Setup collision
-    pCollisionBox.MakeBox(pos, scl, 1, pCollisionManager->GenerateNewID());
-    pCollisionManager->AddBox(&pCollisionBox);
+    collisionBox.MakeBox(pos, scl, 1, pCollisionManager->GenerateNewID());
+    pCollisionManager->AddBox(&collisionBox);
+    SetCollisionInfo(pCollisionManager, &collisionBox, &collisionResult);
+    EnableCollisionMove();
 
     // Complete setup
     CoreReset();
@@ -32,40 +34,10 @@ void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pC
 void Player::Tick()
 {
     CharacterTick();
-
-    // Advanced movement
-
-    if (key == KEY_CTRL_LEFT)
-    {   
-        pos.x -= 1 * speed;
-        pCollisionManager->CheckForCollision(pCollisionBox.GetID(), &collisionResult);
-        if (collisionResult.collided)
-            pos.x += 1 * speed;
-    }
-    else if (key == KEY_CTRL_RIGHT)
-    {
-        pos.x += 1 * speed;
-        pCollisionManager->CheckForCollision(pCollisionBox.GetID(), &collisionResult);
-        if (collisionResult.collided)
-            pos.x -= 1 * speed;
-    }
-    else if (key == KEY_CTRL_UP)
-    {
-        pos.y -= 1 * speed;
-        pCollisionManager->CheckForCollision(pCollisionBox.GetID(), &collisionResult);
-        if (collisionResult.collided)
-            pos.y += 1 * speed;
-    }
-    else if (key == KEY_CTRL_DOWN)
-    {
-        pos.y += 1 * speed;
-        pCollisionManager->CheckForCollision(pCollisionBox.GetID(), &collisionResult);
-        if (collisionResult.collided)
-            pos.y -= 1 * speed;
-    }
     
+    collisionResult.Reset();
     SetPosition(pos);
-    pCollisionBox.SetBoxInfo(pos, scl);
+    collisionBox.SetBoxInfo(pos, scl);
 
     // Debugging 
 

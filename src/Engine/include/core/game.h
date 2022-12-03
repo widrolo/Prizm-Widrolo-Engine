@@ -3,7 +3,9 @@
 class Game
 {
 public:
-    void Awake();
+    bool isRunning;
+
+    void Awake(Game *pGame);
     void Start();
     void Tick();
     void Draw();

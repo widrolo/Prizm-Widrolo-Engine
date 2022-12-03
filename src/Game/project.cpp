@@ -18,11 +18,13 @@ Player player;
 World world;
 Barrier barrier;
 // Initialize engine components
-void Game::Awake()
+void Game::Awake(Game *pGame)
 {
     pGameModeManger->SetGameMode(&gameMode);
     pGameModeManger->SetCurrentPlayer(&player);
     pGameModeManger->SetCollisionManager(&collisionManager);
+
+    crashHandler.Init(pGame);
 }
 // Initialize gameplay objects
 void Game::Start()
@@ -49,5 +51,5 @@ void Game::Draw()
 // End gameplay (if this gets called, then the game crashed)
 void Game::End()
 {
-
+    crashHandler.EndProgram();
 }
