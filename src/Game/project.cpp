@@ -2,6 +2,7 @@
 #include "../Engine/include/core/Collision.h"
 #include "../Engine/include/core/game.h"
 #include "../Engine/include/core/CrashHandler.h"
+#include "../Engine/include/core/Text.h"
 // Game objects
 #include "./Objects/World.cpp"
 #include "./Objects/Barrier.cpp"
@@ -12,6 +13,7 @@ GameModeManager *pGameModeManger = static_cast<GameModeManager*>(sys_malloc(size
 CrashHandler crashHandler;
 GameModeBase gameMode;
 CollisionManger collisionManager;
+TextCanvas textCanvas;
 
 // Create objects for gameplay
 Player player;
@@ -25,13 +27,17 @@ void Game::Awake(Game *pGame)
     pGameModeManger->SetCollisionManager(&collisionManager);
 
     crashHandler.Init(pGame);
+    textCanvas.Init();
 }
 // Initialize gameplay objects
 void Game::Start()
 {  
+    char *text = "AAAA"; 
     world.Reset();
     barrier.Reset(pGameModeManger, &collisionManager);
     player.Reset(pGameModeManger, &collisionManager, &crashHandler);
+
+    textCanvas.AddTxtBuff(text, 0, 10, 10);
 }
 // Tick gameplay objects
 void Game::Tick()
@@ -47,6 +53,8 @@ void Game::Draw()
     world.Draw();
     barrier.Draw();
     player.Draw();
+
+    textCanvas.Draw();
 }
 // End gameplay (if this gets called, then the game crashed)
 void Game::End()

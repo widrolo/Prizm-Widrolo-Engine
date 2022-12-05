@@ -16,9 +16,14 @@
 // turn stuff on or off
 #define __COLLISION 1			// This disables all collision and trigger zones
 #define __RENDERING 1			// This disables all rendering
+#define __TEXT		1			// This disables all text
+
+// Text buffer -- WARNING: TO LARGE NUMBERS MAY RESULT IN LOW MEMORY!
+#define __TEXT_BUFFER_SIZE 64	// This is the size of the text buffer used for text rendering
+#define __TEXT_BUFFER_AMMOUNT 6 // This is the ammount of text buffer available
 
 // Anti Piracy
-#define __FOR_WHO "   An Filip" // This is tho whoever im going to sell the game to
+#define __FOR_WHO "   An Filip" // This is to whoever im going to sell the game to
 
 // DO NOT TOUCH
 // Check is the developer is retarded

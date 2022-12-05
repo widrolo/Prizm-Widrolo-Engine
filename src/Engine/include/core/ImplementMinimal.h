@@ -68,7 +68,7 @@ protected: // Acceessing Actor Variables Using Functions
     Vector2 GetScale() { return size; }
 
 protected: // Character Specific Functions
-    void CharacterTick()
+    void CharacterTick(CrashHandler *ch)
     {
         ActorTick();
         GetKey(&key);
@@ -160,8 +160,6 @@ protected: // Character Specific Functions
         pCollisionBox = nullptr;
         pCollisionManager = nullptr;
         pCollisionResult = nullptr;
-
-        enableStdCollisionMove = false;
 
         ticks = 0;
     }

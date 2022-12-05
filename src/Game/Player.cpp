@@ -8,7 +8,7 @@ void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pC
     pCrashHandler = pCH;
     pCollisionManager = pCM;
 
-    enableStdMove = false;
+    enableStdMove = true;
     speed = 3;
 
     // Setup player
@@ -25,18 +25,15 @@ void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pC
     // Setup collision
     collisionBox.MakeBox(pos, scl, 1, pCollisionManager->GenerateNewID());
     pCollisionManager->AddBox(&collisionBox);
-    SetCollisionInfo(pCollisionManager, &collisionBox, &collisionResult);
-    EnableCollisionMove();
 
     // Complete setup
     CoreReset();
 }
 void Player::Tick()
 {
-    CharacterTick();
+    CharacterTick(pCrashHandler);
     
     collisionResult.Reset();
-    SetPosition(pos);
     collisionBox.SetBoxInfo(pos, scl);
 
     // Debugging 
