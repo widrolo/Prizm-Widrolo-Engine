@@ -33,7 +33,8 @@ void Game::Awake(Game *pGame)
 void Game::Start()
 {  
     char *text1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
-    char *text2 = "!$%&/()=?{[]}\\+#- .,;:_\'*~<>|"; 
+    char *text2 = "!$%&/()=?{[]}\\+#- .,;:_\'\"*~<>|"; 
+    char *text3 = "1234567890"; 
 
     world.Reset();
     barrier.Reset(pGameModeManger, &collisionManager);
@@ -41,6 +42,7 @@ void Game::Start()
 
     textCanvas.AddTxtBuff(text1, 0, 10, 8);
     textCanvas.AddTxtBuff(text2, 1, 10, 16);
+    textCanvas.AddTxtBuff(text3, 2, 10, 24);
 }
 // Tick gameplay objects
 void Game::Tick()

@@ -198,10 +198,10 @@ public:
                     VRAM_CopySprite(F_SYMBOL_DOLLAR, x + xpos, y, 8, 8);
                     xpos += 8;
                     break;
-                //case '\"':
-                //    VRAM_CopySprite(F_SYMBOL_, x + xpos, y, 8, 8);
-                //    xpos += 8;
-                //    break;
+                case '\"':
+                    VRAM_CopySprite(F_SYMBOL_DOUBLE_QUOTE, x + xpos, y, 8, 8);
+                    xpos += 8;
+                    break;
                 case '=':
                     VRAM_CopySprite(F_SYMBOL_EQUALS, x + xpos, y, 8, 8);
                     xpos += 8;
@@ -294,7 +294,49 @@ public:
                     VRAM_CopySprite(F_SYMBOL_VERTICAL_SLASH, x + xpos, y, 8, 8);
                     xpos += 8;
                     break;
-
+                /*
+                    Standart number printer 
+                */
+                case '0':
+                    VRAM_CopySprite(F_NUMBER_ZERO, x + xpos, y, 8, 8);
+                    xpos += 8;
+                    break;
+                case '1':
+                    VRAM_CopySprite(F_NUMBER_ONE, x + xpos, y, 8, 8);
+                    xpos += 8;
+                    break;
+                case '2':
+                    VRAM_CopySprite(F_NUMBER_TWO, x + xpos, y, 8, 8);
+                    xpos += 8;
+                    break;
+                case '3':
+                    VRAM_CopySprite(F_NUMBER_THREE, x + xpos, y, 8, 8);
+                    xpos += 8;
+                    break;
+                case '4':
+                    VRAM_CopySprite(F_NUMBER_FOUR, x + xpos, y, 8, 8);
+                    xpos += 8;
+                    break;
+                case '5':
+                    VRAM_CopySprite(F_NUMBER_FIVE, x + xpos, y, 8, 8);
+                    xpos += 8;
+                    break;
+                case '6':
+                    VRAM_CopySprite(F_NUMBER_SIX, x + xpos, y, 8, 8);
+                    xpos += 8;
+                    break;
+                case '7':
+                    VRAM_CopySprite(F_NUMBER_SEVEN, x + xpos, y, 8, 8);
+                    xpos += 8;
+                    break;
+                case '8':
+                    VRAM_CopySprite(F_NUMBER_EIGTH, x + xpos, y, 8, 8);
+                    xpos += 8;
+                    break;
+                case '9':
+                    VRAM_CopySprite(F_NUMBER_NINE, x + xpos, y, 8, 8);
+                    xpos += 8;
+                    break;
                 /*
                     Invisible chars printer 
                 */
