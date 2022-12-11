@@ -32,12 +32,15 @@ void Game::Awake(Game *pGame)
 // Initialize gameplay objects
 void Game::Start()
 {  
-    char *text = "AAAA"; 
+    char *text1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
+    char *text2 = "!$%&/()=?{[]}\\+#- .,;:_\'*~<>|"; 
+
     world.Reset();
     barrier.Reset(pGameModeManger, &collisionManager);
     player.Reset(pGameModeManger, &collisionManager, &crashHandler);
 
-    textCanvas.AddTxtBuff(text, 0, 10, 10);
+    textCanvas.AddTxtBuff(text1, 0, 10, 8);
+    textCanvas.AddTxtBuff(text2, 1, 10, 16);
 }
 // Tick gameplay objects
 void Game::Tick()
