@@ -32,9 +32,9 @@ void Game::Awake(Game *pGame)
 // Initialize gameplay objects
 void Game::Start()
 {  
-    char *text1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
-    char *text2 = "!$%&/()=?{[]}\\+#- .,;:_\'\"*~<>|"; 
-    char *text3 = "1234567890"; 
+    char *text1 = "IT WAS A PAIN TO MAKE THIS FONT!"; 
+    char *text2 = "BUT IT'S TOTALLY WORTH IT."; 
+    char *text3 = "AM I PROUD OF IT? YES!"; 
 
     world.Reset();
     barrier.Reset(pGameModeManger, &collisionManager);

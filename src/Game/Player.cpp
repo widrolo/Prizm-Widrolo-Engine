@@ -1,4 +1,5 @@
 #include "./Player.h"
+#include "./Data/S_GHOST.h"
 #include <fxcg/display.h>
 
 void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pCH)
@@ -16,8 +17,8 @@ void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pC
     pos.y = 70;
     SetPosition(pos);
 
-    scl.x = 20;
-    scl.y = 20;
+    scl.x = 32;
+    scl.y = 32;
     SetScale(scl);
 
     color = COLOR_RED;
@@ -49,5 +50,47 @@ void Player::Tick()
 
 void Player::Draw()
 {
-    CharacterDraw(0);
+    //CharacterDraw(1);
+    Vector2 pos = GetPosition();
+    Vector2 scl;
+    scl.x = 8;
+    scl.y = 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_CORNER, false, false);
+    pos.y += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_SIDE, false, false);
+    pos.y += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_SIDE, false, false);
+    pos.y += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_CORNER, true, false);
+
+    pos.y = GetPosition().y;
+    pos.x += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_TOP, false, false);
+    pos.y += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_EYE, false, false);
+    pos.y += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_MOUTH, false, false);
+    pos.y += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_LEG, false, false);
+
+    pos.y = GetPosition().y;
+    pos.x += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_TOP, false, true);
+    pos.y += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_EYE, false, true);
+    pos.y += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_MOUTH, false, true);
+    pos.y += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_LEG, false, true);
+
+    pos.y = GetPosition().y;
+    pos.x += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_CORNER, false, true);
+    pos.y += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_SIDE, false, true);
+    pos.y += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_SIDE, false, true);
+    pos.y += 8;
+    renderer->RenderSprite(pos, scl, S_GHOST_CORNER, true, true);
+
 }

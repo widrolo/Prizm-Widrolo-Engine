@@ -340,7 +340,7 @@ public:
                 /*
                     Invisible chars printer 
                 */
-                case 0:
+                case 0: // Null byte
                     brk = true;
                     break;
 

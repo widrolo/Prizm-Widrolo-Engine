@@ -31,6 +31,10 @@ public:
     {
         return ID;
     }
+    unsigned char GetLayer()
+    {
+        return layer;
+    }
     Vector2 GetPosition()
     {
         return position;
@@ -163,7 +167,7 @@ private: // Private Searching Functions
     int FindBoxLayer(unsigned char layer, int start)
     {
         for (int i = start; i < MAX_BOXES; i++)
-            if (boxes[i]->layer == layer)
+            if (boxes[i]->GetLayer() == layer)
                 return i;
     }
 #endif

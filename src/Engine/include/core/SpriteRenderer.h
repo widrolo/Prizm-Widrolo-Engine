@@ -23,9 +23,62 @@ public: // Rendering Functions
         }
     }
 #if __BLEEDING_EDGE == 1
-    void RenderSprite8x8(Vector2 position, color_t *sprite)
+    void RenderSprite(Vector2 position, Vector2 size, color_t *sprite, bool xFlip, bool yFlip)
     {
-        VRAM_CopySprite(sprite, position.x, position.y, 8, 8);
+        color_t *VRAM = (color_t*)GetVRAMAddress();
+        
+        // Draw Sprite normally
+        if (!xFlip && !yFlip)
+        {
+            VRAM += (LCD_WIDTH_PX * position.y) + position.x;
+            for(int j = position.y; j < position.y + size.y; j++) 
+            {
+                for (int i = position.x; i < position.x + size.x; i++) 
+                {
+                    *VRAM++ = *sprite++;
+                }
+                VRAM += LCD_WIDTH_PX - size.x;
+            }
+        }
+        // Flip Horizontally
+        if (!xFlip && yFlip)
+        {
+            VRAM += (LCD_WIDTH_PX * position.y) + position.x + size.x - 1;
+            for(int j = position.y; j < position.y + size.y; j++) 
+            {
+                for (int i = position.x + size.x; i > position.x; i--) 
+                {
+                    *VRAM-- = *sprite++;
+                }
+                VRAM += LCD_WIDTH_PX + size.x;
+            }
+        }
+        // Flip Vertically
+        if (xFlip && !yFlip)
+        {
+            VRAM += (LCD_WIDTH_PX * (position.y + size.y - 1)) + position.x;
+            for(int j = position.y + size.y; j > position.y; j--) 
+            {
+                for (int i = position.x; i < position.x + size.x; i++) 
+                {
+                    *VRAM++ = *sprite++;
+                }
+                VRAM -= LCD_WIDTH_PX + size.x;
+            }
+        }
+        // Flip Both Axis
+        if (xFlip && yFlip)
+        {
+            VRAM += (LCD_WIDTH_PX * (position.y + size.y - 1)) + position.x + size.x - 1;
+            for(int j = position.y + size.y; j > position.y; j--) 
+            {
+                for (int i = position.x + size.x; i > position.x; i--) 
+                {
+                    *VRAM-- = *sprite++;
+                }
+                VRAM -= LCD_WIDTH_PX - size.x;
+            }
+        }
     }
 #endif
 };

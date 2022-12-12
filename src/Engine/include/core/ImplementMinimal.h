@@ -1,6 +1,3 @@
-
-#define Minimal_Inlcuded
-
 #include <fxcg/keyboard.h>
 #include <fxcg/heap.h>
 #include "./../math/vector.h"
@@ -139,17 +136,6 @@ protected: // Character Specific Functions
         case 0:
             renderer->RenderSquare(position, size, color);
             break;
-        case 1:
-#if __BLEEDING_EDGE == 1
-            renderer->RenderSprite8x8(position, pPlayerSprite);
-#endif
-            break;
-        case 2:
-            //renderer.RenderSquare(position, size, color);
-            break;
-        case 3:
-            //renderer.RenderSquare(position, size, color);
-            break;
         
         default:
             break;
@@ -169,7 +155,6 @@ class Pawn : Actor
 {
 protected: // Pawn Specific Variables
     int color;
-    color_t *pPawnSprite = static_cast<color_t*>(sys_malloc(sizeof(color_t) * 64));
     SpriteRenderer *renderer = static_cast<SpriteRenderer*>(sys_malloc(sizeof(SpriteRenderer)));
 
 protected: // Acceessing Actor Variables Using Functions
@@ -192,17 +177,6 @@ protected: // Pawn Behavior
         {
         case 0:
             renderer->RenderSquare(position, size, color);
-            break;
-        case 1:
-#if __BLEEDING_EDGE == 1
-            renderer->RenderSprite8x8(position, pPawnSprite);
-#endif
-            break;
-        case 2:
-            //renderer.RenderSquare(position, size, color);
-            break;
-        case 3:
-            //renderer.RenderSquare(position, size, color);
             break;
         
         default:
