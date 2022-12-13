@@ -1,6 +1,7 @@
 #include "EngineDefines.h"
 #include <fxcg/display.h>
 #include "../data/Fontfile.h"
+#include "stdlib.h"
 
 // This may just be the most conplex piece of code written in this engine
 class TextCanvas
@@ -40,8 +41,23 @@ public:
 
             TextCanvasBuffer[buffNum][i] = txt[i];
         }
-        
+    }
+    void AddIntBuff(short num, int buffNum, unsigned char x, unsigned char y)
+    {
+        // The last 2 bytes tell the position
+        TextCanvasBuffer[buffNum][__TEXT_BUFFER_SIZE - 1] = x;
+        TextCanvasBuffer[buffNum][__TEXT_BUFFER_SIZE - 2] = y;
 
+        char *txt = IntToChar(num);
+
+        for (int i = 0; i < __TEXT_BUFFER_SIZE; i++)
+        {
+            // check to see if text has ended
+            if (txt[i] == 0)
+                break;
+
+            TextCanvasBuffer[buffNum][i] = txt[i];
+        }
     }
     
     void Draw()
@@ -351,8 +367,35 @@ public:
                 if (brk)
                     break;
             }
+        }   
+    }
+private:
+    char* IntToChar(short N)
+    {
+        // Prevent a bug from happening
+        // TODO: fix the bug so i can remove this
+        if (N & 0b1000000000000000)
+        {
+            char *err = "INF";
+            return err;
         }
+        char* arr;
+        char arr1[12];
+        arr = (char*)malloc(sizeof(char) * 12);
 
-        
+        // ASCII Magic
+        int index = 0;
+        while (N) {
+            arr1[++index] = N % 10 + '0';
+            N /= 10;
+        }
+    
+        int i;
+        for (i = 0; i < index; i++) {
+            arr[i] = arr1[index - i];
+        }
+        arr[i] = '\0';
+
+        return (char*)arr;
     }
 };

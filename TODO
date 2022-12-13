@@ -9,6 +9,16 @@ Primary:
 [/] - Game Reset (requires Game Mode base)
 [ ] - Random
 [O] - Sprite optimization (h/v-filping)
+[ ] - File IO
+[ ] - Save Game (File IO and Game Mode needed)
+    In the Gamemode, there will be a buffer of a given size, that holds a certain
+    number of the SaveItem object. Uppon saving, all SaveItem objects will be 
+    packaged and saved to a file with a given name ending with .wsv.
+    The programmer can access the save buffer at any given possible time.
+[ ] - Data Files (File IO)
+    Any game using the Widrolo Engine will always be able to access .wdt files for 
+    aditional data. Data comes in 1024 byte blocks, and cannot be written to by the game
+    itself, but must be created using a custom data to wdt converter. 
 
 Secondary:
 [O] - Anti Piracy
@@ -19,5 +29,5 @@ Secondary:
     and based on if its true or false, it will modify the file accordingly.
     Is the file present, and its contants are right, then the game will boot.
     Is the file present, but the contents are wrong, then the game will throw an anti piracy screen.
-
 [O] - Tool for converting ppm to color arrays
+[ ] - Tool for converting data to a .wdt file

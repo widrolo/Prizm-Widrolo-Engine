@@ -3,6 +3,7 @@
 #include "../Engine/include/core/game.h"
 #include "../Engine/include/core/CrashHandler.h"
 #include "../Engine/include/core/Text.h"
+#include "../Engine/include/core/Randomizer.h"
 // Game objects
 #include "./Objects/World.cpp"
 #include "./Objects/Barrier.cpp"
@@ -14,6 +15,7 @@ CrashHandler crashHandler;
 GameModeBase gameMode;
 CollisionManger collisionManager;
 TextCanvas textCanvas;
+Randomizer randomizer;
 
 // Create objects for gameplay
 Player player;
@@ -32,6 +34,8 @@ void Game::Awake(Game *pGame)
 // Initialize gameplay objects
 void Game::Start()
 {  
+    randomizer.Shuffle(0, 700);
+
     char *text1 = "IT WAS A PAIN TO MAKE THIS FONT!"; 
     char *text2 = "BUT IT'S TOTALLY WORTH IT."; 
     char *text3 = "AM I PROUD OF IT? YES!"; 
@@ -43,6 +47,8 @@ void Game::Start()
     textCanvas.AddTxtBuff(text1, 0, 10, 8);
     textCanvas.AddTxtBuff(text2, 1, 10, 16);
     textCanvas.AddTxtBuff(text3, 2, 10, 24);
+
+    textCanvas.AddIntBuff((short)randomizer.GetNum(), 3, 10, 30);
 }
 // Tick gameplay objects
 void Game::Tick()
