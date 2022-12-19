@@ -1,10 +1,11 @@
 #include "stdlib.h"
 
+
 class Randomizer
 {
 private:
     int seed;
-    int number;
+    short number;
 public:
     // Abstraction heaven
 
@@ -12,27 +13,17 @@ public:
     {
         sys_srand(seed);
     }
-    void Shuffle(int min, int max)
+    void Shuffle(bool negative, int max)
     {
         number = sys_rand();
 
-        double newNum = number;
-
-        omg:
-        while (newNum < min)
+        while (number > max)
         {
-            while (newNum < min)
-            {
-                newNum * 2;
-            }
-            newNum / 2;
+            number = (int)((double)number / 2);
         }
 
-        if (newNum < min)
-            goto omg;
-        
-        number = newNum;
-        ret
+        if (negative)
+            number = (number | 0x8000); // Signs the short
     }
     int GetNum()
     {
