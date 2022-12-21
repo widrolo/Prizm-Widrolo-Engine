@@ -22,12 +22,12 @@ public:
         {
             for (int j = 0; j < __TEXT_BUFFER_SIZE; j++)
             {
-                TextCanvasBuffer[i][j] = 0;
+                TextCanvasBuffer[i][j] = 0x0;
             }
         }
     }
 
-    void AddTxtBuff(char txt[__TEXT_BUFFER_SIZE], int buffNum, unsigned char x, unsigned char y)
+    void AddTxtBuff(const char txt[__TEXT_BUFFER_SIZE], int buffNum, unsigned char x, unsigned char y)
     {
         // The last 2 bytes tell the position
         TextCanvasBuffer[buffNum][__TEXT_BUFFER_SIZE - 1] = x;
@@ -48,7 +48,7 @@ public:
         TextCanvasBuffer[buffNum][__TEXT_BUFFER_SIZE - 1] = x;
         TextCanvasBuffer[buffNum][__TEXT_BUFFER_SIZE - 2] = y;
 
-        char *txt = IntToChar(num);
+        char *txt = (char*)IntToChar(num);
 
         for (int i = 0; i < __TEXT_BUFFER_SIZE; i++)
         {
@@ -57,6 +57,13 @@ public:
                 break;
 
             TextCanvasBuffer[buffNum][i] = txt[i];
+        }
+    }
+    void ClearBuff(int buffNum)
+    {
+        for (int j = 0; j < __TEXT_BUFFER_SIZE; j++)
+        {
+            TextCanvasBuffer[buffNum][j] = 0x0;
         }
     }
     
@@ -370,13 +377,13 @@ public:
         }   
     }
 private:
-    char* IntToChar(short N)
+    const char* IntToChar(short N)
     {
         // Prevent a bug from happening
         // TODO: fix the bug so i can remove this
         if (N & 0b1000000000000000)
         {
-            char *err = "INF";
+            const char *err = "INF";
             return err;
         }
         char* arr;

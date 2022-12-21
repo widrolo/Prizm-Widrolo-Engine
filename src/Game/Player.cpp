@@ -2,12 +2,13 @@
 #include "./Data/S_GHOST.h"
 #include <fxcg/display.h>
 
-void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pCH)
+void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pCH, FileReader *pFR)
 {
     // Setup object
     pGameModeManger = pGMM;
     pCrashHandler = pCH;
     pCollisionManager = pCM;
+    pFileReader = pFR;
 
     enableStdMove = true;
     speed = 3;
@@ -22,6 +23,9 @@ void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pC
     SetScale(scl);
 
     color = COLOR_RED;
+
+    // Setup File
+    file.SetName("\\\\fls0\\File.txt");
 
     // Setup collision
     collisionBox.MakeBox(pos, scl, 1, pCollisionManager->GenerateNewID());
@@ -40,11 +44,13 @@ void Player::Tick()
     // Debugging 
 
     if (key == KEY_CTRL_EXE)
-        pGameModeManger->GetPlayer()->Reset(pGameModeManger, pCollisionManager, pCrashHandler);
+        pGameModeManger->GetPlayer()->Reset(pGameModeManger, pCollisionManager, pCrashHandler, pFileReader);
     if (key == KEY_CHAR_0)
         pGameModeManger->GetGameMode()->ChangeSkyboxColor(COLOR_DARKGREEN);
     if (key == KEY_CHAR_1)
-        pCrashHandler->Crash();
+        pCrashHandler->Crash("  Key Interrupt");
+    if (key == KEY_CHAR_7)
+        pFileReader->CreateFile(&file);
 
 }
 

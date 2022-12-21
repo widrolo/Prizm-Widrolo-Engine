@@ -4,6 +4,7 @@
 #include "../Engine/include/core/CrashHandler.h"
 #include "../Engine/include/core/Text.h"
 #include "../Engine/include/core/Randomizer.h"
+#include "../Engine/include/core/File.h"
 // Game objects
 #include "./Objects/World.cpp"
 #include "./Objects/Barrier.cpp"
@@ -16,6 +17,7 @@ GameModeBase gameMode;
 CollisionManger collisionManager;
 TextCanvas textCanvas;
 Randomizer randomizer;
+FileReader fileReader;
 
 // Create objects for gameplay
 Player player;
@@ -30,19 +32,20 @@ void Game::Awake(Game *pGame)
 
     crashHandler.Init(pGame);
     textCanvas.Init();
+    fileReader.Init(&crashHandler);
 }
 // Initialize gameplay objects
 void Game::Start()
 {  
     randomizer.Shuffle(false, 100);
 
-    char *text1 = "IT WAS A PAIN TO MAKE THIS FONT!"; 
-    char *text2 = "BUT IT'S TOTALLY WORTH IT."; 
-    char *text3 = "AM I PROUD OF IT? YES!"; 
+    const char *text1 = "IT WAS A PAIN TO MAKE THIS FONT!"; 
+    const char *text2 = "BUT IT'S TOTALLY WORTH IT."; 
+    const char *text3 = "AM I PROUD OF IT? YES!"; 
 
     world.Reset();
     barrier.Reset(pGameModeManger, &collisionManager);
-    player.Reset(pGameModeManger, &collisionManager, &crashHandler);
+    player.Reset(pGameModeManger, &collisionManager, &crashHandler, &fileReader);
 
     textCanvas.AddTxtBuff(text1, 0, 10, 8);
     textCanvas.AddTxtBuff(text2, 1, 10, 16);
