@@ -12,13 +12,14 @@ private:
     CollisionManger *pCollisionManager;
     CollisionResult collisionResult;
     CrashHandler *pCrashHandler;
-    FileReader *pFileReader;
+    FileReader *pFileReader;  
+    TextCanvas *pTextCanvas;
     WFile file;
 
     Vector2 pos;
     Vector2 scl;
 public:
-    void Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pCH, FileReader *pFR);
+    void Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pCH, FileReader *pFR, TextCanvas *pTC);
     void Tick();
     void Draw();
     void End();

@@ -2,13 +2,14 @@
 #include "./Data/S_GHOST.h"
 #include <fxcg/display.h>
 
-void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pCH, FileReader *pFR)
+void Player::Reset(GameModeManager *pGMM, CollisionManger *pCM, CrashHandler *pCH, FileReader *pFR, TextCanvas *pTC)
 {
     // Setup object
     pGameModeManger = pGMM;
     pCrashHandler = pCH;
     pCollisionManager = pCM;
     pFileReader = pFR;
+    pTextCanvas = pTC;
 
     enableStdMove = true;
     speed = 3;
@@ -43,14 +44,28 @@ void Player::Tick()
 
     // Debugging 
 
+    // Debug Runtime Manipulation
     if (key == KEY_CTRL_EXE)
-        pGameModeManger->GetPlayer()->Reset(pGameModeManger, pCollisionManager, pCrashHandler, pFileReader);
+        pGameModeManger->GetPlayer()->Reset(pGameModeManger, pCollisionManager, pCrashHandler, pFileReader, pTextCanvas);
     if (key == KEY_CHAR_0)
         pGameModeManger->GetGameMode()->ChangeSkyboxColor(COLOR_DARKGREEN);
     if (key == KEY_CHAR_1)
         pCrashHandler->Crash("  Key Interrupt");
+    
+    // Debug Text
+    if (key == KEY_CHAR_5)
+    {
+        pTextCanvas->ClearBuff(0);
+        pTextCanvas->AddTxtBuff("OMG IT WORKS!!", 0, 10, 8);
+    }
+
+    // Debug File Handling
     if (key == KEY_CHAR_7)
         pFileReader->CreateFile(&file);
+    if (key == KEY_CHAR_8)
+        pFileReader->OpenFile(&file);
+    if (key == KEY_CHAR_9)
+        pFileReader->CloseFile(&file);
 
 }
 

@@ -45,7 +45,7 @@ void Game::Start()
 
     world.Reset();
     barrier.Reset(pGameModeManger, &collisionManager);
-    player.Reset(pGameModeManger, &collisionManager, &crashHandler, &fileReader);
+    player.Reset(pGameModeManger, &collisionManager, &crashHandler, &fileReader, &textCanvas);
 
     textCanvas.AddTxtBuff(text1, 0, 10, 8);
     textCanvas.AddTxtBuff(text2, 1, 10, 16);

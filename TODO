@@ -7,9 +7,9 @@ Primary:
 [O] - Pawn Class
 [O] - UI (requires Sprites for smaller font)
 [/] - Game Reset (requires Game Mode base)
-[ ] - Random
+[O] - Random
 [O] - Sprite optimization (h/v-filping)
-[ ] - File IO
+[O] - File IO
 [ ] - Save Game (File IO and Game Mode needed)
     In the Gamemode, there will be a buffer of a given size, that holds a certain
     number of the SaveItem object. Uppon saving, all SaveItem objects will be 

@@ -12,7 +12,7 @@ public:
     bool isOpen;
     void SetName(const char* name)
     {
-        Bfile_StrToName_ncpy(this->name, name, sizeof(name) * 2);
+        Bfile_StrToName_ncpy(this->name, name, 64);
     }
 };
 
