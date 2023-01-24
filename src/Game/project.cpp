@@ -1,3 +1,4 @@
+#include "../Engine/include/core/Allocator.h"
 #include "../Engine/include/core/RuntimeManagers.h"
 #include "../Engine/include/core/Collision.h"
 #include "../Engine/include/core/game.h"

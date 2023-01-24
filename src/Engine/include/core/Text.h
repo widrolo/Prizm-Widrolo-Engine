@@ -367,11 +367,11 @@ public:
                 case 0: // Null byte
                     brk = true;
                     break;
-                case '\n'
+                case '\n':
                     xpos = 0;
                     ypos += 8;
                     break;
-                case '\t'
+                case '\t':
                     xpos += 32;
                     break;
 
