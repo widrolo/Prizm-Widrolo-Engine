@@ -11,7 +11,6 @@ Player player;
 World world;
 Barrier barrier;
 
-// Create managers
 ENGINE_SETUP
 
 // Initialize engine components
@@ -22,6 +21,7 @@ void Game::Awake(Game *pGame)
 // Initialize gameplay objects
 void Game::Start()
 {  
+    pGameMode.GetTextCanvas()->AddTxtBuff("THIS IS JUST A DEMO OF\nTHE ENGINE AND DOES NOT\nREPRESENT ANY GAME\nENGINE VERSION: 0.8 ALPHA", 1, 180, 180);
     player.Reset(&pGameMode);
     world.Reset();
     barrier.Reset(&pGameMode);
@@ -34,14 +34,14 @@ void Game::Tick()
 // Draw gameplay
 void Game::Draw()
 {
-    ENGINE_DRAW
-    world.Draw();
-    barrier.Draw();
-    player.Draw();
-
-    pGameMode.GetTextCanvas()->Draw();
+    ENGINE_DRAW(
+        world.Draw();
+        barrier.Draw();
+        player.Draw();
+    )
 }
-// End gameplay (if this gets called, then the game crashed)
+// Ends Game execution by locking it after a crash
+// here you can attempt to save the game one last time
 void Game::End()
 {
     CrashHandler* cr = pGameMode.GetCrashHandler();

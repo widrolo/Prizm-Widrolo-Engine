@@ -26,6 +26,7 @@ void Player::Tick()
 {
     CharacterTick(gameMode->GetCrashHandler());
     Vector2 BarrierPos = {x: 100, y: 100};
+    gameMode->GetTextCanvas()->ClearBuff(0);
     gameMode->GetTextCanvas()->AddIntBuff(Wdist(BarrierPos, GetPosition()), 0, 10, 10);
 }
 

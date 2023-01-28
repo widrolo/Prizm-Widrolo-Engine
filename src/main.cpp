@@ -15,7 +15,7 @@ int main() {
     PrintXY(5, 6, "   An Filip", TEXT_MODE_TRANSPARENT_BACKGROUND, COLOR_BLACK);
 #endif 
     // Draw first Frame
-    Bdisp_PutDisp_DD();
+    game.Draw();
     // Game start and Game loop begin
     game.Start();
     while (game.isRunning) 

@@ -19,7 +19,7 @@
 #define __TEXT		1			// This disables all text
 
 // Text buffer
-#define __TEXT_BUFFER_SIZE 64	// This is the size of the text buffer used for text rendering
+#define __TEXT_BUFFER_SIZE 256	// This is the size of the text buffer used for text rendering
 #define __TEXT_BUFFER_AMMOUNT 6 // This is the ammount of text buffer available
 
 // Anti Piracy
@@ -50,5 +50,5 @@ _Pragma ("message(__FOR_WHO)")
 
 #define ENGINE_SETUP GM_GameMode pGameMode;
 #define ENGINE_AWAKE pGameMode.InitGame(pGame);
-#define ENGINE_DRAW	Bdisp_AllClr_VRAM();
+#define ENGINE_DRAW(x)	Bdisp_AllClr_VRAM(); x pGameMode.GetTextCanvas()->Draw(); Bdisp_PutDisp_DD();
 

@@ -49,6 +49,10 @@ public:
         TextCanvasBuffer[buffNum][__TEXT_BUFFER_SIZE - 2] = y;
 
         char *txt = (char*)IntToChar(num);
+        if (num == 0)
+        {
+            txt[0] = '0';
+        }
 
         for (int i = 0; i < __TEXT_BUFFER_SIZE; i++)
         {
