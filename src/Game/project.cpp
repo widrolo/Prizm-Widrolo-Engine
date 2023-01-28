@@ -1,7 +1,6 @@
 #include "./GM_GameMode.h"
 #include "../Engine/include/core/EngineDefines.h"
 
-#include <fxcg/display.h>
 
 #include "./Player.cpp"
 
@@ -9,12 +8,12 @@
 Player player;
 
 // Create managers
-GM_GameMode pGameMode;
+ENGINE_SETUP
 
 // Initialize engine components
 void Game::Awake(Game *pGame)
 {
-    pGameMode.InitGame(pGame);
+    ENGINE_AWAKE
 }
 // Initialize gameplay objects
 void Game::Start()
@@ -29,6 +28,7 @@ void Game::Tick()
 // Draw gameplay
 void Game::Draw()
 {
+    ENGINE_DRAW
     player.Draw();
 }
 // End gameplay (if this gets called, then the game crashed)

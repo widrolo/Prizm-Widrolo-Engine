@@ -18,7 +18,7 @@
 #define __RENDERING 1			// This disables all rendering
 #define __TEXT		1			// This disables all text
 
-// Text buffer -- WARNING: TO LARGE NUMBERS MAY RESULT IN LOW MEMORY!
+// Text buffer
 #define __TEXT_BUFFER_SIZE 64	// This is the size of the text buffer used for text rendering
 #define __TEXT_BUFFER_AMMOUNT 6 // This is the ammount of text buffer available
 
@@ -48,7 +48,7 @@ _Pragma ("message(__FOR_WHO)")
 
 // Engine Macros
 
-#define ENGINE_SETUP GM_GameMode pGameMode;CrashHandler crashHandler;CollisionManger collisionManager;Allocator allocator;FileReader fileHandler;Randomizer randomizer;TextCanvas mainCanvas;
-#define ENGINE_AWAKE pGameMode.InitGame(game, &crashHandler, &collisionManager, &allocator, &fileHandler, &randomizer, &mainCanvas);
+#define ENGINE_SETUP GM_GameMode pGameMode;
+#define ENGINE_AWAKE pGameMode.InitGame(pGame);
 #define ENGINE_DRAW	Bdisp_AllClr_VRAM();
 

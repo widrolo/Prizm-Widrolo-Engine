@@ -52,9 +52,11 @@ public: // Engine Things
         if (pRandomizer == nullptr)
             pCrashHandler->Crash(crashMsg);
     }
-public: // Getters
-    CrashHandler* GetCrashHandler()
-    {
-        return pCrashHandler;
-    }
+public: // Engine Getters
+    CrashHandler* GetCrashHandler() { return pCrashHandler; }
+    Allocator* GetAllocator() { return pAllocator; }
+    FileReader* GetFileReader() { return pFileHandler; }
+    CollisionManger* GetCollisionManger() { return pCollisionManager; }
+    TextCanvas* GetTextCanvas() { return pMainCanvas; }
+    Randomizer* GetRandomizer() { return pRandomizer; }
 };

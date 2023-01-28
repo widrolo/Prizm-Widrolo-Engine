@@ -31,33 +31,7 @@ protected: // Character Specific Variables
     int color;
     bool enableStdMove;
     int key;
-    color_t *pPlayerSprite = static_cast<color_t*>(sys_malloc(sizeof(color_t) * 64));
     SpriteRenderer *renderer = static_cast<SpriteRenderer*>(sys_malloc(sizeof(SpriteRenderer)));
-
-private: // Collision Components
-    bool enableStdCollisionMove;
-    CollisionManger *pCollisionManager;
-    CollisionBox *pCollisionBox;
-    CollisionResult *pCollisionResult;
-
-protected: // Collision functions
-    void SetCollisionInfo(CollisionManger *pCollisionManager, CollisionBox *pCollisionBox, CollisionResult *pCollisionResult)
-    {
-        this->pCollisionManager = pCollisionManager;
-        this->pCollisionBox = pCollisionBox;
-        this->pCollisionResult = pCollisionResult;
-    }
-
-    void EnableCollisionMove()
-    {
-        if (enableStdMove)
-            return;
-        
-        if (pCollisionManager == nullptr || pCollisionBox == nullptr || pCollisionResult == nullptr)
-            return;
-
-        enableStdCollisionMove = true;
-    }
 
 protected: // Acceessing Actor Variables Using Functions
     void SetPosition(Vector2 position) { this->position = position; }
@@ -81,73 +55,17 @@ protected: // Character Specific Functions
             else if (key == KEY_CTRL_DOWN)
                 position.y += 1 * speed;
         }
-
-        if (enableStdCollisionMove)
-        {
-            if (key == KEY_CTRL_LEFT)
-            {   
-                position.x -= 1 * speed;
-                pCollisionBox->SetBoxInfo(position, size);
-                pCollisionManager->CheckForCollision(pCollisionBox->GetID(), pCollisionResult);
-                if (pCollisionResult->collided)
-                {
-                    position.x += 1 * speed;
-                }
-            }
-            else if (key == KEY_CTRL_RIGHT)
-            {
-                position.x += 1 * speed;
-                pCollisionBox->SetBoxInfo(position, size);
-                pCollisionManager->CheckForCollision(pCollisionBox->GetID(), pCollisionResult);
-                if (pCollisionResult->collided)
-                {
-                    position.x -= 1 * speed;
-                }
-            }
-            else if (key == KEY_CTRL_UP)
-            {
-                position.y -= 1 * speed;
-                pCollisionBox->SetBoxInfo(position, size);
-                pCollisionManager->CheckForCollision(pCollisionBox->GetID(), pCollisionResult);
-                if (pCollisionResult->collided)
-                {
-                    position.y += 1 * speed;
-                }
-            }
-            else if (key == KEY_CTRL_DOWN)
-            {
-                position.y += 1 * speed;
-                pCollisionBox->SetBoxInfo(position, size);
-                pCollisionManager->CheckForCollision(pCollisionBox->GetID(), pCollisionResult);
-                if (pCollisionResult->collided)
-                {
-                    position.y -= 1 * speed;
-                }
-            }
-            pCollisionBox->SetBoxInfo(position, size);
-        }
     }
 
-    void CharacterDraw(int renderMode)
+    void CharacterDraw(bool stdRender)
     {
         ActorDraw();
         
-        switch (renderMode)
-        {
-        case 0:
+        if (stdRender)
             renderer->RenderSquare(position, size, color);
-            break;
-        
-        default:
-            break;
-        }
     }
     void CoreReset()
     {
-        pCollisionBox = nullptr;
-        pCollisionManager = nullptr;
-        pCollisionResult = nullptr;
-
         ticks = 0;
     }
 };
@@ -170,19 +88,12 @@ protected: // Pawn Behavior
         ActorTick();
     }
 
-    void PawnDraw(int renderMode)
+    void PawnDraw(bool stdRender)
     {
         ActorDraw();
         
-        switch (renderMode)
-        {
-        case 0:
+        if (stdRender)
             renderer->RenderSquare(position, size, color);
-            break;
-        
-        default:
-            break;
-        }
     }
 
     void CoreReset()

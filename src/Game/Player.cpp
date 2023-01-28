@@ -19,7 +19,6 @@ void Player::Reset(GM_GameMode *gm)
 
     color = COLOR_RED;
 
-
     // Complete setup
     CoreReset();
 }
@@ -30,5 +29,5 @@ void Player::Tick()
 
 void Player::Draw()
 {
-    CharacterDraw(0);
+    CharacterDraw(true);
 }
