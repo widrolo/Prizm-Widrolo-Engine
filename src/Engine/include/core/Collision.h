@@ -67,7 +67,7 @@ private: // Private Vars
 
 public: // Public Box Array Control Functions
 
-    CollisionManger()
+    void Init()
     {
         for (int i = 0; i < MAX_BOXES; i++)
             boxes[i] = nullptr;

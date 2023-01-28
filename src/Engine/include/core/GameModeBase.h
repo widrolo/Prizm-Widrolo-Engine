@@ -15,9 +15,9 @@ class GameModeBase
 protected:
     Game *pGameSession;
     CrashHandler *pCrashHandler;
-    CollisionManger *pCollisionManager;
     Allocator *pAllocator;
     FileReader *pFileHandler;
-    Randomizer *pRandomizer;
+    CollisionManger *pCollisionManager;
     TextCanvas *pMainCanvas;
+    Randomizer *pRandomizer;
 };

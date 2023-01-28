@@ -11,8 +11,6 @@ Player player;
 // Create managers
 GM_GameMode pGameMode;
 
-
-
 // Initialize engine components
 void Game::Awake(Game *pGame)
 {
@@ -36,5 +34,6 @@ void Game::Draw()
 // End gameplay (if this gets called, then the game crashed)
 void Game::End()
 {
-
+    CrashHandler* cr = pGameMode.GetCrashHandler();
+    cr->EndProgram();
 }

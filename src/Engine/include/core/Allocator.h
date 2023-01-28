@@ -10,15 +10,18 @@ private:
     ListNode* firstNode;
     ListNode* lastNode;
 
+    CrashHandler* pCR;
+
     int highID;
 
 public:
-    void Init()
+    void Init(CrashHandler* cr)
     {
+        pCR = cr;
         firstNode = (ListNode*)sys_malloc(sizeof(ListNode));
         if (firstNode == nullptr)
         {
-            // Handle an exception
+            cr->Crash("Allocator Init Fail");
         }
         lastNode = firstNode;
         highID = 0;
@@ -30,7 +33,7 @@ public:
         lastNode->nextNode = (ListNode*)sys_malloc(sizeof(ListNode));
         if (lastNode->nextNode == nullptr)
         {
-            // Handle an exception
+            pCR->Crash("Allocator Fail");
         }
         lastNode = lastNode->nextNode;
 
@@ -40,7 +43,7 @@ public:
         lastNode->data.ptr = sys_malloc(allocSize);
         if (lastNode->data.ptr == nullptr)
         {
-            // Handle an exception
+            pCR->Crash("Allocator Fail");
         }
 
         return lastNode->ID;

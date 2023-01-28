@@ -4,6 +4,7 @@
 int main() {
     // Load game
     Game game;
+    game.isRunning = true;
     game.Awake(&game);
 
     // Clear the screen in preperation of game start
@@ -17,7 +18,6 @@ int main() {
     Bdisp_PutDisp_DD();
     // Game start and Game loop begin
     game.Start();
-    game.isRunning = true;
     while (game.isRunning) 
     {
         game.Tick();
