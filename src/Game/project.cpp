@@ -38,6 +38,8 @@ void Game::Draw()
     world.Draw();
     barrier.Draw();
     player.Draw();
+
+    pGameMode.GetTextCanvas()->Draw();
 }
 // End gameplay (if this gets called, then the game crashed)
 void Game::End()

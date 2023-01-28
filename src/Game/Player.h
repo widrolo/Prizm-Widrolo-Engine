@@ -2,6 +2,7 @@
 
 #include "./GM_GameMode.h"
 #include "../Engine/include/core/ImplementMinimal.h"
+#include "../Engine/include/math/math.h"
 
 class Player : Character
 {

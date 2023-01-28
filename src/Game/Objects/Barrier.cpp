@@ -10,8 +10,8 @@ void Barrier::Reset(GM_GameMode *gm)
     pos.y = 100;
     SetPosition(pos);
 
-    scl.x = 100; 
-    scl.y = 50;
+    scl.x = 16; 
+    scl.y = 16;
     SetScale(scl);
 
     color = COLOR_BLUE;
