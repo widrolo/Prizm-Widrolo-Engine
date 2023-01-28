@@ -8,7 +8,7 @@ class GM_GameMode : GameModeBase
 public: // Engine Things
     void InitGame(Game *pGame)
     {
-        const char* crashMsg = "  Enigine Init Fail";
+        const char* crashMsg = "  Engine Init Fail";
         this->pGameSession = pGame;
         // Init Crash Handler
         this->pCrashHandler = (CrashHandler*)sys_malloc(sizeof(CrashHandler));

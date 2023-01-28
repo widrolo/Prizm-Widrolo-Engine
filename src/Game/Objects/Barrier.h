@@ -1,17 +1,13 @@
-#include "../../Engine/include/core/ImplementMinimal.h"
-#include "../../Engine/include/core/SpriteRenderer.h"
-#include "../../Engine/include/core/Collision.h"
 #pragma once
 
+#include "../GM_GameMode.h"
+#include "../../Engine/include/core/ImplementMinimal.h"
 class Barrier : Pawn
 {
 private:
-    GameModeManager *pGameModeManger;
-    CollisionBox collisionBox;
-    CollisionManger *pCollisionManager;
+    GM_GameMode *gameMode;
 public:
-    void Reset(GameModeManager *pGMM, CollisionManger *pCM);
-    void Tick();
+    void Reset(GM_GameMode *gm);
     void Draw();
 };
 

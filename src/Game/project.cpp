@@ -3,9 +3,13 @@
 
 
 #include "./Player.cpp"
+#include "./Objects/World.cpp"
+#include "./Objects/Barrier.cpp"
 
 // Game objects
 Player player;
+World world;
+Barrier barrier;
 
 // Create managers
 ENGINE_SETUP
@@ -19,6 +23,8 @@ void Game::Awake(Game *pGame)
 void Game::Start()
 {  
     player.Reset(&pGameMode);
+    world.Reset();
+    barrier.Reset(&pGameMode);
 }
 // Tick gameplay objects
 void Game::Tick()
@@ -29,6 +35,8 @@ void Game::Tick()
 void Game::Draw()
 {
     ENGINE_DRAW
+    world.Draw();
+    barrier.Draw();
     player.Draw();
 }
 // End gameplay (if this gets called, then the game crashed)

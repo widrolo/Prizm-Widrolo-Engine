@@ -13,8 +13,8 @@ void Player::Reset(GM_GameMode *gm)
     pos.y = 70;
     SetPosition(pos);
 
-    scl.x = 32;
-    scl.y = 32;
+    scl.x = 16;
+    scl.y = 16;
     SetScale(scl);
 
     color = COLOR_RED;

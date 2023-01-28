@@ -1,12 +1,10 @@
-#include "../../Engine/include/core/ImplementMinimal.h"
-#include "../../Engine/include/core/SpriteRenderer.h"
 #pragma once
+#include "../../Engine/include/core/ImplementMinimal.h"
 
 class World : Pawn
 {
 public:
     void Reset();
-    void Tick();
     void Draw();
 };
 

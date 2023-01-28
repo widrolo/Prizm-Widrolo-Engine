@@ -12,6 +12,8 @@ endif
 
 include $(FXCGSDK)/toolchain/prizm_rules
 
+REMOVER=RemoveDrive
+CASIODRIVE=E:
 
 #---------------------------------------------------------------------------------
 # TARGET is the name of the output
@@ -28,7 +30,7 @@ INCLUDES	:=  "C:\Users\Filip\Desktop\PrizmSDK-win-0.5.2\projects\Widrolo-Engine\
 #---------------------------------------------------------------------------------
 # options for code and add-in generation
 #---------------------------------------------------------------------------------
-APPNAME	   := "!DBG! Demo"
+APPNAME	   := "!DBG!"
 MKG3AFLAGS := -n basic:$(APPNAME) -i uns:../unselected.bmp -i sel:../selected.bmp
 
 # Optional: add -flto to CFLAGS and LDFLAGS to enable link-time optimization
@@ -110,6 +112,14 @@ all: $(BUILD)
 $(BUILD):
 	@mkdir $@
 
+#---------------------------------------------------------------------------------
+transfer-clean:
+	copy "$(OUTPUT).g3a" "$(CASIODRIVE)/$(TARGET).g3a"
+	$(REMOVER) $(CASIODRIVE)
+transfer:
+	$(call rm,$(CASIODRIVE)/$(TARGET).g3a)
+	copy "$(OUTPUT).g3a" "$(CASIODRIVE)/$(TARGET).g3a"
+	$(REMOVER) $(CASIODRIVE)
 #---------------------------------------------------------------------------------
 export CYGWIN := nodosfilewarning
 clean:

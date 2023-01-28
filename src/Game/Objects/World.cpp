@@ -16,11 +16,7 @@ void World::Reset()
     color = COLOR_GREEN;
     CoreReset();
 }
-void World::Tick()
-{
-    PawnTick();
-}
 void World::Draw()
 {
-    PawnDraw(0);
+    PawnDraw(true);
 }
