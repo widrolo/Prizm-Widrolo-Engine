@@ -2,7 +2,8 @@
 #include <fxcg/heap.h>
 #include "./../math/vector.h"
 #include "./SpriteRenderer.h"
-#include "./RuntimeManagers.h"
+#include "./CrashHandler.h"
+#include "./Collision.h"
 
 #pragma once
 

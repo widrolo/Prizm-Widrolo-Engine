@@ -13,6 +13,8 @@ int main() {
 #if __FINAL || __EMULATE_FINAL
     PrintXY(5, 6, "   An Filip", TEXT_MODE_TRANSPARENT_BACKGROUND, COLOR_BLACK);
 #endif 
+    // Draw first Frame
+    Bdisp_PutDisp_DD();
     // Game start and Game loop begin
     game.Start();
     game.isRunning = true;

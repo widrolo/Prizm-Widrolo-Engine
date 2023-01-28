@@ -45,3 +45,10 @@
 #if __FINAL == 1
 _Pragma ("message(__FOR_WHO)")
 #endif
+
+// Engine Macros
+
+#define ENGINE_SETUP GM_GameMode pGameMode;CrashHandler crashHandler;CollisionManger collisionManager;Allocator allocator;FileReader fileHandler;Randomizer randomizer;TextCanvas mainCanvas;
+#define ENGINE_AWAKE pGameMode.InitGame(game, &crashHandler, &collisionManager, &allocator, &fileHandler, &randomizer, &mainCanvas);
+#define ENGINE_DRAW	Bdisp_AllClr_VRAM();
+

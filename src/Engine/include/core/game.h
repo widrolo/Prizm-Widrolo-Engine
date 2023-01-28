@@ -6,7 +6,6 @@ class Game
 {
 public:
     bool isRunning;
-    Game *game;
 
     void Awake(Game *pGame);
     void Start();

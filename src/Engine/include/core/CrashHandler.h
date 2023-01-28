@@ -3,6 +3,7 @@
 #include <fxcg/keyboard.h>
 #include <fxcg/misc.h>
 #include <fxcg/heap.h>
+#include "./game.h"
 
 #pragma once
 
