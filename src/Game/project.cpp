@@ -4,7 +4,7 @@
 
 #include "./Player.cpp"
 #include "./Objects/World.cpp"
-#include "./Objects/Barrier.cpp"
+#include "./Objects/Barrier.h"
 
 // Permanent game objects
 Player *pPlayer;
@@ -30,19 +30,20 @@ void Game::Start()
     pGameMode.GetTextCanvas()->AddTxtBuff("THIS IS JUST A DEMO OF\nTHE ENGINE AND DOES NOT\nREPRESENT ANY GAME\nENGINE VERSION: 0.8 ALPHA", 1, 180, 180);
     pPlayer->Reset(&pGameMode);
     pWorld->Reset();
-    pBarrier->Reset(&pGameMode);
+    //pBarrier->Reset(&pGameMode);
 }
 // Tick gameplay objects
 void Game::Tick()
 {
     pPlayer->Tick();
+    pBarrier->Tick(); // This crashes the program due to some issue in the virual override system
 }
 // Draw gameplay
 void Game::Draw()
 {
     ENGINE_DRAW(
         pWorld->Draw();
-        pBarrier->Draw();
+        //pBarrier->Draw();
         pPlayer->Draw();
     )
 }
