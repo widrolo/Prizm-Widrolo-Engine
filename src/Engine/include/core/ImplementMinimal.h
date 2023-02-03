@@ -7,6 +7,7 @@
 
 #pragma once
 
+#define MAKE_SELF(x) x *self = (x*)s;
 
 class Actor
 {

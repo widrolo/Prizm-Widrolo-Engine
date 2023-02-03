@@ -13,7 +13,7 @@ private:
 public:
     static void Reset(void *s, GM_GameMode *gm)
     {
-        Player *self = (Player*)s;
+        MAKE_SELF(Player)
 
         // Setup object
         self->gameMode = gm;
@@ -32,18 +32,20 @@ public:
 
         self->color = COLOR_RED;
 
+        gm->GetTextCanvas()->AddTxtBuff("YUP IT WORKS!", 2, 10, 10);
+
         // Complete setup
         self->CoreReset();
     }
     static void Tick(void *s)
     {
-        Player *self = (Player*)s;
+        MAKE_SELF(Player)
 
         self->CharacterTick(self->gameMode->GetCrashHandler());
     }
     static void Draw(void *s)
     {
-        Player *self = (Player*)s;
+        MAKE_SELF(Player)
 
         self->CharacterDraw(true);
     }

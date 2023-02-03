@@ -1,8 +1,10 @@
 #pragma once
 
-#include "./../../../Game/GM_GameMode.h"
 #include "./EngineDefines.h"
 #include <fxcg/display.h>
+#include "./../../../Game/GM_GameMode.h"
+
+#include "./Text.h"
 
 class GM_GameMode;
 
@@ -15,6 +17,8 @@ private: // Function pointers
     void *selfs[64];
 public: // Game runtime called my main()
     bool isRunning;
+    GM_GameMode *pGameMode;
+    TextCanvas *pTextCanvas;
 
     void Awake(Game *pGame);
     void Start()
@@ -24,7 +28,7 @@ public: // Game runtime called my main()
             if (awakePtrs[i] == nullptr || selfs[i] == nullptr)
                 continue;
 
-            (*awakePtrs[i])(selfs[i], nullptr); // TODO: pass in real game mode
+            (*awakePtrs[i])(selfs[i], pGameMode);
         }
     }
     void Tick()
@@ -51,7 +55,7 @@ public: // Game runtime called my main()
     }
     void End();
 
-public: // Game pointer caller
+public: // Game runtime manger
 
     void EnginePreInit()
     {
@@ -62,6 +66,12 @@ public: // Game pointer caller
             drawPtrs[i] = nullptr;
             selfs[i] = nullptr;
         }
+    }
+
+    void EngineSetGamemode(GM_GameMode *pGM, TextCanvas *pTC)
+    {
+        pGameMode = pGM;
+        pTextCanvas = pTC;
     }
     	
     // Adds an object to be called later, takes function pointers as first arument

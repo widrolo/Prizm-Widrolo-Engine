@@ -1,3 +1,5 @@
+#pragma once
+
 #include "EngineDefines.h"
 #include <fxcg/display.h>
 #include "../data/Fontfile.hpp"

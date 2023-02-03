@@ -9,7 +9,7 @@ public:
 public:
     static void Reset(void *s, GM_GameMode *pGM)
     {
-        Barrier *self = (Barrier*)s;
+        MAKE_SELF(Barrier)
         self->gameMode = pGM;
         Vector2 pos;
         Vector2 scl;
@@ -31,7 +31,7 @@ public:
     }
     static void Draw(void *s)
     {
-        Barrier *self = (Barrier*)s;
+        MAKE_SELF(Barrier)
         self->PawnDraw(true);
     }
 };

@@ -48,7 +48,7 @@ _Pragma ("message(__FOR_WHO)")
 
 // Engine Macros
 
-#define ENGINE_SETUP GM_GameMode pGameMode;
-#define ENGINE_AWAKE pGameMode.InitGame(pGame);
-#define ENGINE_DRAW(x)	Bdisp_AllClr_VRAM(); x /*pGameMode.GetTextCanvas()->Draw();*/ Bdisp_PutDisp_DD();
+#define ENGINE_SETUP GM_GameMode PGAMEMODE;
+#define ENGINE_AWAKE PGAMEMODE.InitGame(pGame); 
+#define ENGINE_DRAW(x)	Bdisp_AllClr_VRAM(); x pTextCanvas->Draw(); Bdisp_PutDisp_DD();
 
