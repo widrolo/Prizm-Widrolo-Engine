@@ -5,11 +5,13 @@
 #include "./Player.h"
 #include "./Objects/World.h"
 #include "./Objects/Barrier.h"
+#include "./Objects/RandomGuy.h"
 
 // Permanent game objects
 Player *pPlayer;
 World *pWorld;
 Barrier *pBarrier;
+RandomGuy *pRandomGuy;
 
 ENGINE_SETUP
 
@@ -26,8 +28,11 @@ void Game::Awake(Game *pGame)
     pBarrier = (Barrier*)PGAMEMODE.GetAllocator()->AllocateEZ(sizeof(Barrier));
     pGame->AddObj(&pBarrier->Reset, &pBarrier->Tick, &pBarrier->Draw, 1, pBarrier);
 
+    pRandomGuy = (RandomGuy*)PGAMEMODE.GetAllocator()->AllocateEZ(sizeof(RandomGuy));
+    pGame->AddObj(&pRandomGuy->Reset, &pRandomGuy->Tick, &pRandomGuy->Draw, 2, pRandomGuy);
+
     pPlayer = (Player*)PGAMEMODE.GetAllocator()->AllocateEZ(sizeof(Player));
-    pGame->AddObj(&pPlayer->Reset, &pPlayer->Tick, &pPlayer->Draw, 2, pPlayer);
+    pGame->AddObj(&pPlayer->Reset, &pPlayer->Tick, &pPlayer->Draw, 3, pPlayer);
 
     PGAMEMODE.GetTextCanvas()->AddTxtBuff("THIS IS JUST A DEMO OF\nTHE ENGINE AND DOES NOT\nREPRESENT ANY GAME\nENGINE VERSION: 0.8 ALPHA", 1, 180, 180);
 }
