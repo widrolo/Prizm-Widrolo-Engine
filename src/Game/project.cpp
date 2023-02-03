@@ -2,7 +2,7 @@
 #include "../Engine/include/core/EngineDefines.h"
 
 
-#include "./Player.cpp"
+#include "./Player.h"
 #include "./Objects/World.cpp"
 #include "./Objects/Barrier.h"
 
@@ -13,40 +13,20 @@ Barrier *pBarrier;
 
 ENGINE_SETUP
 
-// Initialize engine components
+// Initialize engine components and game objects
 void Game::Awake(Game *pGame)
 {
     ENGINE_AWAKE
-}
-// Initialize gameplay objects
-void Game::Start()
-{  
-    // Create Objects (no pointer checking required)
-    pPlayer = (Player*)pGameMode.GetAllocator()->AllocateEZ(sizeof(Player));
-    pWorld = (World*)pGameMode.GetAllocator()->AllocateEZ(sizeof(World));
-    pBarrier = (Barrier*)pGameMode.GetAllocator()->AllocateEZ(sizeof(Barrier));
 
-    // Call reset functions
+    pBarrier = (Barrier*)pGameMode.GetAllocator()->AllocateEZ(sizeof(Barrier));
+    pGame->AddObj(&pBarrier->Reset, &pBarrier->Tick, &pBarrier->Draw, 0, pBarrier);
+
+    pPlayer = (Player*)pGameMode.GetAllocator()->AllocateEZ(sizeof(Player));
+    pGame->AddObj(&pPlayer->Reset, &pPlayer->Tick, &pPlayer->Draw, 1, pPlayer);
+
     pGameMode.GetTextCanvas()->AddTxtBuff("THIS IS JUST A DEMO OF\nTHE ENGINE AND DOES NOT\nREPRESENT ANY GAME\nENGINE VERSION: 0.8 ALPHA", 1, 180, 180);
-    pPlayer->Reset(&pGameMode);
-    pWorld->Reset();
-    //pBarrier->Reset(&pGameMode);
 }
-// Tick gameplay objects
-void Game::Tick()
-{
-    pPlayer->Tick();
-    pBarrier->Tick(); // This crashes the program due to some issue in the virual override system
-}
-// Draw gameplay
-void Game::Draw()
-{
-    ENGINE_DRAW(
-        pWorld->Draw();
-        //pBarrier->Draw();
-        pPlayer->Draw();
-    )
-}
+
 // Ends Game execution by locking it after a crash
 // here you can attempt to save the game one last time
 void Game::End()

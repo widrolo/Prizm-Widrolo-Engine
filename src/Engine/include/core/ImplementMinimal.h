@@ -70,38 +70,6 @@ protected: // Character Specific Functions
     }
 };
 
-class OldPawn : Actor
-{
-protected: // Pawn Specific Variables
-    int color;
-    SpriteRenderer *renderer = static_cast<SpriteRenderer*>(sys_malloc(sizeof(SpriteRenderer)));
-
-protected: // Acceessing Actor Variables Using Functions
-    void SetPosition(Vector2 pos) { position = pos; }
-    void SetScale(Vector2 scl) { size = scl; }
-    Vector2 GetPosition() { return position; }
-    Vector2 GetScale() { return size; }
-
-protected: // Pawn Behavior
-    void PawnTick()
-    {
-        ActorTick();
-    }
-
-    void PawnDraw(bool stdRender)
-    {
-        ActorDraw();
-        
-        if (stdRender)
-            renderer->RenderSquare(position, size, color);
-    }
-
-    void CoreReset()
-    {
-        ticks = 0;
-    }
-};
-
 
 class Pawn : Actor
 {
@@ -132,17 +100,6 @@ protected:
     void CoreReset()
     {
         ticks = 0;
-    }
-
-public:
-    virtual void Reset(GM_GameMode *pGM)
-    {
-        return;
-    }
-    virtual void Tick();
-    virtual void Draw()
-    {
-        return;
     }
 };
 

@@ -4,37 +4,35 @@
 #include "../../Engine/include/core/ImplementMinimal.h"
 class Barrier : Pawn
 {
-private:
+public:
     GM_GameMode *gameMode;
 public:
-    virtual void Reset(GM_GameMode *pGM) override
+    static void Reset(void *s, GM_GameMode *pGM)
     {
-        gameMode = pGM;
+        Barrier *self = (Barrier*)s;
+        self->gameMode = pGM;
         Vector2 pos;
         Vector2 scl;
 
         pos.x = 100;
         pos.y = 100;
-        SetPosition(pos);
+        self->SetPosition(pos);
 
         scl.x = 16; 
         scl.y = 16;
-        SetScale(scl);
+        self->SetScale(scl);
 
-        color = COLOR_BLUE;
-        CoreReset();
+        self->color = COLOR_BLUE;
+        self->CoreReset();
     }
-    virtual void Tick() override
+    static void Tick(void *s)
     {
         return;
     }
-    void MyTick()
+    static void Draw(void *s)
     {
-        return;
-    }
-    virtual void Draw() override
-    {
-        PawnDraw(true);
+        Barrier *self = (Barrier*)s;
+        self->PawnDraw(true);
     }
 };
 

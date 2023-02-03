@@ -4,6 +4,7 @@
 int main() {
     // Load game
     Game game;
+    game.EnginePreInit();
     game.isRunning = true;
     game.Awake(&game);
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "../../Engine/include/core/ImplementMinimal.h"
 
-class World : OldPawn
+class World : Pawn
 {
 public:
     void Reset();
