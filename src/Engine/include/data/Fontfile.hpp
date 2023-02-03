@@ -1,9 +1,13 @@
+
+// this file ends with .hpp because github thought i was unsing c in thei case
+
 #pragma once
 
 #include <fxcg/display.h>
 #include "./../core/EngineDefines.h"
 
 #if __TEXT == 1
+
 
 // Standart upper case Letters
 

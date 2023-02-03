@@ -1,6 +1,6 @@
 #include "EngineDefines.h"
 #include <fxcg/display.h>
-#include "../data/Fontfile.h"
+#include "../data/Fontfile.hpp"
 #include "stdlib.h"
 
 // This may just be the most conplex piece of code written in this engine
