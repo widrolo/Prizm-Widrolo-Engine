@@ -4,7 +4,7 @@
 #include "./EngineDefines.h"
 
 // size = sizeof(char * 2) = 2 bytes
-typedef struct SaveObject
+struct SaveObject
 {
     short SaveData;
 };
@@ -24,7 +24,7 @@ public:
         for (int i = 0; i < __MAX_SAVE_OBJECTS; i++)
         {
             // Reset all saves
-            objs[i].SaveData = 65; // temp 65 for testing
+            objs[i].SaveData = 0; // temp 0x0a0f for testing
         }
 
         saveFile.SetName(__SAVE_NAME);
@@ -49,20 +49,12 @@ public: // Dangerous File Handling Functions
 
     void SaveToFile()
     {
-        char lowerByte; // 0x00FF
-        char upperByte; // 0xFF00
-
         char *buffPtr = saveBuff;
 
-        for (int  i = 0; i < __MAX_SAVE_OBJECTS; i++)
+        for (int i = 0; i < __MAX_SAVE_OBJECTS; i++)
         {
-            lowerByte = (char)(objs[i].SaveData & 0x00FF);
-            *buffPtr = lowerByte;
-            buffPtr++;
-
-            upperByte = (char)((objs[i].SaveData & 0xFF00) >> 8);
-            *buffPtr = upperByte;
-            buffPtr++;
+            buffPtr[i * 2] = objs[i].SaveData;
+            buffPtr[(i * 2) + 1] = (objs[i].SaveData >> 8);
         }
 
         fileReader.OpenFile(&saveFile);
@@ -72,6 +64,18 @@ public: // Dangerous File Handling Functions
 
     void LoadSaveFromFile()
     {
+        fileReader.OpenFile(&saveFile);
+        fileReader.ReadFromFile(&saveFile, 0);
 
+        for (int i = 0; i < __MAX_SAVE_OBJECTS * 2; i =+ 2)
+        {
+            objs[i].SaveData = fileReader.readBuffer[i * 2];
+        }
+        for (int i = 1; i < (__MAX_SAVE_OBJECTS * 2) - 1; i =+ 2)
+        {
+            
+        }
+
+        fileReader.CloseFile(&saveFile);
     }
 };

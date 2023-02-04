@@ -32,7 +32,9 @@ public:
 
         self->color = COLOR_RED;
 
-        gm->GetTextCanvas()->AddTxtBuff("YUP IT WORKS!", 2, 10, 10);
+        gm->GetTextCanvas()->AddIntBuff(gm->GetSaveManager()->GetData(0), 2, 10, 10);
+
+        gm->GetSaveManager()->SetData(10, 0x0A0F);
 
         // Complete setup
         self->CoreReset();
@@ -47,7 +49,7 @@ public:
             self->gameMode->GetSaveManager()->CreateNewSaveFile();
         
         if (self->key == KEY_CHAR_8)
-            self->gameMode->GetSaveManager()->SaveToFile();
+            self->gameMode->GetSaveManager()->LoadSaveFromFile();
     }
     static void Draw(void *s)
     {
