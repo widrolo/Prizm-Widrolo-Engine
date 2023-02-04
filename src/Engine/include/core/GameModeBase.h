@@ -8,6 +8,7 @@
 #include "./Randomizer.h"
 #include "./Text.h"
 #include "./InputManager.h"
+#include "./SaveGame.h"
 
 
 class GameModeBase
@@ -20,4 +21,5 @@ protected:
     CollisionManger *pCollisionManager;
     TextCanvas *pMainCanvas;
     Randomizer *pRandomizer;
+    SaveManager *pSaveManger;
 };

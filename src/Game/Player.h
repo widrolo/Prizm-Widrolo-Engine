@@ -42,6 +42,12 @@ public:
         MAKE_SELF(Player)
 
         self->CharacterTick(self->gameMode->GetCrashHandler());
+        
+        if (self->key == KEY_CHAR_7)
+            self->gameMode->GetSaveManager()->CreateNewSaveFile();
+        
+        if (self->key == KEY_CHAR_8)
+            self->gameMode->GetSaveManager()->SaveToFile();
     }
     static void Draw(void *s)
     {

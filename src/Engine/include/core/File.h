@@ -3,6 +3,9 @@
 #include <fxcg/file.h>
 #include "./CrashHandler.h"
 
+// "\\\\fls0\\File.txt" Example name
+
+
 class WFile
 {
 public:
@@ -42,12 +45,12 @@ public:
         file->handle = out;
         file->isOpen = true;
     }
-    void WriteToFile(WFile* file, void* buff)
+    void WriteToFile(WFile* file, void* buff, int buffSize)
     {
         if(!file->isOpen)
             cr->Crash("  File is not open");
 
-        Bfile_WriteFile_OS(file->handle, buff, 4096);
+        Bfile_WriteFile_OS(file->handle, buff, buffSize);
     }
     void ReadFromFile(WFile* file, int fileChunk)
     {

@@ -51,6 +51,12 @@ public: // Engine Things
         this->pRandomizer = (Randomizer*)sys_malloc(sizeof(Randomizer));
         if (pRandomizer == nullptr)
             pCrashHandler->Crash(crashMsg);
+
+        // Init Main Text Canvas
+        this->pSaveManger = (SaveManager*)sys_malloc(sizeof(SaveManager));
+        if (pMainCanvas == nullptr)
+            pCrashHandler->Crash(crashMsg);
+        pSaveManger->Init();
     }
 public: // Engine Getters
     CrashHandler* GetCrashHandler() { return pCrashHandler; }
@@ -59,4 +65,5 @@ public: // Engine Getters
     CollisionManger* GetCollisionManger() { return pCollisionManager; }
     TextCanvas* GetTextCanvas() { return pMainCanvas; }
     Randomizer* GetRandomizer() { return pRandomizer; }
+    SaveManager* GetSaveManager() { return pSaveManger; }
 };

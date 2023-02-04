@@ -26,6 +26,10 @@
 #define __MAX_OBJECTS 64		// How many objects can be stored to be started, ticked or drawn
 #define __MAX_COLLISION_BOXES 64// How many collision boxes can exist
 
+// Save Game
+#define __MAX_SAVE_OBJECTS 64	// How many save objects can exist
+#define __SAVE_NAME "\\\\fls0\\Debug.wsv"
+
 // DO NOT TOUCH
 // Check is the developer is retarded
 #if __FINAL == 1
@@ -41,10 +45,8 @@
 #if __RENDERING == 0
 	#pragma message("Rendering is turned off. Edit EngineDefines.h to enable it again")
 #endif
-
-// Who is getting this copy
-#if __FINAL == 1
-_Pragma ("message(__FOR_WHO)")
+#if __TEXT == 0
+	#pragma message("Text is turned off. Edit EngineDefines.h to enable it again")
 #endif
 
 // Engine Macros

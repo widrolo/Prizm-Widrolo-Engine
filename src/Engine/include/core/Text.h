@@ -71,7 +71,7 @@ public:
             TextCanvasBuffer[buffNum][i] = txt[i];
         }
 
-        sys_free(txt);
+        free(txt);
     }
     void ClearBuff(int buffNum)
     {
