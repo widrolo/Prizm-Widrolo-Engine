@@ -10,11 +10,7 @@ int main() {
 
     // Clear the screen in preperation of game start
     Bdisp_AllClr_VRAM();
-
-    // Start Notification (basic anti piracy)
-#if __FINAL || __EMULATE_FINAL
-    PrintXY(5, 6, "   An Filip", TEXT_MODE_TRANSPARENT_BACKGROUND, COLOR_BLACK);
-#endif 
+    
     // Draw first Frame
     game.Draw();
     // Game start and Game loop begin

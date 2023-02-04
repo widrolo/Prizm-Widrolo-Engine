@@ -22,9 +22,6 @@
 #define __TEXT_BUFFER_SIZE 256	// This is the size of the text buffer used for text rendering
 #define __TEXT_BUFFER_AMMOUNT 6 // This is the ammount of text buffer available
 
-// Anti Piracy
-#define __FOR_WHO "   An Filip" // This is to whoever im going to sell the game to
-
 // DO NOT TOUCH
 // Check is the developer is retarded
 #if __FINAL == 1

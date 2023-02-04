@@ -20,13 +20,5 @@ Primary:
     itself, but must be created using a custom data to wdt converter. 
 
 Secondary:
-[O] - Anti Piracy
-[ ] - Anti Piracy V2 (Requires File IO)
-    On boot the game will check for a anti piracy file.
-    That file is called something like SYSTEM.SYS to make it more legit.
-    If the file doesnt exist, then the game will ask the user for a Password,
-    and based on if its true or false, it will modify the file accordingly.
-    Is the file present, and its contants are right, then the game will boot.
-    Is the file present, but the contents are wrong, then the game will throw an anti piracy screen.
 [O] - Tool for converting ppm to color arrays
 [ ] - Tool for converting data to a .wdt file
