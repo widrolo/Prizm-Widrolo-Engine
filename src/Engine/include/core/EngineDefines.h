@@ -22,6 +22,10 @@
 #define __TEXT_BUFFER_SIZE 256	// This is the size of the text buffer used for text rendering
 #define __TEXT_BUFFER_AMMOUNT 6 // This is the ammount of text buffer available
 
+// Object counts
+#define __MAX_OBJECTS 64		// How many objects can be stored to be started, ticked or drawn
+#define __MAX_COLLISION_BOXES 64// How many collision boxes can exist
+
 // DO NOT TOUCH
 // Check is the developer is retarded
 #if __FINAL == 1

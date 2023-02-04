@@ -17,9 +17,9 @@ private:
 public:
     void Init()
     {
-#if __TEXT == 1
-    return;
-#endif
+        if (__TEXT == 0)
+            return;
+
         for (int i = 0; i < __TEXT_BUFFER_AMMOUNT; i++)
         {
             for (int j = 0; j < __TEXT_BUFFER_SIZE; j++)
@@ -31,6 +31,9 @@ public:
 
     void AddTxtBuff(const char txt[__TEXT_BUFFER_SIZE], int buffNum, unsigned char x, unsigned char y)
     {
+        if (__TEXT == 0)
+            return;
+
         // The last 2 bytes tell the position
         TextCanvasBuffer[buffNum][__TEXT_BUFFER_SIZE - 1] = x;
         TextCanvasBuffer[buffNum][__TEXT_BUFFER_SIZE - 2] = y;
@@ -46,6 +49,9 @@ public:
     }
     void AddIntBuff(short num, int buffNum, unsigned char x, unsigned char y)
     {
+        if (__TEXT == 0)
+            return;
+
         // The last 2 bytes tell the position
         TextCanvasBuffer[buffNum][__TEXT_BUFFER_SIZE - 1] = x;
         TextCanvasBuffer[buffNum][__TEXT_BUFFER_SIZE - 2] = y;
@@ -64,9 +70,14 @@ public:
 
             TextCanvasBuffer[buffNum][i] = txt[i];
         }
+
+        sys_free(txt);
     }
     void ClearBuff(int buffNum)
     {
+        if (__TEXT == 0)
+            return;
+
         for (int j = 0; j < __TEXT_BUFFER_SIZE; j++)
         {
             TextCanvasBuffer[buffNum][j] = 0x0;
@@ -75,6 +86,9 @@ public:
     
     void Draw()
     {
+        if (__TEXT == 0)
+            return;
+
         // Go trough all buffers and print them
         for (int i = 0; i < __TEXT_BUFFER_AMMOUNT; i++)
         {

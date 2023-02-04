@@ -3,7 +3,6 @@
 
 #pragma once
 
-#define MAX_BOXES 100
 
 class CollisionBox
 {
@@ -63,13 +62,13 @@ class CollisionManger
 private: // Private Vars
 
     unsigned int avalibleID = 1;
-    CollisionBox *boxes[MAX_BOXES];
+    CollisionBox *boxes[__MAX_COLLISION_BOXES];
 
 public: // Public Box Array Control Functions
 
     void Init()
     {
-        for (int i = 0; i < MAX_BOXES; i++)
+        for (int i = 0; i < __MAX_COLLISION_BOXES; i++)
             boxes[i] = nullptr;
     }
 
@@ -84,7 +83,7 @@ public: // Public Box Array Control Functions
 
     void RemoveBox(unsigned int ID)
     {
-        for (int i = 0; i < MAX_BOXES; i++)
+        for (int i = 0; i < __MAX_COLLISION_BOXES; i++)
         {
             if (boxes[i]->GetID() == ID)
             {
@@ -104,9 +103,8 @@ public: //Public Collision Check Functions
 
     void CheckForCollision(unsigned int ID, CollisionResult* result) 
     {
-#if __COLLISION == 0
-        return;
-#endif
+        if (__COLLISION == 0)
+            return;
         // Setup
         result->collided = false;
 
@@ -148,7 +146,7 @@ private: // Private Searching Functions
 
     int CheckForAvail()
     {
-        for (int i = 0; i < MAX_BOXES; i++)
+        for (int i = 0; i < __MAX_COLLISION_BOXES; i++)
             if (boxes[i] == nullptr)
                 return i;
         return -1;
@@ -156,24 +154,23 @@ private: // Private Searching Functions
 
     int FindBoxID(unsigned int ID)
     {
-        for (int i = 0; i < MAX_BOXES; i++)
+        for (int i = 0; i < __MAX_COLLISION_BOXES; i++)
             if (boxes[i]->GetID() == ID)
                 return i;
 
         return -1;
     }
 
-#if __BLEEDING_EDGE == 1
     int FindBoxLayer(unsigned char layer, int start)
     {
-        for (int i = start; i < MAX_BOXES; i++)
+        for (int i = start; i < __MAX_COLLISION_BOXES; i++)
             if (boxes[i]->GetLayer() == layer)
                 return i;
     }
-#endif
+
     int FindNextBox(int start, unsigned int searchAgainst)
     {
-        for (int i = start; i < MAX_BOXES; i++)
+        for (int i = start; i < __MAX_COLLISION_BOXES; i++)
             if (boxes[i] != nullptr)
                 if (boxes[i]->GetID() != searchAgainst) //possible bug!
                     return i;

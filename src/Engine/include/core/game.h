@@ -11,10 +11,10 @@ class GM_GameMode;
 class Game
 {
 private: // Function pointers
-    void (*awakePtrs[64])(void *self, GM_GameMode*);
-    void (*tickPtrs[64])(void *self);
-    void (*drawPtrs[64])(void *self);
-    void *selfs[64];
+    void (*awakePtrs[__MAX_OBJECTS])(void *self, GM_GameMode*);
+    void (*tickPtrs[__MAX_OBJECTS])(void *self);
+    void (*drawPtrs[__MAX_OBJECTS])(void *self);
+    void *selfs[__MAX_OBJECTS];
 public: // Game runtime called my main()
     bool isRunning;
     GM_GameMode *pGameMode;
@@ -23,7 +23,7 @@ public: // Game runtime called my main()
     void Awake(Game *pGame);
     void Start()
     {
-        for (int i = 0; i < 64; i++)
+        for (int i = 0; i < __MAX_OBJECTS; i++)
         {
             if (awakePtrs[i] == nullptr || selfs[i] == nullptr)
                 continue;
@@ -33,7 +33,7 @@ public: // Game runtime called my main()
     }
     void Tick()
     {
-        for (int i = 0; i < 64; i++)
+        for (int i = 0; i < __MAX_OBJECTS; i++)
         {
             if (tickPtrs[i] == nullptr || selfs[i] == nullptr)
                 continue;
@@ -43,8 +43,11 @@ public: // Game runtime called my main()
     }
     void Draw()
     {
+        if (__RENDERING == 0)
+            return;
+        
         ENGINE_DRAW(
-            for (int i = 0; i < 64; i++)
+            for (int i = 0; i < __MAX_OBJECTS; i++)
             {
                 if (drawPtrs[i] == nullptr || selfs[i] == nullptr)
                     continue;
@@ -59,7 +62,7 @@ public: // Game runtime manger
 
     void EnginePreInit()
     {
-        for (int i = 0; i < 64; i++)
+        for (int i = 0; i < __MAX_OBJECTS; i++)
         {
             awakePtrs[i] = nullptr;
             tickPtrs[i] = nullptr;
