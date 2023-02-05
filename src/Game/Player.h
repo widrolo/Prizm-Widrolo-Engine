@@ -32,10 +32,6 @@ public:
 
         self->color = COLOR_RED;
 
-        gm->GetTextCanvas()->AddIntBuff(gm->GetSaveManager()->GetData(0), 2, 10, 10);
-
-        gm->GetSaveManager()->SetData(10, 0x0A0F);
-
         // Complete setup
         self->CoreReset();
     }
@@ -45,11 +41,20 @@ public:
 
         self->CharacterTick(self->gameMode->GetCrashHandler());
         
+        if (self->key == KEY_CHAR_5)
+            self->gameMode->GetSaveManager()->SaveToFile();
+
         if (self->key == KEY_CHAR_7)
             self->gameMode->GetSaveManager()->CreateNewSaveFile();
         
         if (self->key == KEY_CHAR_8)
             self->gameMode->GetSaveManager()->LoadSaveFromFile();
+
+        if (self->key == KEY_CHAR_9)
+            self->gameMode->GetSaveManager()->SetData(32, self->GetPosition().x);
+
+        self->gameMode->GetTextCanvas()->ClearBuff(4);
+        self->gameMode->GetTextCanvas()->AddIntBuff(self->gameMode->GetSaveManager()->GetData(32), 4, 10, 10);
     }
     static void Draw(void *s)
     {

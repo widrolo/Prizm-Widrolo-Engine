@@ -67,14 +67,11 @@ public: // Dangerous File Handling Functions
         fileReader.OpenFile(&saveFile);
         fileReader.ReadFromFile(&saveFile, 0);
 
-        for (int i = 0; i < __MAX_SAVE_OBJECTS * 2; i =+ 2)
+        for (int i = 0; i < __MAX_SAVE_OBJECTS; i++)
         {
-            objs[i].SaveData = fileReader.readBuffer[i * 2];
+            objs[i].SaveData = fileReader.readBuffer[i * 2] | ((short)fileReader.readBuffer[(i * 2) + 1] << 8);
         }
-        for (int i = 1; i < (__MAX_SAVE_OBJECTS * 2) - 1; i =+ 2)
-        {
-            
-        }
+        
 
         fileReader.CloseFile(&saveFile);
     }

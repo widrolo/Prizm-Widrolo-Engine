@@ -48,21 +48,30 @@ public:
     void WriteToFile(WFile* file, void* buff, int buffSize)
     {
         if(!file->isOpen)
+        {
             cr->Crash("  File is not open");
+            return;
+        }
 
         Bfile_WriteFile_OS(file->handle, buff, buffSize);
     }
     void ReadFromFile(WFile* file, int fileChunk)
     {
         if(!file->isOpen)
+        {
             cr->Crash("  File is not open");
+            return;
+        }
 
-        Bfile_ReadFile_OS(file->handle, readBuffer, 4096, fileChunk * 4096);
+        Bfile_ReadFile_OS(file->handle, readBuffer, 4096, -1);
     }
     void CloseFile(WFile* file)
     {
         if(!file->isOpen)
+        {
             cr->Crash("  File is not open");
+            return;
+        }
 
         Bfile_CloseFile_OS(file->handle);
         file->isOpen = false;
