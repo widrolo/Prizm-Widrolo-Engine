@@ -73,7 +73,6 @@ export OUTPUT	:=	$(CURDIR)/$(TARGET)
 
 #---------------------------------------------------------------------------------
 all: $(BUILD)
-	$(call rm,$(CURDIR)/build/main.d)
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 $(BUILD):

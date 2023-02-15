@@ -52,6 +52,7 @@
 // Engine Macros
 
 #define ENGINE_SETUP GM_GameMode PGAMEMODE;
-#define ENGINE_AWAKE PGAMEMODE.InitGame(pGame); 
+#define ENGINE_AWAKE PGAMEMODE.InitGame(pGame); pGame->EngineSetGamemode(&PGAMEMODE, PGAMEMODE.GetTextCanvas());
 #define ENGINE_DRAW(x)	Bdisp_AllClr_VRAM(); x pTextCanvas->Draw(); Bdisp_PutDisp_DD();
+#define NEW_OBJECT(x, y, z) x *y = (x*)PGAMEMODE.GetAllocator()->AllocateEZ(sizeof(x)); pGame->AddObj(&y->Reset, &y->Tick, &y->Draw, z, y);
 
