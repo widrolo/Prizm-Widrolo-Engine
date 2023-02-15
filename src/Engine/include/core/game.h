@@ -6,6 +6,7 @@
 
 #include "./Text.h"
 
+
 class GM_GameMode;
 
 class Game
@@ -18,8 +19,7 @@ private: // Function pointers
 public: // Game runtime called my main()
     bool isRunning;
     GM_GameMode *pGameMode;
-    TextCanvas *pTextCanvas;
-
+    WEngine::TextCanvas *pTextCanvas;
     void Awake(Game *pGame);
     void Start()
     {
@@ -27,7 +27,6 @@ public: // Game runtime called my main()
         {
             if (awakePtrs[i] == nullptr || selfs[i] == nullptr)
                 continue;
-
             (*awakePtrs[i])(selfs[i], pGameMode);
         }
     }
@@ -37,7 +36,6 @@ public: // Game runtime called my main()
         {
             if (tickPtrs[i] == nullptr || selfs[i] == nullptr)
                 continue;
-
             (*tickPtrs[i])(selfs[i]);
         }
     }
@@ -45,21 +43,17 @@ public: // Game runtime called my main()
     {
         if (__RENDERING == 0)
             return;
-        
         ENGINE_DRAW(
             for (int i = 0; i < __MAX_OBJECTS; i++)
             {
                 if (drawPtrs[i] == nullptr || selfs[i] == nullptr)
                     continue;
-
                 (*drawPtrs[i])(selfs[i]);
             }
         )
     }
     void End();
-
 public: // Game runtime manger
-
     void EnginePreInit()
     {
         for (int i = 0; i < __MAX_OBJECTS; i++)
@@ -70,13 +64,11 @@ public: // Game runtime manger
             selfs[i] = nullptr;
         }
     }
-
-    void EngineSetGamemode(GM_GameMode *pGM, TextCanvas *pTC)
+    void EngineSetGamemode( GM_GameMode *pGM, WEngine::TextCanvas *pTC)
     {
         pGameMode = pGM;
         pTextCanvas = pTC;
     }
-    	
     // Adds an object to be called later, takes function pointers as first arument
     void AddObj(void (*awakePtr)(void *self, GM_GameMode*), void (*tickPtr)(void *self),
         void (*drawPtr)(void *self), int buffNum, void *self)

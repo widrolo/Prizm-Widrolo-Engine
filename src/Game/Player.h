@@ -4,7 +4,7 @@
 #include "../Engine/include/core/ImplementMinimal.h"
 #include "../Engine/include/math/math.h"
 
-class Player : Character
+class Player : WEngine::Character
 {
 private:
     GM_GameMode *gameMode;

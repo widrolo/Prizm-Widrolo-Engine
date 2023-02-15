@@ -1,32 +1,35 @@
 #include "stdlib.h"
 
 
-class Randomizer
+namespace WEngine
 {
-private:
-    int seed;
-    short number;
-public:
-    // Abstraction heaven
-
-    void Seed(int seed)
+    class Randomizer
     {
-        sys_srand(seed);
-    }
-    void Shuffle(bool negative, int max)
-    {
-        number = sys_rand();
+    private:
+        int seed;
+        short number;
+    public:
+        // Abstraction heaven
 
-        while (number > max)
+        void Seed(int seed)
         {
-            number = (int)((double)number / 2);
+            sys_srand(seed);
         }
+        void Shuffle(bool negative, int max)
+        {
+            number = sys_rand();
 
-        if (negative)
-            number = (number | 0x8000); // Signs the short
-    }
-    int GetNum()
-    {
-        return number;
-    }
-};
+            while (number > max)
+            {
+                number = (int)((double)number / 2);
+            }
+
+            if (negative)
+                number = (number | 0x8000); // Signs the short
+        }
+        int GetNum()
+        {
+            return number;
+        }
+    };
+}

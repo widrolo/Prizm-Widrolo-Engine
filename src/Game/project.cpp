@@ -21,16 +21,7 @@ void Game::Awake(Game *pGame)
     ENGINE_AWAKE
 
     pGame->EngineSetGamemode(&PGAMEMODE, PGAMEMODE.GetTextCanvas());
-
-    pWorld = (World*)PGAMEMODE.GetAllocator()->AllocateEZ(sizeof(World));
-    pGame->AddObj(&pWorld->Reset, &pWorld->Tick, &pWorld->Draw, 0, pWorld);
-
-    pBarrier = (Barrier*)PGAMEMODE.GetAllocator()->AllocateEZ(sizeof(Barrier));
-    pGame->AddObj(&pBarrier->Reset, &pBarrier->Tick, &pBarrier->Draw, 1, pBarrier);
-
-    pRandomGuy = (RandomGuy*)PGAMEMODE.GetAllocator()->AllocateEZ(sizeof(RandomGuy));
-    pGame->AddObj(&pRandomGuy->Reset, &pRandomGuy->Tick, &pRandomGuy->Draw, 2, pRandomGuy);
-
+    
     pPlayer = (Player*)PGAMEMODE.GetAllocator()->AllocateEZ(sizeof(Player));
     pGame->AddObj(&pPlayer->Reset, &pPlayer->Tick, &pPlayer->Draw, 3, pPlayer);
 
@@ -41,6 +32,6 @@ void Game::Awake(Game *pGame)
 // here you can attempt to save the game one last time
 void Game::End()
 {
-    CrashHandler* cr = PGAMEMODE.GetCrashHandler();
+    WEngine::CrashHandler* cr = PGAMEMODE.GetCrashHandler();
     cr->EndProgram();
 }

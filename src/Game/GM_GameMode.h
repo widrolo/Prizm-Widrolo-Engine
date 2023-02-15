@@ -3,7 +3,7 @@
 #include "../Engine/include/core/GameModeBase.h"
 #include <fxcg/heap.h>
 
-class GM_GameMode : GameModeBase
+class GM_GameMode : WEngine::GameModeBase
 {
 public: // Engine Things
     void InitGame(Game *pGame)
@@ -11,7 +11,7 @@ public: // Engine Things
         const char* crashMsg = "  Engine Init Fail";
         this->pGameSession = pGame;
         // Init Crash Handler
-        this->pCrashHandler = (CrashHandler*)sys_malloc(sizeof(CrashHandler));
+        this->pCrashHandler = (WEngine::CrashHandler*)sys_malloc(sizeof(WEngine::CrashHandler));
         if (pCrashHandler == nullptr)
         {
             Bdisp_AllClr_VRAM();
@@ -24,46 +24,46 @@ public: // Engine Things
         pCrashHandler->Init(pGame);
 
         // Init Allocator
-        this->pAllocator = (Allocator*)sys_malloc(sizeof(Allocator));
+        this->pAllocator = (WEngine::Allocator*)sys_malloc(sizeof(WEngine::Allocator));
         if (pAllocator == nullptr)
             pCrashHandler->Crash(crashMsg);
         pAllocator->Init(pCrashHandler);
 
         // Init File Reader
-        this->pFileHandler = (FileReader*)sys_malloc(sizeof(FileReader));
+        this->pFileHandler = (WEngine::FileReader*)sys_malloc(sizeof(WEngine::FileReader));
         if (pFileHandler == nullptr)
             pCrashHandler->Crash(crashMsg);
         pFileHandler->Init(pCrashHandler);
 
         // Init Collision Manager
-        this->pCollisionManager = (CollisionManger*)sys_malloc(sizeof(CollisionManger));
+        this->pCollisionManager = (WEngine::CollisionManger*)sys_malloc(sizeof(WEngine::CollisionManger));
         if (pCollisionManager == nullptr)
             pCrashHandler->Crash(crashMsg);
         pCollisionManager->Init();
         
         // Init Main Text Canvas
-        this->pMainCanvas = (TextCanvas*)sys_malloc(sizeof(TextCanvas));
+        this->pMainCanvas = (WEngine::TextCanvas*)sys_malloc(sizeof(WEngine::TextCanvas));
         if (pMainCanvas == nullptr)
             pCrashHandler->Crash(crashMsg);
         pMainCanvas->Init();
 
         // Init Randomizer
-        this->pRandomizer = (Randomizer*)sys_malloc(sizeof(Randomizer));
+        this->pRandomizer = (WEngine::Randomizer*)sys_malloc(sizeof(WEngine::Randomizer));
         if (pRandomizer == nullptr)
             pCrashHandler->Crash(crashMsg);
 
         // Init Main Text Canvas
-        this->pSaveManger = (SaveManager*)sys_malloc(sizeof(SaveManager));
+        this->pSaveManger = (WEngine::SaveManager*)sys_malloc(sizeof(WEngine::SaveManager));
         if (pMainCanvas == nullptr)
             pCrashHandler->Crash(crashMsg);
         pSaveManger->Init();
     }
 public: // Engine Getters
-    CrashHandler* GetCrashHandler() { return pCrashHandler; }
-    Allocator* GetAllocator() { return pAllocator; }
-    FileReader* GetFileReader() { return pFileHandler; }
-    CollisionManger* GetCollisionManger() { return pCollisionManager; }
-    TextCanvas* GetTextCanvas() { return pMainCanvas; }
-    Randomizer* GetRandomizer() { return pRandomizer; }
-    SaveManager* GetSaveManager() { return pSaveManger; }
+    WEngine::CrashHandler* GetCrashHandler() { return pCrashHandler; }
+    WEngine::Allocator* GetAllocator() { return pAllocator; }
+    WEngine::FileReader* GetFileReader() { return pFileHandler; }
+    WEngine::CollisionManger* GetCollisionManger() { return pCollisionManager; }
+    WEngine::TextCanvas* GetTextCanvas() { return pMainCanvas; }
+    WEngine::Randomizer* GetRandomizer() { return pRandomizer; }
+    WEngine::SaveManager* GetSaveManager() { return pSaveManger; }
 };

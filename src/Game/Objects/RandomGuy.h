@@ -1,7 +1,7 @@
 #pragma once
 #include "../../Engine/include/core/ImplementMinimal.h"
 
-class RandomGuy : Pawn
+class RandomGuy : WEngine::Pawn
 {
 public:
     GM_GameMode *gameMode;

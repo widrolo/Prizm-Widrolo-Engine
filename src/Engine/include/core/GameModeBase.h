@@ -11,15 +11,18 @@
 #include "./SaveGame.h"
 
 
-class GameModeBase
+namespace WEngine
 {
-protected:
-    Game *pGameSession;
-    CrashHandler *pCrashHandler;
-    Allocator *pAllocator;
-    FileReader *pFileHandler;
-    CollisionManger *pCollisionManager;
-    TextCanvas *pMainCanvas;
-    Randomizer *pRandomizer;
-    SaveManager *pSaveManger;
-};
+    class GameModeBase
+    {
+    protected:
+        Game *pGameSession;
+        WEngine::CrashHandler *pCrashHandler;
+        WEngine::Allocator *pAllocator;
+        WEngine::FileReader *pFileHandler;
+        WEngine::CollisionManger *pCollisionManager;
+        WEngine::TextCanvas *pMainCanvas;
+        WEngine::Randomizer *pRandomizer;
+        WEngine::SaveManager *pSaveManger;
+    };
+}

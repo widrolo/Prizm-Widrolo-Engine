@@ -2,7 +2,7 @@
 
 #include "../GM_GameMode.h"
 #include "../../Engine/include/core/ImplementMinimal.h"
-class Barrier : Pawn
+class Barrier : WEngine::Pawn
 {
 public:
     GM_GameMode *gameMode;

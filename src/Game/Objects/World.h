@@ -1,7 +1,7 @@
 #pragma once
 #include "../../Engine/include/core/ImplementMinimal.h"
 
-class World : Pawn
+class World : WEngine::Pawn
 {
 public:
     static void Reset(void *s, GM_GameMode *gm)
