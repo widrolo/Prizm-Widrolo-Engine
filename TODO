@@ -9,7 +9,7 @@ Primary:
 [O] - Random
 [O] - Sprite optimization (h/v-filping)
 [O] - File IO
-[ ] - Save Game (File IO and Game Mode needed)
+[O] - Save Game (File IO and Game Mode needed)
     In the Gamemode, there will be a buffer of a given size, that holds a certain
     number of the SaveItem object. Uppon saving, all SaveItem objects will be 
     packaged and saved to a file with a given name ending with .wsv.

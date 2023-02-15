@@ -15,7 +15,7 @@ TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
 SOURCES		:=	src
 DATA		:=	data  
-INCLUDES	:=  "C:\Users\Filip\Desktop\PrizmSDK-win-0.5.2\projects\Widrolo-Engine\src"
+INCLUDES	:=  
 
 
 APPNAME	   := "!DBG!"

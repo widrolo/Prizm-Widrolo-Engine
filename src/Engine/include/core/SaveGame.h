@@ -24,7 +24,7 @@ public:
         for (int i = 0; i < __MAX_SAVE_OBJECTS; i++)
         {
             // Reset all saves
-            objs[i].SaveData = 0; // temp 0x0a0f for testing
+            objs[i].SaveData = 0;
         }
 
         saveFile.SetName(__SAVE_NAME);
@@ -69,6 +69,7 @@ public: // Dangerous File Handling Functions
 
         for (int i = 0; i < __MAX_SAVE_OBJECTS; i++)
         {
+            //objs[i].SaveData =  fileReader.readBuffer[(i * 2) + 1]| ((short)fileReader.readBuffer[i * 2] << 8);
             objs[i].SaveData = fileReader.readBuffer[i * 2] | ((short)fileReader.readBuffer[(i * 2) + 1] << 8);
         }
         

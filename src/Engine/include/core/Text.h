@@ -2,6 +2,7 @@
 
 #include "EngineDefines.h"
 #include <fxcg/display.h>
+#include <fxcg/misc.h>
 #include "../data/Fontfile.hpp"
 #include "stdlib.h"
 
@@ -47,7 +48,7 @@ public:
             TextCanvasBuffer[buffNum][i] = txt[i];
         }
     }
-    void AddIntBuff(short num, int buffNum, unsigned char x, unsigned char y)
+    void AddIntBuff(int num, int buffNum, unsigned char x, unsigned char y)
     {
         if (__TEXT == 0)
             return;
@@ -56,11 +57,13 @@ public:
         TextCanvasBuffer[buffNum][__TEXT_BUFFER_SIZE - 1] = x;
         TextCanvasBuffer[buffNum][__TEXT_BUFFER_SIZE - 2] = y;
 
-        char *txt = (char*)IntToChar(num);
-        if (num == 0)
-        {
-            txt[0] = '0';
-        }
+        unsigned char txt[24];
+        itoa(num, txt);
+        //char *txt = (char*)IntToChar(num);
+        //if (num == 0)
+        //{
+        //    txt[0] = '0';
+        //}
 
         for (int i = 0; i < __TEXT_BUFFER_SIZE; i++)
         {
@@ -70,8 +73,6 @@ public:
 
             TextCanvasBuffer[buffNum][i] = txt[i];
         }
-
-        free(txt);
     }
     void ClearBuff(int buffNum)
     {
