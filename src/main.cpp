@@ -2,25 +2,26 @@
 #include "Engine/include/core/game.h"
 
 int main() {
-    // Load game
-    Game* game = (Game*)sys_malloc(sizeof(Game));
-    game->EnginePreInit();
-    game->isRunning = true;
-    game->Awake(game);
+    // Load Game
+    Game* pGame = (Game*)sys_malloc(sizeof(Game));
+    pGame->EnginePreInit();
+    pGame->isRunning = true;
+    pGame->Awake(pGame);
 
-    // Clear the screen in preperation of game start
+    // Clear the screen in preperation of Game start
     Bdisp_AllClr_VRAM();
     
     // Draw first Frame
-    game->Draw();
+    pGame->Draw();
     // Game start and Game loop begin
-    game->Start();
-    while (game->isRunning) 
+    pGame->Start();
+    while (pGame->isRunning) 
     {
-        game->Tick();
-        game->Draw();
+        pGame->Tick();
+        pGame->Draw();
     }
     // Game end (use for soft crashes only)
-    game->End();
+    pGame->End();
+    sys_free(pGame);
     return 0;
 }

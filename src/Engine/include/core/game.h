@@ -2,7 +2,7 @@
 
 #include "./EngineDefines.h"
 #include <fxcg/display.h>
-#include "./../../../Game/GM_GameMode.h"
+#include <fxcg/heap.h>
 
 #include "./Text.h"
 
@@ -77,5 +77,21 @@ public: // Game runtime manger
         tickPtrs[buffNum] = tickPtr;
         drawPtrs[buffNum] = drawPtr;
         selfs[buffNum] = self;
+    }
+
+    void DeallocEverything()
+    {
+        for (int i = 0; i < __MAX_OBJECTS; i++)
+        {
+            awakePtrs[i] = nullptr;
+            tickPtrs[i] = nullptr;
+            drawPtrs[i] = nullptr;
+            if (selfs[i] != nullptr )
+            {
+                sys_free(selfs[i]);
+                selfs[i] = nullptr;
+            }
+        }
+        sys_free(pGameMode);
     }
 };

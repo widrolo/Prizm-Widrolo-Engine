@@ -27,5 +27,10 @@ void Game::Awake(Game *pGame)
 void Game::End()
 {
     WEngine::CrashHandler* cr = pGameMode->GetCrashHandler();
+
+    // Place own code  here
+
+    pGameMode->DealocateSystems();
+    DeallocEverything();
     cr->EndProgram();
 }

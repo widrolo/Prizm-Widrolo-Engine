@@ -8,7 +8,7 @@
 #pragma once
 
 // Packaging 
-#define __FINAL 0				// This flags the final release (All othe flags must be disabled)
+#define __FINAL 0				// This flags the final release (All other flags must be disabled)
 #define __EMULATE_FINAL 0		// This emulates the final release 
 #define __DEV 1					// This enables developer mode, it allows for debugging and other features that a user shouldnt have
 #define __BLEEDING_EDGE 1		// This enables features (not engine features) that are incomplete, untested or unstable

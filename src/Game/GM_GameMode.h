@@ -56,6 +56,19 @@ public: // Engine Things
         InitSystem<WEngine::SaveManager>(pSaveManger, crashMsg);
         pSaveManger->Init();
     }
+
+    void DealocateSystems()
+    {
+        // crash handler wont be deleted because its needed until the very end
+
+        sys_free(pAllocator);
+        sys_free(pFileHandler);
+        sys_free(pCollisionManager);
+        sys_free(pMainCanvas);
+        sys_free(pRandomizer);
+        sys_free(pSaveManger);
+    }
+
 public: // Engine Getters
     WEngine::CrashHandler* GetCrashHandler() { return pCrashHandler; }
     WEngine::Allocator* GetAllocator() { return pAllocator; }
