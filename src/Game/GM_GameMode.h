@@ -6,6 +6,16 @@
 class GM_GameMode : WEngine::GameModeBase
 {
 public: // Engine Things
+
+    template<typename T>
+    void InitSystem(void *system, const char* msg)
+    {
+        system = (T*)sys_malloc(sizeof(T));
+        if (system == nullptr)
+            pCrashHandler->Crash(msg);
+
+    }
+
     void InitGame(Game *pGame)
     {
         const char* crashMsg = "  Engine Init Fail";
@@ -24,38 +34,26 @@ public: // Engine Things
         pCrashHandler->Init(pGame);
 
         // Init Allocator
-        this->pAllocator = (WEngine::Allocator*)sys_malloc(sizeof(WEngine::Allocator));
-        if (pAllocator == nullptr)
-            pCrashHandler->Crash(crashMsg);
+        InitSystem<WEngine::Allocator>(pAllocator, crashMsg);
         pAllocator->Init(pCrashHandler);
 
         // Init File Reader
-        this->pFileHandler = (WEngine::FileReader*)sys_malloc(sizeof(WEngine::FileReader));
-        if (pFileHandler == nullptr)
-            pCrashHandler->Crash(crashMsg);
+        InitSystem<WEngine::FileReader>(pFileHandler, crashMsg);
         pFileHandler->Init(pCrashHandler);
 
         // Init Collision Manager
-        this->pCollisionManager = (WEngine::CollisionManger*)sys_malloc(sizeof(WEngine::CollisionManger));
-        if (pCollisionManager == nullptr)
-            pCrashHandler->Crash(crashMsg);
+        InitSystem<WEngine::CollisionManger>(pCollisionManager, crashMsg);
         pCollisionManager->Init();
         
         // Init Main Text Canvas
-        this->pMainCanvas = (WEngine::TextCanvas*)sys_malloc(sizeof(WEngine::TextCanvas));
-        if (pMainCanvas == nullptr)
-            pCrashHandler->Crash(crashMsg);
+        InitSystem<WEngine::TextCanvas>(pMainCanvas, crashMsg);
         pMainCanvas->Init();
 
         // Init Randomizer
-        this->pRandomizer = (WEngine::Randomizer*)sys_malloc(sizeof(WEngine::Randomizer));
-        if (pRandomizer == nullptr)
-            pCrashHandler->Crash(crashMsg);
+        InitSystem<WEngine::Randomizer>(pRandomizer, crashMsg);
 
-        // Init Main Text Canvas
-        this->pSaveManger = (WEngine::SaveManager*)sys_malloc(sizeof(WEngine::SaveManager));
-        if (pMainCanvas == nullptr)
-            pCrashHandler->Crash(crashMsg);
+        // Init Save Manger
+        InitSystem<WEngine::SaveManager>(pSaveManger, crashMsg);
         pSaveManger->Init();
     }
 public: // Engine Getters
