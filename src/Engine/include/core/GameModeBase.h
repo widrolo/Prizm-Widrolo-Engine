@@ -9,6 +9,7 @@
 #include "./Text.h"
 #include "./InputManager.h"
 #include "./SaveGame.h"
+#include "./EventsManager.h"
 
 
 namespace WEngine
@@ -24,5 +25,6 @@ namespace WEngine
         WEngine::TextCanvas *pMainCanvas;
         WEngine::Randomizer *pRandomizer;
         WEngine::SaveManager *pSaveManger;
+        WEngine::EventsManager *pEventManager;
     };
 }

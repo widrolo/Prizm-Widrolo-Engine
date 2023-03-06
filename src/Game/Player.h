@@ -45,6 +45,11 @@ public:
         
         if (self->key == KEY_CHAR_0)
             self->gameMode->GetCrashHandler()->Crash("  Invoked Crash");
+        if (self->key == KEY_CHAR_1)
+        {
+            int pos[2] = {120, 120};
+            self->gameMode->GetEventsManager()->Dispatch(0, pos);
+        }
 
         if (self->key == KEY_CHAR_5)
         {

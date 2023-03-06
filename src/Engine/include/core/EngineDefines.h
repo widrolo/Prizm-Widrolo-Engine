@@ -30,6 +30,10 @@
 #define __MAX_SAVE_OBJECTS 64	// How many save objects can exist
 #define __SAVE_NAME "\\\\fls0\\Debug.wsv"
 
+// Events
+#define __MAX_EVENTS 16			// How many events exist
+#define __MAX_SUBSCRIBERS 16	// How many objects can subscribe to an event
+
 // DO NOT TOUCH
 // Check is the developer is retarded
 #if __FINAL == 1

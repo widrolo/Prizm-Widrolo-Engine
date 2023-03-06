@@ -7,6 +7,13 @@ class Barrier : WEngine::Pawn
 public:
     GM_GameMode *gameMode;
 public:
+    static void E_change_pos(void *s, void *infoBuff)
+    {
+        MAKE_SELF(Barrier)
+        int *copy = (int*)infoBuff;
+        Vector2 pos = { x: copy[0], y: copy[1]};
+        self->SetPosition(pos);
+    }
     static void Reset(void *s, GM_GameMode *pGM)
     {
         MAKE_SELF(Barrier)
@@ -24,6 +31,8 @@ public:
 
         self->color = COLOR_BLUE;
         self->CoreReset();
+
+        pGM->GetEventsManager()->Subscribe<Barrier>(0, self, E_change_pos);
     }
     static void Tick(void *s)
     {

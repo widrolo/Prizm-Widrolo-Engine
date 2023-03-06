@@ -55,6 +55,10 @@ public: // Engine Things
         // Init Save Manger
         InitSystem<WEngine::SaveManager>(pSaveManger, crashMsg);
         pSaveManger->Init();
+
+        // Init Events Manager
+        InitSystem<WEngine::EventsManager>(pEventManager, crashMsg);
+        pEventManager->Init(pCrashHandler);
     }
 
     void DealocateSystems()
@@ -77,4 +81,5 @@ public: // Engine Getters
     WEngine::TextCanvas* GetTextCanvas() { return pMainCanvas; }
     WEngine::Randomizer* GetRandomizer() { return pRandomizer; }
     WEngine::SaveManager* GetSaveManager() { return pSaveManger; }
+    WEngine::EventsManager* GetEventsManager() { return pEventManager; }
 };
