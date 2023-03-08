@@ -18,7 +18,7 @@ public:
         // Setup object
         self->gameMode = gm;
 
-        self->enableStdMove = true;
+        self->enableStdMove = false;
         self->speed = 3;
 
         // Setup player
@@ -41,48 +41,20 @@ public:
     {
         MAKE_SELF(Player)
 
+        int speed = 3;
+
+        int key = self->gameMode->GetInputManager()->GetKey();
+
         self->CharacterTick(self->gameMode->GetCrashHandler());
-        
-        if (self->key == KEY_CHAR_0)
-            self->gameMode->GetCrashHandler()->Crash("  Invoked Crash");
-        if (self->key == KEY_CHAR_1)
-        {
-            int pos[2] = {120, 120};
-            self->gameMode->GetEventsManager()->Dispatch(0, pos);
-        }
 
-        if (self->key == KEY_CHAR_5)
-        {
-            self->gameMode->GetSaveManager()->SetData(0, self->GetPosition().x);
-            self->gameMode->GetSaveManager()->SetData(32, self->GetPosition().y);
-            self->gameMode->GetSaveManager()->SaveToFile();
-        }
-
-        if (self->key == KEY_CHAR_7)
-        {
-            self->gameMode->GetSaveManager()->CreateNewSaveFile();
-        }
-        
-        if (self->key == KEY_CHAR_8)
-        {
-            self->gameMode->GetSaveManager()->LoadSaveFromFile();
-
-            Vector2 newPos;
-
-            newPos.x = (unsigned short)self->gameMode->GetSaveManager()->GetData(0);
-            newPos.y = (unsigned short)self->gameMode->GetSaveManager()->GetData(32);
-            self->gameMode->GetTextCanvas()->ClearBuff(5);
-            self->gameMode->GetTextCanvas()->AddIntBuff(newPos.x, 5, 10, 30);
-            self->gameMode->GetTextCanvas()->ClearBuff(4);
-            self->gameMode->GetTextCanvas()->AddIntBuff(newPos.y, 4, 10, 40);
-
-            self->SetPosition(newPos);
-        }
-
-        if (self->key == KEY_CHAR_9)
-            self->gameMode->GetSaveManager()->SetData(32, self->GetPosition().x);
-
-        
+        if (key == KEY_PRGM_LEFT)
+            self->position.x -= 1 * speed;
+        else if (key == KEY_PRGM_RIGHT)
+            self->position.x += 1 * speed;
+        else if (key == KEY_PRGM_UP)
+            self->position.y -= 1 * speed;
+        else if (key == KEY_PRGM_DOWN)
+            self->position.y += 1 * speed;
     }
     static void Draw(void *s)
     {

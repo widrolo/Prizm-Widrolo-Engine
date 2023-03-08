@@ -1,3 +1,5 @@
+#include "Engine/include/core/EngineDefines.h"
+
 #include "Game/project.cpp"
 #include "Engine/include/core/game.h"
 
@@ -19,7 +21,7 @@ int main() {
     {
         pGame->Tick();
         pGame->Draw();
-        OS_InnerWait_ms(10);
+        OS_InnerWait_ms(__LOOP_HALT);
     }
     // Game end (use for soft crashes only)
     pGame->End();

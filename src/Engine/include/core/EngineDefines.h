@@ -7,6 +7,9 @@
 
 #pragma once
 
+// Game loop defines
+#define __LOOP_HALT 1			// Sets a pause time before another tick can happen
+
 // Packaging 
 #define __FINAL 0				// This flags the final release (All other flags must be disabled)
 #define __EMULATE_FINAL 0		// This emulates the final release 
@@ -55,7 +58,7 @@
 
 // Engine Macros
 
-#define ENGINE_BOOT GM_GameMode *pGameMode = (GM_GameMode*)sys_malloc(sizeof(GM_GameMode)); pGameMode->InitGame(pGame); pGame->EngineSetGamemode(pGameMode, pGameMode->GetTextCanvas());
+#define ENGINE_BOOT GM_GameMode *pGameMode = (GM_GameMode*)sys_malloc(sizeof(GM_GameMode)); pGameMode->InitGame(pGame); pGame->EngineSetGamemode(pGameMode, pGameMode->GetTextCanvas(), pGameMode->GetInputManager());
 #define ENGINE_DRAW(x)	Bdisp_AllClr_VRAM(); x pTextCanvas->Draw(); Bdisp_PutDisp_DD();
 #define NEW_OBJECT(x, y, z) x *y = (x*)pGameMode->GetAllocator()->AllocateEZ(sizeof(x)); pGame->AddObj(&y->Reset, &y->Tick, &y->Draw, z, y);
 

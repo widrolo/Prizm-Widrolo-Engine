@@ -5,6 +5,7 @@
 #include <fxcg/heap.h>
 
 #include "./Text.h"
+#include "./InputManager.h"
 
 
 class GM_GameMode;
@@ -20,6 +21,8 @@ public: // Game runtime called my main()
     bool isRunning;
     GM_GameMode *pGameMode;
     WEngine::TextCanvas *pTextCanvas;
+    WEngine::InputManager *pInputManger;
+
     void Awake(Game *pGame);
     void Start()
     {
@@ -32,12 +35,15 @@ public: // Game runtime called my main()
     }
     void Tick()
     {
+        pInputManger->Tick();
+        
         for (int i = 0; i < __MAX_OBJECTS; i++)
         {
             if (tickPtrs[i] == nullptr || selfs[i] == nullptr)
                 continue;
             (*tickPtrs[i])(selfs[i]);
         }
+
     }
     void Draw()
     {
@@ -66,10 +72,11 @@ public: // Game runtime manger
             selfs[i] = nullptr;
         }
     }
-    void EngineSetGamemode( GM_GameMode *pGM, WEngine::TextCanvas *pTC)
+    void EngineSetGamemode( GM_GameMode *pGM, WEngine::TextCanvas *pTC, WEngine::InputManager *pIM)
     {
         pGameMode = pGM;
         pTextCanvas = pTC;
+        pInputManger = pIM;
     }
     // Adds an object to be called later, takes function pointers as first arument
     void AddObj(void (*awakePtr)(void *self, GM_GameMode*), void (*tickPtr)(void *self),

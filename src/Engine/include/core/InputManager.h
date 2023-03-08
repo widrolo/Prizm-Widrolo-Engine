@@ -14,7 +14,7 @@ namespace WEngine
         void Tick()
         {
             unsigned char buffer[12];
-            PRGM_GetKey_OS(&key);
+            PRGM_GetKey_OS(buffer);
 
             // magic that i copied
             this->key = ( buffer[1] & 0x0F ) * 10 + ( ( buffer[2] & 0xF0 ) >> 4 );

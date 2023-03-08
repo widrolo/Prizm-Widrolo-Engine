@@ -27,7 +27,7 @@ namespace WEngine
         }
     };
 
-    class Character : Actor
+    class Character : public Actor
     {
     protected: // Character Specific Variables
         int speed;
