@@ -46,7 +46,7 @@ namespace WEngine
         void CharacterTick(CrashHandler *ch)
         {
             ActorTick();
-            GetKey(&key);
+            
             if (enableStdMove)
             {
                 if (key == KEY_CTRL_LEFT)
@@ -67,14 +67,14 @@ namespace WEngine
             if (stdRender)
                 renderer->RenderSquare(position, size, color);
         }
-        void CoreReset()
+        void CoreReset(GM_GameMode *pGM)
         {
             ticks = 0;
         }
     };
 
 
-    class Pawn : Actor
+    class Pawn : public Actor
     {
     protected:
         int color;

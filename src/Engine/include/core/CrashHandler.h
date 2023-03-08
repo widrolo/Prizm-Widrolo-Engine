@@ -38,7 +38,7 @@ namespace WEngine
         void EndProgram()
         {
             MsgBoxPush(6); 
-            PrintXY(3, 2, "  Game Crashed!", TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
+            PrintXY(3,  2, "  Game Crashed!", TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
             if (containsMsg)
                 PrintXY(3, 4, msg, TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
 

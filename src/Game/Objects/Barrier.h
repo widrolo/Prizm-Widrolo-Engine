@@ -18,16 +18,12 @@ public:
     {
         MAKE_SELF(Barrier)
         self->gameMode = pGM;
-        Vector2 pos;
-        Vector2 scl;
 
-        pos.x = 100;
-        pos.y = 100;
-        self->SetPosition(pos);
+        self->position.x = 100;
+        self->position.y = 100;
 
-        scl.x = 16; 
-        scl.y = 16;
-        self->SetScale(scl);
+        self->size.x = 16;
+        self->size.y = 16;
 
         self->color = COLOR_BLUE;
         self->CoreReset();
@@ -36,6 +32,8 @@ public:
     }
     static void Tick(void *s)
     {
+        MAKE_SELF(Barrier)
+        self->position.x++; 
         return;
     }
     static void Draw(void *s)

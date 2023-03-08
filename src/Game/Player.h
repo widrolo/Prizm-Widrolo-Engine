@@ -8,8 +8,6 @@ class Player : WEngine::Character
 {
 private:
     GM_GameMode *gameMode;
-    Vector2 pos;
-    Vector2 scl;
 public:
     static void Reset(void *s, GM_GameMode *gm)
     {
@@ -22,20 +20,18 @@ public:
         self->speed = 3;
 
         // Setup player
-        self->pos.x = 100;
-        self->pos.y = 70;
-        self->SetPosition(self->pos);
+        self->position.x = 100;
+        self->position.y = 70;
 
-        self->scl.x = 16;
-        self->scl.y = 16;
-        self->SetScale(self->scl);
+        self->size.x = 16;
+        self->size.y = 16;
 
         self->color = COLOR_RED;
         
         gm->GetTextCanvas()->AddTxtBuff("0 = CRASH\n5 = SAVE GAME\n7 = NEW SAVE\n8 = LOAD SAVE", 3, 10, 50);
 
         // Complete setup
-        self->CoreReset();
+        self->CoreReset(gm);
     }
     static void Tick(void *s)
     {
@@ -43,7 +39,7 @@ public:
 
         int speed = 3;
 
-        int key = self->gameMode->GetInputManager()->GetKey();
+        int key = self->gameMode->GetInputManager()->GetInput();
 
         self->CharacterTick(self->gameMode->GetCrashHandler());
 

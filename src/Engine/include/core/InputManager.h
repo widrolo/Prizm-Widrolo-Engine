@@ -18,9 +18,28 @@ namespace WEngine
 
             // magic that i copied
             this->key = ( buffer[1] & 0x0F ) * 10 + ( ( buffer[2] & 0xF0 ) >> 4 );
+
+            // Adds the ability to leave the game
+            if (key == KEY_PRGM_MENU)
+            {
+                MsgBoxPush(6);
+                PrintXY(3,  2, "  Game Paused", TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
+                PrintXY(3,  3, "  Menu to leave", TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
+                PrintXY(3,  4, "  Exit to continue", TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
+
+                int pauseKey;
+
+                while (true)
+                {
+                    GetKey(&pauseKey);
+                    if (pauseKey == KEY_CTRL_EXIT)
+                        return;
+                }
+                
+            }
         }
 
-        int GetKey()
+        int GetInput()
         {
             return key;
         }
