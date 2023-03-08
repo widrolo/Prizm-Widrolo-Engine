@@ -23,7 +23,7 @@ public: // Rendering Functions
         }
     }
 #if __BLEEDING_EDGE == 1
-    void RenderSprite(Vector2 position, Vector2 size, color_t *sprite, bool xFlip, bool yFlip)
+    void RenderSprite(Vector2 position, Vector2 size, const color_t *sprite, bool xFlip, bool yFlip)
     {
         color_t *VRAM = (color_t*)GetVRAMAddress();
         
@@ -35,7 +35,14 @@ public: // Rendering Functions
             {
                 for (int i = position.x; i < position.x + size.x; i++) 
                 {
-                    *VRAM++ = *sprite++;
+                    VRAM++;
+                    sprite++;
+
+                    // The ugly pink that no one uses
+                    if (*sprite == 0xf81a)
+                        continue;
+
+                    *VRAM = *sprite;
                 }
                 VRAM += LCD_WIDTH_PX - size.x;
             }
@@ -48,7 +55,14 @@ public: // Rendering Functions
             {
                 for (int i = position.x + size.x; i > position.x; i--) 
                 {
-                    *VRAM-- = *sprite++;
+                    VRAM--;
+                    sprite++;
+
+                    // The ugly pink that no one uses
+                    if (*sprite == 0xf81a)
+                        continue;
+                        
+                    *VRAM = *sprite;
                 }
                 VRAM += LCD_WIDTH_PX + size.x;
             }
@@ -61,7 +75,14 @@ public: // Rendering Functions
             {
                 for (int i = position.x; i < position.x + size.x; i++) 
                 {
-                    *VRAM++ = *sprite++;
+                    VRAM++;
+                    sprite++;
+
+                    // The ugly pink that no one uses
+                    if (*sprite == 0xf81a)
+                        continue;
+
+                    *VRAM = *sprite;
                 }
                 VRAM -= LCD_WIDTH_PX + size.x;
             }
@@ -74,7 +95,14 @@ public: // Rendering Functions
             {
                 for (int i = position.x + size.x; i > position.x; i--) 
                 {
-                    *VRAM-- = *sprite++;
+                    VRAM--;
+                    sprite++;
+
+                    // The ugly pink that no one uses
+                    if (*sprite == 0xf81a)
+                        continue;
+                        
+                    *VRAM = *sprite;
                 }
                 VRAM -= LCD_WIDTH_PX - size.x;
             }

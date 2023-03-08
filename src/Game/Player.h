@@ -4,6 +4,8 @@
 #include "../Engine/include/core/ImplementMinimal.h"
 #include "../Engine/include/math/math.h"
 
+#include "./Data/spritedata.h"
+
 class Player : WEngine::Character
 {
 private:
@@ -23,8 +25,8 @@ public:
         self->position.x = 100;
         self->position.y = 70;
 
-        self->size.x = 16;
-        self->size.y = 16;
+        self->size.x = 32;
+        self->size.y = 32;
 
         self->color = COLOR_RED;
         
@@ -56,7 +58,9 @@ public:
     {
         MAKE_SELF(Player)
 
-        self->CharacterDraw(true);
+        self->CharacterDraw(false);
+
+        self->renderer->RenderSprite(self->position, self->size, _forgbmp, false, false);
     }
 };
 
