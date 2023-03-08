@@ -51,6 +51,8 @@ public: // Game runtime called my main()
                 (*drawPtrs[i])(selfs[i]);
             }
         )
+
+        Bdisp_PutDisp_DD();
     }
     void End();
 public: // Game runtime manger

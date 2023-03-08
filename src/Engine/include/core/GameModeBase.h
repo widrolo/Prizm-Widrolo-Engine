@@ -10,6 +10,7 @@
 #include "./InputManager.h"
 #include "./SaveGame.h"
 #include "./EventsManager.h"
+#include "./InputManager.h"
 
 
 namespace WEngine
@@ -26,5 +27,6 @@ namespace WEngine
         WEngine::Randomizer *pRandomizer;
         WEngine::SaveManager *pSaveManger;
         WEngine::EventsManager *pEventManager;
+        WEngine::InputManager *pInputManager;
     };
 }

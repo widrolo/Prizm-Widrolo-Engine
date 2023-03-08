@@ -19,6 +19,7 @@ int main() {
     {
         pGame->Tick();
         pGame->Draw();
+        OS_InnerWait_ms(10);
     }
     // Game end (use for soft crashes only)
     pGame->End();

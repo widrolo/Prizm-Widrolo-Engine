@@ -59,6 +59,9 @@ public: // Engine Things
         // Init Events Manager
         InitSystem<WEngine::EventsManager>(pEventManager, crashMsg);
         pEventManager->Init(pCrashHandler);
+
+        // Init Input Manger
+        InitSystem<WEngine::InputManager>(pInputManager, crashMsg);
     }
 
     void DealocateSystems()
@@ -82,4 +85,5 @@ public: // Engine Getters
     WEngine::Randomizer* GetRandomizer() { return pRandomizer; }
     WEngine::SaveManager* GetSaveManager() { return pSaveManger; }
     WEngine::EventsManager* GetEventsManager() { return pEventManager; }
+    WEngine::InputManager* GetInputManager() { return pInputManager; }
 };
