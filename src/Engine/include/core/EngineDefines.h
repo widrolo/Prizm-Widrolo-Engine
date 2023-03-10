@@ -8,7 +8,7 @@
 #pragma once
 
 // Game loop defines
-#define __LOOP_HALT 5			// Sets a pause time before another tick can happen
+#define __LOOP_HALT 1			// Sets a pause time before another tick can happen
 
 // Packaging 
 #define __FINAL 0				// This flags the final release (All other flags must be disabled)

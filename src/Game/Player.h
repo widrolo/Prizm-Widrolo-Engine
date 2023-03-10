@@ -29,8 +29,6 @@ public:
         self->size.y = 32;
 
         self->color = COLOR_RED;
-        
-        gm->GetTextCanvas()->AddTxtBuff("0 = CRASH\n5 = SAVE GAME\n7 = NEW SAVE\n8 = LOAD SAVE", 3, 10, 50);
 
         // Complete setup
         self->CoreReset(gm);
