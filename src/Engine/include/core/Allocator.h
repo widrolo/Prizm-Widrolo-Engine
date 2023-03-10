@@ -29,6 +29,7 @@ namespace WEngine
             highID = 0;
         }
 
+        // TODO: fix the allocator
         // Allocates an object and returns its ID
         int Allocate(size_t allocSize)
         {

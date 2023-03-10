@@ -63,11 +63,6 @@ namespace WEngine
 
             unsigned char txt[24];
             itoa(num, txt);
-            //char *txt = (char*)IntToChar(num);
-            //if (num == 0)
-            //{
-            //    txt[0] = '0';
-            //}
 
             for (int i = 0; i < __TEXT_BUFFER_SIZE; i++)
             {
@@ -408,35 +403,6 @@ namespace WEngine
                         break;
                 }
             }   
-        }
-    private:
-        const char* IntToChar(short N)
-        {
-            // Prevent a bug from happening
-            // TODO: fix the bug so i can remove this
-            if (N & 0b1000000000000000)
-            {
-                const char *err = "INF";
-                return err;
-            }
-            char* arr;
-            char arr1[12];
-            arr = (char*)malloc(sizeof(char) * 12);
-
-            // ASCII Magic
-            int index = 0;
-            while (N) {
-                arr1[++index] = N % 10 + '0';
-                N /= 10;
-            }
-
-            int i;
-            for (i = 0; i < index; i++) {
-                arr[i] = arr1[index - i];
-            }
-            arr[i] = '\0';
-
-            return (char*)arr;
         }
     };
 }

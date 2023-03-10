@@ -64,6 +64,7 @@ namespace WEngine
             fileReader.CloseFile(&saveFile);
         }
 
+        // TODO: fix loading issue
         void LoadSaveFromFile()
         {
             fileReader.OpenFile(&saveFile);

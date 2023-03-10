@@ -97,6 +97,8 @@ namespace WEngine
             sys_free(pMainCanvas);
             sys_free(pRandomizer);
             sys_free(pSaveManger);
+            sys_free(pEventManager);
+            sys_free(pInputManager);
         }
 
         CrashHandler* GetCrashHandler() { return pCrashHandler; }
