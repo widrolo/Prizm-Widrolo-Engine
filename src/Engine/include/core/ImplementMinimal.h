@@ -29,12 +29,15 @@ namespace WEngine
 
     class Character : public Actor
     {
+    private:
+        GM_GameMode *pGameMode;
     protected: // Character Specific Variables
         int speed;
         int color;
         bool enableStdMove;
         int key;
         SpriteRenderer *renderer = static_cast<SpriteRenderer*>(sys_malloc(sizeof(SpriteRenderer)));
+        
 
     protected: // Acceessing Actor Variables Using Functions
         void SetPosition(Vector2 position) { this->position = position; }
@@ -43,7 +46,7 @@ namespace WEngine
         Vector2 GetScale() { return size; }
 
     protected: // Character Specific Functions
-        void CharacterTick(CrashHandler *ch)
+        void CharacterTick()
         {
             ActorTick();
             
@@ -70,6 +73,7 @@ namespace WEngine
         void CoreReset(GM_GameMode *pGM)
         {
             ticks = 0;
+            this->pGameMode = pGM;
         }
     };
 

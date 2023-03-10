@@ -41,7 +41,7 @@ public:
 
         int key = self->gameMode->GetInputManager()->GetInput();
 
-        self->CharacterTick(self->gameMode->GetCrashHandler());
+        self->CharacterTick();
 
         if (key == KEY_PRGM_LEFT)
             self->position.x -= 1 * speed;

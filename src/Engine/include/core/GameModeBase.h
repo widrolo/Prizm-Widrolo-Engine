@@ -19,14 +19,94 @@ namespace WEngine
     {
     protected:
         Game *pGameSession;
-        WEngine::CrashHandler *pCrashHandler;
-        WEngine::Allocator *pAllocator;
-        WEngine::FileReader *pFileHandler;
-        WEngine::CollisionManger *pCollisionManager;
-        WEngine::TextCanvas *pMainCanvas;
-        WEngine::Randomizer *pRandomizer;
-        WEngine::SaveManager *pSaveManger;
-        WEngine::EventsManager *pEventManager;
-        WEngine::InputManager *pInputManager;
+        CrashHandler *pCrashHandler;
+        Allocator *pAllocator;
+        FileReader *pFileHandler;
+        CollisionManger *pCollisionManager;
+        TextCanvas *pMainCanvas;
+        Randomizer *pRandomizer;
+        SaveManager *pSaveManger;
+        EventsManager *pEventManager;
+        InputManager *pInputManager;
+
+    public:
+        template<typename T>
+        void InitSystem(void *system, const char* msg)
+        {
+            system = (T*)sys_malloc(sizeof(T));
+            if (system == nullptr)
+                pCrashHandler->Crash(msg);
+
+        }
+
+        void InitGame(Game *pGame)
+        {
+            const char* crashMsg = "  Engine Init Fail";
+            this->pGameSession = pGame;
+            // Init Crash Handler
+            this->pCrashHandler = (CrashHandler*)sys_malloc(sizeof(CrashHandler));
+            if (pCrashHandler == nullptr)
+            {
+                Bdisp_AllClr_VRAM();
+                PrintXY(3, 2, crashMsg, TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
+                Bdisp_PutDisp_DD();
+                int dummy;
+                while (true)
+                    GetKey(&dummy);
+            }
+            pCrashHandler->Init(pGame);
+
+            // Init Allocator
+            InitSystem<Allocator>(pAllocator, crashMsg);
+            pAllocator->Init(pCrashHandler);
+
+            // Init File Reader
+            InitSystem<FileReader>(pFileHandler, crashMsg);
+            pFileHandler->Init(pCrashHandler);
+
+            // Init Collision Manager
+            InitSystem<CollisionManger>(pCollisionManager, crashMsg);
+            pCollisionManager->Init();
+
+            // Init Main Text Canvas
+            InitSystem<TextCanvas>(pMainCanvas, crashMsg);
+            pMainCanvas->Init();
+
+            // Init Randomizer
+            InitSystem<Randomizer>(pRandomizer, crashMsg);
+
+            // Init Save Manger
+            InitSystem<SaveManager>(pSaveManger, crashMsg);
+            pSaveManger->Init();
+
+            // Init Events Manager
+            InitSystem<EventsManager>(pEventManager, crashMsg);
+            pEventManager->Init(pCrashHandler);
+
+            // Init Input Manger
+            InitSystem<InputManager>(pInputManager, crashMsg);
+        }
+
+        void DealocateSystems()
+        {
+            // crash handler wont be deleted because its needed until the very end
+
+            sys_free(pAllocator);
+            sys_free(pFileHandler);
+            sys_free(pCollisionManager);
+            sys_free(pMainCanvas);
+            sys_free(pRandomizer);
+            sys_free(pSaveManger);
+        }
+
+        CrashHandler* GetCrashHandler() { return pCrashHandler; }
+        Allocator* GetAllocator() { return pAllocator; }
+        FileReader* GetFileReader() { return pFileHandler; }
+        CollisionManger* GetCollisionManger() { return pCollisionManager; }
+        TextCanvas* GetTextCanvas() { return pMainCanvas; }
+        Randomizer* GetRandomizer() { return pRandomizer; }
+        SaveManager* GetSaveManager() { return pSaveManger; }
+        EventsManager* GetEventsManager() { return pEventManager; }
+        InputManager* GetInputManager() { return pInputManager; }
     };
 }

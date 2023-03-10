@@ -18,7 +18,7 @@ public:
         scl.y = 216;
         self->SetScale(scl);
 
-        self->color = COLOR_GREEN;
+        self->color = COLOR_LIGHTGREEN;
         self->CoreReset();
     }
     static void Tick(void *s)
