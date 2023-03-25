@@ -15,13 +15,7 @@ void Game::Awake(Game *pGame)
     ENGINE_BOOT
 
     NEW_OBJECT(World, w1, 0)
-    NEW_OBJECT(Barrier, b1, 1)
-    NEW_OBJECT(RandomGuy, rg1, 2)
     NEW_OBJECT(Player, p1, 3)
-
-    pGameMode->GetTextCanvas()->AddTxtBuff("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 1, 10, 170);
-    pGameMode->GetTextCanvas()->AddTxtBuff("1234567890", 2, 10, 178);
-    pGameMode->GetTextCanvas()->AddTxtBuff("!\"§$%&/()=?\\+*#',;.:-_<>|{[]}~|", 3, 10, 186);
 }
 
 // Ends Game execution by locking it after a crash

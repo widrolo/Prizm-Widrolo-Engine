@@ -1,6 +1,7 @@
 #pragma once
 
 #include "./GM_GameMode.h"
+#include "./Objects/Barrier.h"
 #include "../Engine/include/core/ImplementMinimal.h"
 #include "../Engine/include/math/math.h"
 
@@ -9,6 +10,7 @@
 class Player : WEngine::Character
 {
 private:
+    int spawnbuffcount;
     GM_GameMode *gameMode;
 public:
     static void Reset(void *s, GM_GameMode *gm)
@@ -29,6 +31,7 @@ public:
         self->size.y = 32;
 
         self->color = COLOR_RED;
+        self->spawnbuffcount = 10;
 
         // Complete setup
         self->CoreReset(gm);
@@ -51,6 +54,12 @@ public:
             self->position.y -= 1 * speed;
         else if (key == KEY_PRGM_DOWN)
             self->position.y += 1 * speed;
+
+        if (key == KEY_PRGM_0)
+        {
+            NEW_OBJECT_AFTER(Barrier, b1, self->spawnbuffcount)
+            self->spawnbuffcount++;
+        }
     }
     static void Draw(void *s)
     {

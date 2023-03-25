@@ -7,7 +7,6 @@
 #include "./Text.h"
 #include "./InputManager.h"
 
-
 class GM_GameMode;
 
 class Game
@@ -24,8 +23,11 @@ public: // Game runtime called my main()
     WEngine::InputManager *pInputManger;
 
     void Awake(Game *pGame);
+
+    // This takes care of initializing objects, that were created in the Awake function
     void Start()
     {
+        // Call Reset() for every object
         for (int i = 0; i < __MAX_OBJECTS; i++)
         {
             if (awakePtrs[i] == nullptr || selfs[i] == nullptr)
@@ -33,10 +35,13 @@ public: // Game runtime called my main()
             (*awakePtrs[i])(selfs[i], pGameMode);
         }
     }
+    
+    // This takes care of ticking the logic
     void Tick()
     {
         pInputManger->Tick();
         
+        // Call Draw() for every object
         for (int i = 0; i < __MAX_OBJECTS; i++)
         {
             if (tickPtrs[i] == nullptr || selfs[i] == nullptr)
@@ -45,21 +50,28 @@ public: // Game runtime called my main()
         }
 
     }
+
+    // This takes care of drawing pixels to the screen
     void Draw()
     {
         if (__RENDERING == 0)
             return;
-        ENGINE_DRAW(
-            for (int i = 0; i < __MAX_OBJECTS; i++)
-            {
-                if (drawPtrs[i] == nullptr || selfs[i] == nullptr)
-                    continue;
-                (*drawPtrs[i])(selfs[i]);
-            }
-        )
+
+        Bdisp_AllClr_VRAM();
+
+        // Call Draw() for every object
+        for (int i = 0; i < __MAX_OBJECTS; i++)
+        {
+            if (drawPtrs[i] == nullptr || selfs[i] == nullptr)
+                continue;
+            (*drawPtrs[i])(selfs[i]);
+        }
+
+        pTextCanvas->Draw(); 
 
         Bdisp_PutDisp_DD();
     }
+
     void End();
 public: // Game runtime manger
     void EnginePreInit()
@@ -82,10 +94,29 @@ public: // Game runtime manger
     void AddObj(void (*awakePtr)(void *self, GM_GameMode*), void (*tickPtr)(void *self),
         void (*drawPtr)(void *self), int buffNum, void *self)
     {
+        if (buffNum > __MAX_OBJECTS || buffNum < 0)
+        {
+            CrashNow("  Couldnt Create Actor");
+        }
         awakePtrs[buffNum] = awakePtr;
         tickPtrs[buffNum] = tickPtr;
         drawPtrs[buffNum] = drawPtr;
         selfs[buffNum] = self;
+    }
+
+    void AddNewAfterAwake(void (*awakePtr)(void *self, GM_GameMode*), void (*tickPtr)(void *self),
+        void (*drawPtr)(void *self), int buffNum, void *self)
+    {
+        if (buffNum > __MAX_OBJECTS || buffNum < 0)
+        {
+            CrashNow("  Couldnt Create Actor");
+        }
+        awakePtrs[buffNum] = awakePtr;
+        tickPtrs[buffNum] = tickPtr;
+        drawPtrs[buffNum] = drawPtr;
+        selfs[buffNum] = self;
+
+        (*awakePtr)(self, pGameMode);
     }
 
     void DeallocEverything()
@@ -102,5 +133,16 @@ public: // Game runtime manger
             }
         }
         sys_free(pGameMode);
+    }
+
+private:
+    // This exists because of include order
+    void CrashNow(const char* msg)
+    {   
+        PrintXY(3, 2, msg, TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
+        Bdisp_PutDisp_DD();
+        int dummy;
+        while (true)
+            GetKey(&dummy);
     }
 };

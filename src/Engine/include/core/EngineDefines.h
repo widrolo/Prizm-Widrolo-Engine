@@ -26,7 +26,7 @@
 #define __TEXT_BUFFER_AMMOUNT 6 // This is the ammount of text buffer available
 
 // Object counts
-#define __MAX_OBJECTS 64		// How many objects can be stored to be started, ticked or drawn
+#define __MAX_OBJECTS 64		// How many objects can be stored to be started, ticked and drawn
 #define __MAX_COLLISION_BOXES 64// How many collision boxes can exist
 
 // Save Game
@@ -59,6 +59,6 @@
 // Engine Macros
 
 #define ENGINE_BOOT GM_GameMode *pGameMode = (GM_GameMode*)sys_malloc(sizeof(GM_GameMode)); pGameMode->InitGame(pGame); pGame->EngineSetGamemode(pGameMode, pGameMode->GetTextCanvas(), pGameMode->GetInputManager());
-#define ENGINE_DRAW(x)	Bdisp_AllClr_VRAM(); x pTextCanvas->Draw(); Bdisp_PutDisp_DD();
 #define NEW_OBJECT(x, y, z) x *y = (x*)pGameMode->GetAllocator()->AllocateEZ(sizeof(x)); pGame->AddObj(&y->Reset, &y->Tick, &y->Draw, z, y);
+#define NEW_OBJECT_AFTER(x, y, z) x *y = (x*)self->gameMode->GetAllocator()->AllocateEZ(sizeof(x)); self->gameMode->GetGameSession()->AddNewAfterAwake(&y->Reset, &y->Tick, &y->Draw, z, y);
 

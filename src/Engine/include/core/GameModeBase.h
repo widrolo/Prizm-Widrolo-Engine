@@ -47,12 +47,7 @@ namespace WEngine
             this->pCrashHandler = (CrashHandler*)sys_malloc(sizeof(CrashHandler));
             if (pCrashHandler == nullptr)
             {
-                Bdisp_AllClr_VRAM();
-                PrintXY(3, 2, crashMsg, TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
-                Bdisp_PutDisp_DD();
-                int dummy;
-                while (true)
-                    GetKey(&dummy);
+                CrashHandler::CrashNow(crashMsg);
             }
             pCrashHandler->Init(pGame);
 
@@ -101,6 +96,7 @@ namespace WEngine
             sys_free(pInputManager);
         }
 
+        Game* GetGameSession() { return pGameSession; }
         CrashHandler* GetCrashHandler() { return pCrashHandler; }
         Allocator* GetAllocator() { return pAllocator; }
         FileReader* GetFileReader() { return pFileHandler; }

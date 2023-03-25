@@ -30,6 +30,14 @@ namespace WEngine
             }
             containsMsg = true;
         }
+        static void CrashNow(const char* msg)
+        {   
+            PrintXY(3, 2, msg, TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
+            Bdisp_PutDisp_DD();
+            int dummy;
+            while (true)
+                GetKey(&dummy);
+        }
     public:
         void Init(Game *pGame)
         {
