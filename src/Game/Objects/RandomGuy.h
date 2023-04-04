@@ -6,6 +6,14 @@ class RandomGuy : WEngine::Pawn
 public:
     GM_GameMode *gameMode;
 public:
+    static void E_change_pos(void *s, void *infoBuff)
+    {
+        MAKE_SELF(RandomGuy)
+        int *copy = (int*)infoBuff;
+        self->position.x = copy[0];
+        self->position.y = copy[1];
+        sys_free(infoBuff);
+    }
     static void Reset(void *s, GM_GameMode *pGM)
     {
         MAKE_SELF(RandomGuy)
@@ -18,6 +26,8 @@ public:
 
         self->color = COLOR_GOLD;
         self->CoreReset();
+
+        pGM->GetEventsManager()->Subscribe<RandomGuy>(0, self, E_change_pos);
     }
 
     static void Tick(void *s)

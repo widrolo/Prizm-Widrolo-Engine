@@ -15,6 +15,7 @@ void Game::Awake(Game *pGame)
     ENGINE_BOOT
 
     NEW_OBJECT(World, w1, 0)
+    NEW_OBJECT(RandomGuy, rg1, 1);
     NEW_OBJECT(Player, p1, 3)
 }
 

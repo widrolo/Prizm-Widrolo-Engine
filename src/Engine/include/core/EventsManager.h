@@ -72,7 +72,11 @@ namespace WEngine{
         void Dispatch(int event, void *infoBuff)
         {
             for (int i = 0; i < __MAX_SUBSCRIBERS; i++)
-                events[event].dispatchFunction[i](events[event].subscribers, infoBuff);
+            {
+                if (events[event].dispatchFunction[i] == nullptr)
+                    continue;
+                events[event].dispatchFunction[i](events[event].subscribers[i], infoBuff);
+            }
         }
     };  
 }

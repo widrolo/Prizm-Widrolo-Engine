@@ -32,7 +32,10 @@ namespace WEngine
         }
         static void CrashNow(const char* msg)
         {   
-            PrintXY(3, 2, msg, TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
+            Bdisp_AllClr_VRAM();
+            PrintXY(3,  2, "  Panic Crash!", TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
+            PrintXY(3,  3, "  No Data Saved!", TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
+            PrintXY(3, 5, msg, TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
             Bdisp_PutDisp_DD();
             int dummy;
             while (true)

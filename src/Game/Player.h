@@ -13,6 +13,15 @@ private:
     int spawnbuffcount;
     GM_GameMode *gameMode;
 public:
+    void ChangePosDispatch()
+    {
+        int *pos = (int*)sys_malloc(sizeof(int) * 2);
+
+        pos[0] = 10;
+        pos[1] = 10;
+
+        gameMode->GetEventsManager()->Dispatch(0, (void*)pos);
+    }
     static void Reset(void *s, GM_GameMode *gm)
     {
         MAKE_SELF(Player)
@@ -59,6 +68,10 @@ public:
         {
             NEW_OBJECT_AFTER(Barrier, b1, self->spawnbuffcount)
             self->spawnbuffcount++;
+        }
+        if (key == KEY_PRGM_1)
+        {
+            self->ChangePosDispatch();
         }
     }
     static void Draw(void *s)
