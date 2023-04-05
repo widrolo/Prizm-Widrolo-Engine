@@ -21,11 +21,13 @@ void Game::Awake(Game *pGame)
 
 // Ends Game execution by locking it after a crash
 // here you can attempt to save the game one last time
+// Panic crashes that happen because of an unrecoverable
+// error will not call this function.
 void Game::End()
 {
     WEngine::CrashHandler* cr = pGameMode->GetCrashHandler();
 
-    // Place own code  here
+    // Place own code here
 
     pGameMode->DealocateSystems();
     DeallocEverything();

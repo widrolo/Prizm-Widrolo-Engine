@@ -11,6 +11,7 @@
 #include "./SaveGame.h"
 #include "./EventsManager.h"
 #include "./InputManager.h"
+#include "./DebugConsole.h"
 
 
 namespace WEngine
@@ -28,6 +29,7 @@ namespace WEngine
         SaveManager *pSaveManger;
         EventsManager *pEventManager;
         InputManager *pInputManager;
+        DebugConsole *pDebugConsole;
 
     public:
         template<typename T>
@@ -47,7 +49,7 @@ namespace WEngine
             this->pCrashHandler = (CrashHandler*)sys_malloc(sizeof(CrashHandler));
             if (pCrashHandler == nullptr)
             {
-                CrashHandler::CrashNow(crashMsg);
+                CrashHandler::PanicCrash(crashMsg);
             }
             pCrashHandler->Init(pGame);
 
@@ -80,6 +82,10 @@ namespace WEngine
 
             // Init Input Manger
             InitSystem<InputManager>(pInputManager, crashMsg);
+            
+            // Init Events Manager
+            InitSystem<DebugConsole>(pDebugConsole, crashMsg);
+            pDebugConsole->Init();
         }
 
         void DealocateSystems()
@@ -94,6 +100,7 @@ namespace WEngine
             sys_free(pSaveManger);
             sys_free(pEventManager);
             sys_free(pInputManager);
+            sys_free(pDebugConsole);
         }
 
         Game* GetGameSession() { return pGameSession; }
@@ -106,5 +113,6 @@ namespace WEngine
         SaveManager* GetSaveManager() { return pSaveManger; }
         EventsManager* GetEventsManager() { return pEventManager; }
         InputManager* GetInputManager() { return pInputManager; }
+        DebugConsole* GetDebugConsole() { return pDebugConsole; }
     };
 }

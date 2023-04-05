@@ -22,7 +22,7 @@
 #define __TEXT		1			// This disables all text
 
 // Text buffer
-#define __TEXT_BUFFER_SIZE 256	// This is the size of the text buffer used for text rendering
+#define __TEXT_BUFFER_SIZE 128	// This is the size of the text buffer used for text rendering
 #define __TEXT_BUFFER_AMMOUNT 6 // This is the ammount of text buffer available
 
 // Object counts
@@ -58,7 +58,7 @@
 
 // Engine Macros
 
-#define ENGINE_BOOT GM_GameMode *pGameMode = (GM_GameMode*)sys_malloc(sizeof(GM_GameMode)); pGameMode->InitGame(pGame); pGame->EngineSetGamemode(pGameMode, pGameMode->GetTextCanvas(), pGameMode->GetInputManager());
+#define ENGINE_BOOT GM_GameMode *pGameMode = (GM_GameMode*)sys_malloc(sizeof(GM_GameMode)); pGameMode->InitGame(pGame); pGame->EngineSetGamemode(pGameMode, pGameMode->GetTextCanvas(), pGameMode->GetInputManager(), pGameMode->GetDebugConsole());
 #define NEW_OBJECT(x, y, z) x *y = (x*)pGameMode->GetAllocator()->AllocateEZ(sizeof(x)); pGame->AddObj(&y->Reset, &y->Tick, &y->Draw, z, y);
 #define NEW_OBJECT_AFTER(x, y, z) x *y = (x*)self->gameMode->GetAllocator()->AllocateEZ(sizeof(x)); self->gameMode->GetGameSession()->AddNewAfterAwake(&y->Reset, &y->Tick, &y->Draw, z, y);
 
