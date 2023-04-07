@@ -69,8 +69,8 @@ public: // Game runtime called my main()
             (*drawPtrs[i])(selfs[i]);
         }
 
-        pTextCanvas->Draw(); 
         pDebugConsole->DrawText();
+        pTextCanvas->Draw(); 
 
         Bdisp_PutDisp_DD();
     }
@@ -114,7 +114,7 @@ public: // Game runtime manger
     {
         if (buffNum > __MAX_OBJECTS || buffNum < 0)
         {
-            CrashNow("  Couldnt Create Actor");
+            CrashNow("  OUT OF MEMORY");
         }
         awakePtrs[buffNum] = awakePtr;
         tickPtrs[buffNum] = tickPtr;
@@ -144,7 +144,10 @@ private:
     // This exists because of include order
     void CrashNow(const char* msg)
     {   
-        PrintXY(3, 2, msg, TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
+        Bdisp_AllClr_VRAM();
+        PrintXY(3,  2, "  Panic Crash!", TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
+        PrintXY(3,  3, "  No Data Saved!", TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
+        PrintXY(3, 5, msg, TEXT_MODE_NORMAL, TEXT_COLOR_BLACK);
         Bdisp_PutDisp_DD();
         int dummy;
         while (true)

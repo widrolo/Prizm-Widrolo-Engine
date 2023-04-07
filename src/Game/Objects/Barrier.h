@@ -20,6 +20,7 @@ public:
 
         self->color = COLOR_BLUE;
         self->CoreReset();
+        self->gameMode->GetDebugConsole()->OutPutMsg("SPAWNED NEW BOX");
     }
     static void Tick(void *s)
     {

@@ -12,7 +12,7 @@ public:
         int *copy = (int*)infoBuff;
         self->position.x = copy[0];
         self->position.y = copy[1];
-        self->gameMode->GetDebugConsole()->OutPutMsg("Changed pos\0");
+        self->gameMode->GetDebugConsole()->OutPutMsg("CHANGED POS");
         sys_free(infoBuff);
     }
     static void Reset(void *s, GM_GameMode *pGM)

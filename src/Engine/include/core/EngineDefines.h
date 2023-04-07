@@ -22,8 +22,8 @@
 #define __TEXT		1			// This disables all text
 
 // Text buffer
-#define __TEXT_BUFFER_SIZE 128	// This is the size of the text buffer used for text rendering
-#define __TEXT_BUFFER_AMMOUNT 6 // This is the ammount of text buffer available
+#define __TEXT_BUFFER_SIZE 265	 // This is the size of the text buffer used for text rendering
+#define __TEXT_BUFFER_AMMOUNT 12 // This is the ammount of text buffer available
 
 // Object counts
 #define __MAX_OBJECTS 64		// How many objects can be stored to be started, ticked and drawn

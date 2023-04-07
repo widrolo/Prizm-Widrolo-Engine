@@ -85,7 +85,7 @@ namespace WEngine
             
             // Init Events Manager
             InitSystem<DebugConsole>(pDebugConsole, crashMsg);
-            pDebugConsole->Init();
+            pDebugConsole->Init(pMainCanvas);
         }
 
         void DealocateSystems()
