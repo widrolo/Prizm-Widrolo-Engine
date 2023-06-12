@@ -15,3 +15,6 @@ Text.h
   so the exectutable size can be minimal 
   (Use that fact that the characters are 
   a continous string in memory)
+
+SpriteRenderer.h
+- fix crash in RenderSpriteSimple8Bit();

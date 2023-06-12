@@ -6,6 +6,7 @@
 #include "../Engine/include/math/math.h"
 
 #include "./Data/spritedata.h"
+#include "./Data/PlayerSprite.hpp"
 
 class Player : WEngine::Character
 {
@@ -36,11 +37,19 @@ public:
         self->position.x = 100;
         self->position.y = 70;
 
-        self->size.x = 32;
-        self->size.y = 32;
+        self->size.x = 8;
+        self->size.y = 8;
 
         self->color = COLOR_RED;
         self->spawnbuffcount = 10;
+
+        Plallete8Bit *pall = (Plallete8Bit*)gm->GetAllocator()->AllocateEZ(sizeof(Plallete8Bit));
+        pall->colors[0] = COLOR_CLEAR;
+        pall->colors[1] = COLOR_RED;
+        pall->colors[2] = COLOR_GREEN;
+        pall->colors[3] = COLOR_BLUE;
+
+        self->renderer->ApplyColorPallete(pall, nullptr, nullptr, nullptr);
 
         // Complete setup
         self->CoreReset(gm);
@@ -80,7 +89,8 @@ public:
 
         self->CharacterDraw(false);
 
-        self->renderer->RenderSprite(self->position, self->size, _forgbmp, false, false);
+        //self->renderer->RenderSprite(self->position, self->size, _forgbmp, false, false);
+        self->renderer->RenderSpriteSimple8Bit(_playerSprite, self->position.x, self->position.y, self->size.x, self->size.y);
     }
 };
 
