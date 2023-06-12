@@ -11,7 +11,9 @@
 #include "./SaveGame.h"
 #include "./EventsManager.h"
 #include "./InputManager.h"
+#if __DEBUG_CONSOLE || __EMULATE_FINAL || __FINAL
 #include "./DebugConsole.h"
+#endif
 
 
 namespace WEngine
@@ -29,7 +31,9 @@ namespace WEngine
         SaveManager *pSaveManger;
         EventsManager *pEventManager;
         InputManager *pInputManager;
+        #if __DEBUG_CONSOLE || __EMULATE_FINAL || __FINAL
         DebugConsole *pDebugConsole;
+        #endif
 
     public:
         template<typename T>
@@ -84,8 +88,10 @@ namespace WEngine
             InitSystem<InputManager>(pInputManager, crashMsg);
             
             // Init Events Manager
+            #if __DEBUG_CONSOLE || __EMULATE_FINAL || __FINAL
             InitSystem<DebugConsole>(pDebugConsole, crashMsg);
             pDebugConsole->Init(pMainCanvas);
+            #endif
         }
 
         void DealocateSystems()
@@ -100,7 +106,9 @@ namespace WEngine
             sys_free(pSaveManger);
             sys_free(pEventManager);
             sys_free(pInputManager);
+            #if __DEBUG_CONSOLE || __EMULATE_FINAL || __FINAL
             sys_free(pDebugConsole);
+            #endif
         }
 
         Game* GetGameSession() { return pGameSession; }
@@ -113,6 +121,8 @@ namespace WEngine
         SaveManager* GetSaveManager() { return pSaveManger; }
         EventsManager* GetEventsManager() { return pEventManager; }
         InputManager* GetInputManager() { return pInputManager; }
+        #if __DEBUG_CONSOLE || __EMULATE_FINAL || __FINAL
         DebugConsole* GetDebugConsole() { return pDebugConsole; }
+        #endif
     };
 }

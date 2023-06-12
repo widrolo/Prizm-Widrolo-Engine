@@ -1,0 +1,17 @@
+DebugConsole.h
+- fix
+
+EventsManager.h
+- fix
+
+ImplementMinimal.h
+- rename classes
+
+SaveGame.h
+- fix loading bug
+
+Text.h
+- refactor that massive switch statement
+  so the exectutable size can be minimal 
+  (Use that fact that the characters are 
+  a continous string in memory)

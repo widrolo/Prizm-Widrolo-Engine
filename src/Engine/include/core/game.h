@@ -6,7 +6,9 @@
 
 #include "./Text.h"
 #include "./InputManager.h"
+#if __DEBUG_CONSOLE || __EMULATE_FINAL || __FINAL
 #include "./DebugConsole.h"
+#endif
 
 class GM_GameMode;
 
@@ -22,7 +24,9 @@ public: // Game runtime called my main()
     GM_GameMode *pGameMode;
     WEngine::TextCanvas *pTextCanvas;
     WEngine::InputManager *pInputManger;
+    #if __DEBUG_CONSOLE || __EMULATE_FINAL || __FINAL
     WEngine::DebugConsole *pDebugConsole;
+    #endif
 
     void Awake(Game *pGame);
 
@@ -68,8 +72,9 @@ public: // Game runtime called my main()
                 continue;
             (*drawPtrs[i])(selfs[i]);
         }
-
+        #if __DEBUG_CONSOLE || __EMULATE_FINAL || __FINAL
         pDebugConsole->DrawText();
+        #endif
         pTextCanvas->Draw(); 
 
         Bdisp_PutDisp_DD();
@@ -88,12 +93,11 @@ public: // Game runtime manger
             selfs[i] = nullptr;
         }
     }
-    void EngineSetGamemode( GM_GameMode *pGM, WEngine::TextCanvas *pTC, WEngine::InputManager *pIM, WEngine::DebugConsole *pDC)
+    void EngineSetGamemode( GM_GameMode *pGM, WEngine::TextCanvas *pTC, WEngine::InputManager *pIM)
     {
         pGameMode = pGM;
         pTextCanvas = pTC;
         pInputManger = pIM;
-        pDebugConsole = pDC;
     }
     // Adds an object to be called later, takes function pointers as first arument
     void AddObj(void (*awakePtr)(void *self, GM_GameMode*), void (*tickPtr)(void *self),

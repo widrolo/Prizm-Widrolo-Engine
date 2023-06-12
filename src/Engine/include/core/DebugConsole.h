@@ -6,8 +6,11 @@
 #include "../math/vector.h"
 #include <string.h>
 
+
+#if __DEBUG_CONSOLE || __EMULATE_FINAL || __FINAL
 namespace WEngine
 {
+
     class DebugConsole
     {
     private:
@@ -63,3 +66,4 @@ namespace WEngine
         }
     };
 }
+#endif

@@ -4,7 +4,7 @@
 #include "./../math/vector.h"
 #pragma once
 
-#define COLOR_CLEAR (color_t)0xF345
+#define COLOR_CLEAR (color_t)0xf81a // bright pink
 
 class SpriteRenderer
 {
@@ -35,8 +35,7 @@ public: // Rendering Functions
             {
                 for (int i = position.x; i < position.x + size.x; i++) 
                 {
-                    // The ugly pink that no one uses
-                    if (*sprite == 0xf81a)
+                    if (*sprite == COLOR_CLEAR)
                     {
                         sprite++;
                         VRAM++;
@@ -56,8 +55,7 @@ public: // Rendering Functions
             {
                 for (int i = position.x + size.x; i > position.x; i--) 
                 {
-                    // The ugly pink that no one uses
-                    if (*sprite == 0xf81a)
+                    if (*sprite == COLOR_CLEAR)
                     {
                         sprite++;
                         VRAM--;
@@ -77,8 +75,7 @@ public: // Rendering Functions
             {
                 for (int i = position.x; i < position.x + size.x; i++) 
                 {
-                    // The ugly pink that no one uses
-                    if (*sprite == 0xf81a)
+                    if (*sprite == COLOR_CLEAR)
                     {
                         sprite++;
                         VRAM++;
@@ -98,8 +95,7 @@ public: // Rendering Functions
             {
                 for (int i = position.x + size.x; i > position.x; i--) 
                 {
-                    // The ugly pink that no one uses
-                    if (*sprite == 0xf81a)
+                    if (*sprite == COLOR_CLEAR)
                     {
                         sprite++;
                         VRAM--;
@@ -121,8 +117,7 @@ public: // Rendering Functions
         {
             for (int i = xPos; i < xPos + xSize; i++) 
             {
-                // The ugly pink that no one uses
-                if (*sprite == 0xf81a)
+                if (*sprite == COLOR_CLEAR)
                 {
                     sprite++;
                     VRAM++;
